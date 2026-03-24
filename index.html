@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <title>AMCOL Group of Companies – Transport &amp; Heavy Lifting Division</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --primary-red: #cc1f31;
+            --primary-blue: #1e40af;
+            --light-bg: #ffffff;
+            --subtle-grey: #f3f4f6;
+            --footer-bg: #4b4b4b;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+        }
+        .nav-shadow {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .service-card, .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover, .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .coverage-map-section {
+            position: relative;
+            min-height: 620px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            border-radius: 24px;
+        }
+        .coverage-map-section.compact {
+            min-height: 360px;
+        }
+        #coverage-map,
+        #miami-coverage-map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        .coverage-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+            gap: 2rem;
+            align-items: stretch;
+        }
+        .coverage-map-stack {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .coverage-map-group {
+            display: grid;
+            gap: 0.85rem;
+        }
+        .coverage-map-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0 0.25rem;
+        }
+        .coverage-map-heading::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(57, 217, 205, 0.5), rgba(255, 255, 255, 0.08));
+        }
+        .coverage-map-heading span {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: #39d9cd;
+            white-space: nowrap;
+        }
+        .transport-solutions-panel {
+            background:
+                linear-gradient(160deg, rgba(19, 39, 63, 0.96) 0%, rgba(13, 27, 42, 0.96) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            color: #ffffff;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+        .transport-solution-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 1.25rem;
+        }
+        .transport-solution-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 999px;
+            background: rgba(57, 217, 205, 0.14);
+            color: #39d9cd;
+        }
+        .coverage-info-card {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            left: auto;
+            transform: none;
+            width: clamp(210px, 21vw, 280px);
+            background: #13273f;
+            border-radius: 10px;
+            padding: 11px;
+            color: #ffffff;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            z-index: 2;
+        }
+        .coverage-info-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e53935;
+            border-radius: 16px 16px 0 0;
+        }
+        .coverage-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .coverage-coords {
+            color: #a8b2c0;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+        .coverage-info-row {
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: #d1d5db;
+        }
+        .coverage-notice {
+            background: #1c3552;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 10px;
+        }
+        .coverage-notice strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+        .coverage-direction-btn {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            background: #2e6ae6;
+            color: #ffffff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .coverage-direction-btn:hover {
+            background: #3b82f6;
+        }
+        .map-star-marker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            color: #e53935;
+            font-size: 22px;
+            line-height: 1;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        .map-ship-marker,
+        .map-port-marker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.92);
+            border: 2px solid #e53935;
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+        .map-ship-marker {
+            font-size: 14px;
+        }
+        .map-port-marker {
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .map-route-label {
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+        .stat-bar {
+            background: linear-gradient(90deg, #1e40af 0%, #cc1f31 100%);
+        }
+        .featured-projects-section {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.34), transparent 28%),
+                radial-gradient(circle at 84% 10%, rgba(226, 232, 240, 0.28), transparent 28%),
+                linear-gradient(180deg, #dfe5ec 0%, #eef2f6 18%, #f8fafc 38%, #fcfdff 68%, #ffffff 100%);
+        }
+        .featured-projects-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 4%, rgba(255, 255, 255, 0.56), transparent 22%),
+                radial-gradient(circle at 82% 8%, rgba(255, 255, 255, 0.34), transparent 24%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 32%, transparent 72%);
+            pointer-events: none;
+        }
+        .featured-projects-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(100, 116, 139, 0.08) 0%, rgba(100, 116, 139, 0) 42%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0) 54%, rgba(255, 255, 255, 0.94) 100%);
+            pointer-events: none;
+        }
+        .featured-projects-map {
+            position: absolute;
+            inset: 0;
+            opacity: 0.42;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .featured-projects-map-fragment {
+            position: absolute;
+            background-image: radial-gradient(circle, rgba(203, 213, 225, 0.82) 1.15px, transparent 1.35px);
+            background-size: 8px 8px;
+            background-repeat: repeat;
+        }
+        .featured-projects-map-fragment.one {
+            top: 3rem;
+            left: -2rem;
+            width: min(30rem, 52vw);
+            height: 17rem;
+            clip-path: polygon(0 34%, 10% 26%, 20% 18%, 34% 14%, 46% 6%, 62% 10%, 74% 4%, 88% 10%, 100% 22%, 94% 42%, 85% 50%, 80% 62%, 64% 66%, 50% 58%, 38% 64%, 24% 68%, 12% 58%, 4% 46%);
+        }
+        .featured-projects-map-fragment.two {
+            top: 1.5rem;
+            right: 0.5rem;
+            width: min(36rem, 56vw);
+            height: 19rem;
+            clip-path: polygon(8% 20%, 22% 12%, 38% 14%, 50% 8%, 66% 10%, 82% 18%, 96% 24%, 100% 40%, 94% 56%, 84% 62%, 72% 58%, 60% 64%, 48% 72%, 34% 70%, 24% 62%, 12% 60%, 4% 46%);
+        }
+        .featured-projects-map-fragment.three {
+            bottom: 8rem;
+            left: 6%;
+            width: min(26rem, 42vw);
+            height: 15rem;
+            clip-path: polygon(10% 20%, 24% 10%, 46% 12%, 60% 22%, 72% 18%, 86% 30%, 92% 48%, 80% 66%, 58% 74%, 40% 68%, 20% 76%, 8% 60%, 0 42%);
+        }
+        .featured-projects-map-fragment.four {
+            right: 4%;
+            bottom: 3rem;
+            width: min(15rem, 26vw);
+            height: 11rem;
+            clip-path: polygon(16% 22%, 34% 8%, 58% 12%, 82% 24%, 94% 44%, 86% 70%, 64% 86%, 38% 82%, 16% 66%, 6% 44%);
+        }
+        .featured-projects-stage {
+            position: relative;
+            z-index: 1;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.58);
+            border-radius: 32px;
+            background:
+                linear-gradient(180deg, rgba(235, 240, 245, 0.76) 0%, rgba(244, 247, 250, 0.5) 18%, rgba(255, 255, 255, 0.96) 48%, rgba(250, 252, 255, 0.94) 100%);
+            box-shadow: 0 28px 80px rgba(100, 116, 139, 0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .featured-projects-stage::before {
+            content: "";
+            position: absolute;
+            inset: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            pointer-events: none;
+        }
+        .featured-projects-header {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 1.5rem;
+            align-items: end;
+        }
+        .featured-projects-intro {
+            max-width: 38rem;
+        }
+        .featured-projects-summary {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 0.85rem;
+        }
+        .featured-projects-stat {
+            padding: 0.95rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.72);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.9));
+            box-shadow: 0 12px 30px rgba(100, 116, 139, 0.08);
+        }
+        .featured-projects-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        .featured-project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            background: #ffffff;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .featured-project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 32px 80px rgba(15, 23, 42, 0.18);
+        }
+        .featured-project-image-wrap {
+            position: relative;
+            min-height: 18rem;
+            overflow: hidden;
+        }
+        .featured-project-image-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.02) 0%, rgba(15, 23, 42, 0.18) 100%),
+                linear-gradient(130deg, rgba(255, 255, 255, 0.18) 0%, transparent 24%);
+            pointer-events: none;
+        }
+        .featured-project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .featured-project-card:hover .featured-project-image {
+            transform: scale(1.06);
+        }
+        .featured-project-card.tall .featured-project-image-wrap {
+            min-height: 23rem;
+        }
+        .featured-project-content {
+            position: relative;
+            padding: 1.4rem;
+            color: #0f172a;
+            background: #ffffff;
+        }
+        .featured-project-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(30, 64, 175, 0.08);
+            border: 1px solid rgba(30, 64, 175, 0.12);
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #1e40af;
+        }
+        .featured-project-meta {
+            margin-top: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            color: #64748b;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        @media (min-width: 768px) {
+            .featured-projects-stage {
+                padding: 2rem;
+            }
+            .featured-projects-summary {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .featured-projects-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 1024px) {
+            .featured-projects-stage {
+                padding: 2.5rem;
+            }
+            .featured-projects-header {
+                grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+                gap: 2rem;
+            }
+            .featured-projects-summary {
+                grid-template-columns: 1fr;
+            }
+            .featured-projects-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .featured-project-card.featured-span {
+                grid-column: span 2;
+            }
+        }
+        @media (max-width: 767px) {
+            .featured-projects-map {
+                opacity: 0.28;
+            }
+            .featured-projects-map-fragment.one,
+            .featured-projects-map-fragment.two {
+                width: 92vw;
+            }
+            .featured-projects-map-fragment.three,
+            .featured-projects-map-fragment.four {
+                display: none;
+            }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .hero-dashboard {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            background-color: #09131f;
+        }
+        .hero-backgrounds {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .hero-background-frame {
+            position: absolute;
+            inset: 0;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: brightness(1.08) saturate(1.08);
+        }
+        .hero-background-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(110deg, rgba(61, 24, 25, 0.62) 0%, rgba(100, 60, 58, 0.46) 42%, rgba(120, 92, 84, 0.18) 100%),
+                radial-gradient(circle at 18% 18%, rgba(205, 63, 40, 0.38), transparent 34%),
+                radial-gradient(circle at 85% 82%, rgba(45, 212, 191, 0.22), transparent 30%);
+        }
+        .hero-background-crane {
+            background-image: url('./assets/Night Crane Lift.png');
+            animation: hero-background-crane 16s ease-in-out infinite;
+        }
+        .hero-background-industrial {
+            background-image: url('./assets/Transport%20industrial.png');
+            animation: hero-background-industrial 16s ease-in-out infinite;
+            opacity: 0;
+        }
+        .hero-dashboard::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(7, 14, 23, 0.46) 0%, rgba(7, 14, 23, 0.14) 45%, rgba(7, 14, 23, 0.4) 100%);
+            pointer-events: none;
+        }
+        .hero-dashboard::after {
+            content: "";
+            position: absolute;
+            left: 18%;
+            right: -12%;
+            bottom: -22%;
+            height: 420px;
+            background: radial-gradient(circle, rgba(166, 58, 38, 0.42) 0%, rgba(166, 58, 38, 0) 72%);
+            filter: blur(28px);
+            pointer-events: none;
+        }
+        .glass-panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 28px 80px rgba(5, 10, 18, 0.42);
+        }
+        .hero-status-row {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        .about-image-rotator {
+            position: relative;
+            min-height: 420px;
+        }
+        .about-visual-stack {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .about-image-slide {
+            position: absolute;
+            inset: 0;
+            border: 4px solid #ffffff;
+            border-radius: 0.125rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+            opacity: 0;
+        }
+        .about-image-dumper {
+            background-image: url('./assets/Dumper%20truck.png');
+            animation: about-image-dumper 24s ease-in-out infinite;
+        }
+        .about-image-loader {
+            background-image: url('./assets/loader.png');
+            animation: about-image-loader 24s ease-in-out infinite;
+        }
+        .about-image-semi {
+            background-image: url('./assets/Semi%20truck.png');
+            animation: about-image-semi 24s ease-in-out infinite;
+        }
+        .about-image-industrial {
+            background-image: url('./assets/Transport%20industrial.png');
+            animation: about-image-industrial 24s ease-in-out infinite;
+        }
+        .hero-mini-stat {
+            background: rgba(8, 14, 23, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .hero-topbar {
+            background: linear-gradient(90deg, rgba(204, 31, 49, 0.96), rgba(142, 24, 39, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .section-transition-band {
+            position: relative;
+            height: 188px;
+            margin-top: -78px;
+            overflow: visible;
+            background: transparent;
+            z-index: 10;
+        }
+        .section-transition-band::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            opacity: 0;
+        }
+        .section-transition-band::after {
+            content: "";
+            position: absolute;
+            inset: -52px 0 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            clip-path: polygon(0 36%, 18% 36%, 24% 0, 62% 0, 68% 36%, 100% 36%, 100% 74%, 84% 74%, 78% 100%, 12% 100%, 6% 74%, 0 74%);
+            background:
+                linear-gradient(90deg, rgba(7, 14, 23, 0.96) 0%, rgba(30, 41, 59, 0.58) 24%, rgba(127, 29, 29, 0.56) 52%, rgba(30, 58, 138, 0.46) 100%);
+            box-shadow: 0 30px 58px rgba(2, 6, 23, 0.42);
+        }
+        .section-transition-grid {
+            position: absolute;
+            inset: 0;
+            display: none;
+        }
+        .section-transition-accent {
+            display: none;
+        }
+        .hero-mainnav {
+            background: rgba(9, 19, 31, 0.8);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hero-brand-panel {
+            position: relative;
+            background: rgba(255, 255, 255, 0.96);
+            clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+        }
+        .hero-brand-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(30, 64, 175, 0.08));
+            pointer-events: none;
+        }
+        .hero-nav-link {
+            position: relative;
+        }
+        .hero-nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1.15rem;
+            width: 100%;
+            height: 3px;
+            background: #39d9cd;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
+        }
+        .hero-nav-link:hover::after,
+        .hero-nav-link:focus-visible::after {
+            transform: scaleX(1);
+        }
+        .status-ticker-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker-content {
+            display: inline-flex;
+            min-width: max-content;
+            animation: ticker 34s linear infinite;
+        }
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.35;
+            }
+        }
+        @keyframes hero-background-crane {
+            0%, 45% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+        @keyframes hero-background-industrial {
+            0%, 45% {
+                opacity: 0;
+            }
+            50%, 95% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes about-image-dumper {
+            0%, 20% {
+                opacity: 1;
+            }
+            25%, 100% {
+                opacity: 0;
+            }
+        }
+        @keyframes about-image-loader {
+            0%, 20% {
+                opacity: 0;
+            }
+            25%, 45% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+        @keyframes about-image-semi {
+            0%, 45% {
+                opacity: 0;
+            }
+            50%, 70% {
+                opacity: 1;
+            }
+            75%, 100% {
+                opacity: 0;
+            }
+        }
+        @keyframes about-image-industrial {
+            0%, 70% {
+                opacity: 0;
+            }
+            75%, 95% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @media (max-width: 640px) {
+            .hero-background-frame {
+                background-position: 68% center;
+            }
+            .hero-brand-panel {
+                clip-path: none;
+            }
+            .coverage-layout {
+                grid-template-columns: 1fr;
+            }
+            .coverage-map-section {
+                min-height: 500px;
+            }
+            .coverage-info-card {
+                width: min(260px, calc(100% - 2rem));
+                top: 1rem;
+                left: 1rem;
+                right: auto;
+                transform: none;
+            }
+            .about-image-rotator {
+                min-height: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased text-slate-900">
+    <section id="top" class="hero-dashboard text-white">
+        <div class="hero-backgrounds" aria-hidden="true">
+            <div class="hero-background-frame hero-background-crane"></div>
+            <div class="hero-background-frame hero-background-industrial"></div>
+        </div>
+        <header class="relative z-20">
+            <div class="hero-topbar">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                    <div
+                        class="flex flex-col gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 lg:flex-row lg:items-center lg:justify-end lg:gap-8">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-base text-[#39d9cd]">location_on</span>
+                            <span>S.S. Erin Road Penal, #22 Ramjohn Trace</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                            <span class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-base text-[#39d9cd]">call</span>
+                                Telephone: +1 (868) 288-5800
+                            </span>
+                            <span class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-base text-[#39d9cd]">smartphone</span>
+                                Mobile: +1(868) 399-9200
+                            </span>
+                            <span class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-base text-[#39d9cd]">schedule</span>
+                                Mon-Fri: 7am - 5pm | Sat: 7am - 4pm
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-mainnav">
+                <div class="mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
+                    <div
+                        class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:w-[34%] md:min-w-[320px] md:justify-start">
+                        <a class="relative z-10 shrink-0" href="#top">
+                            <img alt="AMCOL Group of Companies" class="h-20 sm:h-24 md:h-[6.5rem] w-auto max-w-[420px]"
+                                src="./assets/AMCOL_Logo.png" />
+                        </a>
+                    </div>
+                    <div class="flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
+                        <nav
+                            class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
+                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#top">Home</a>
+                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#about">About Us</a>
+                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
+                                href="#services">Services</a>
+                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
+                                href="#coverage">Coverage</a>
+                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#clients">Clients</a>
+                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#contact">Contact
+                                Us</a>
+                        </nav>
+                        <a class="hidden sm:inline-flex items-center justify-center rounded-sm border border-[#39d9cd] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#39d9cd] transition-colors hover:bg-[#39d9cd] hover:text-slate-950"
+                            href="client.html">Client Login</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="relative z-10 border-y border-white/10 bg-white/5">
+            <div class="w-full border-x border-white/10 bg-white/5">
+                <div class="status-ticker-container py-4">
+                    <div
+                        class="ticker-content items-center gap-12 px-4 text-[10px] font-bold uppercase tracking-[0.24em] text-white/50">
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>Fleet Status: Active</span>
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>Point Lisas | Truck-774 [En
+                            Route]</span>
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>Port of Spain | Cargo-88B
+                            [Delivered]</span>
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>San
+                            Fernando | Lift-102 [Idle]</span>
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>Fleet Status: Active</span>
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>Point Lisas | Truck-774 [En
+                            Route]</span>
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>Port of Spain | Cargo-88B
+                            [Delivered]</span>
+                        <span class="flex items-center gap-3"><span
+                                class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>San
+                            Fernando | Lift-102 [Idle]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative z-10 mx-auto max-w-[88rem] px-4 sm:px-6 lg:px-8 pt-8 pb-28 sm:pb-32 lg:pb-36">
+            <div class="grid items-center gap-12">
+                <div class="max-w-2xl xl:-ml-10">
+                    <div
+                        class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/70">
+                        <span class="pulse-dot h-2.5 w-2.5 rounded-full bg-[#39d9cd]"></span>
+                        Dispatch Network Live
+                    </div>
+                    <p
+                        class="mb-5 text-lg sm:text-xl font-bold uppercase tracking-[0.3em] text-[#c7fff8] drop-shadow-[0_6px_18px_rgba(0,0,0,0.45)]">
+                        Transport &amp;
+                        Heavy Lifting Division</p>
+                    <h1 class="text-5xl font-black leading-none tracking-tight text-white sm:text-6xl xl:text-7xl">
+                        <span class="block">Precision</span>
+                        <span class="block text-[#39d9cd]">Logistics</span>
+                        <span class="block">Across the</span>
+                        <span class="block">Island</span>
+                    </h1>
+                    <p class="mt-8 max-w-xl text-lg leading-relaxed text-slate-200 sm:text-xl">
+                        Heavy haulage, abnormal load transport, and lifting operations coordinated through a responsive
+                        fleet network built for industrial work across Trinidad and Tobago.
+                    </p>
+                    <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+                        <a class="inline-flex items-center justify-center rounded-sm bg-[#39d9cd] px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-slate-950 shadow-2xl transition-transform hover:-translate-y-0.5"
+                            href="#coverage">View Our Coverage</a>
+                        <a class="inline-flex items-center justify-center rounded-sm border border-white/15 bg-white/10 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-white transition-colors hover:bg-white/15"
+                            href="request.html">Send A Request</a>
+                    </div>
+                    <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        <div class="hero-mini-stat rounded-3xl p-4">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.28em] text-white/50">On-Time Rate</p>
+                            <p class="mt-2 text-2xl font-black text-white">98%</p>
+                        </div>
+                        <div class="hero-mini-stat rounded-3xl p-4">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.28em] text-white/50">Dispatch</p>
+                            <p class="mt-2 text-2xl font-black text-white">24/7</p>
+                        </div>
+                        <div class="hero-mini-stat rounded-3xl p-4">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.28em] text-white/50">Projects Served
+                            </p>
+                            <p class="mt-2 text-2xl font-black text-white">200+</p>
+                        </div>
+                    </div>
+                    <div class="mt-10 w-full max-w-2xl">
+                        <div class="glass-panel rounded-3xl border border-white/15 p-5 sm:p-7">
+                            <div class="mb-6 flex items-center justify-between gap-4">
+                                <h2 class="text-sm font-bold uppercase tracking-[0.32em] text-[#39d9cd]">Live Fleet
+                                    Status
+                                </h2>
+                                <div
+                                    class="flex items-center gap-3 text-[10px] uppercase tracking-[0.24em] text-white/50">
+                                    <span class="pulse-dot h-2.5 w-2.5 rounded-full bg-green-400"></span>
+                                    Live Update
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div
+                                    class="hero-status-row flex items-center justify-between gap-4 rounded-3xl p-4 sm:p-5">
+                                    <div class="flex min-w-0 items-center gap-4">
+                                        <div
+                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-950/50 text-[#39d9cd]">
+                                            <span class="material-symbols-outlined">local_shipping</span>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p class="text-lg font-black text-white">TRUCK-8821</p>
+                                            <p class="text-sm text-slate-300">Heading to Point Lisas</p>
+                                        </div>
+                                    </div>
+                                    <div class="shrink-0 text-right">
+                                        <p class="text-sm font-black uppercase tracking-[0.18em] text-green-400">On Time
+                                        </p>
+                                        <p class="text-xs uppercase tracking-[0.2em] text-white/50">ETA: 14:30</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="hero-status-row flex items-center justify-between gap-4 rounded-3xl p-4 sm:p-5">
+                                    <div class="flex min-w-0 items-center gap-4">
+                                        <div
+                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-950/50 text-[#39d9cd]">
+                                            <span class="material-symbols-outlined">inventory_2</span>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p class="text-lg font-black text-white">CARGO-A92</p>
+                                            <p class="text-sm text-slate-300">Unloading at Point Lisas</p>
+                                        </div>
+                                    </div>
+                                    <div class="shrink-0 text-right">
+                                        <p class="text-sm font-black uppercase tracking-[0.18em] text-sky-400">Active
+                                        </p>
+                                        <p class="text-xs uppercase tracking-[0.2em] text-white/50">Dock 4B</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="hero-status-row flex items-center justify-between gap-4 rounded-3xl p-4 sm:p-5">
+                                    <div class="flex min-w-0 items-center gap-4">
+                                        <div
+                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-950/50 text-[#39d9cd]">
+                                            <span class="material-symbols-outlined">construction</span>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p class="text-lg font-black text-white">LIFT-1044</p>
+                                            <p class="text-sm text-slate-300">Arrived San Fernando</p>
+                                        </div>
+                                    </div>
+                                    <div class="shrink-0 text-right">
+                                        <p class="text-sm font-black uppercase tracking-[0.18em] text-[#39d9cd]">
+                                            Complete
+                                        </p>
+                                        <p class="text-xs uppercase tracking-[0.2em] text-white/50">12:15 PM</p>
+                                    </div>
+                                </div>
+                                <div class="hidden max-w-7xl mx-auto px-4 w-full">
+                                    <div
+                                        class="bg-white/95 inline-block p-8 max-w-2xl shadow-2xl border-l-8 border-[#cc1f31]">
+                                        <h1
+                                            class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-4 uppercase">
+                                            AMCOL Group of Companies – Transport &amp; Heavy Lifting Division</h1>
+                                        <p class="text-lg text-slate-600 mb-6">Expert logistics solutions for high-value
+                                            and
+                                            oversized
+                                            cargo across the nation.</p>
+                                        <a class="bg-[#cc1f31] text-white px-8 py-3 font-bold text-sm tracking-widest hover:bg-red-700 transition-colors inline-block"
+                                            href="#">REQUEST A QUOTE</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section class="hidden bg-white pt-16 pb-4">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="coverage-info-card standalone">
+                <div class="coverage-card-title">Headquarters &amp; Main Yard</div>
+                <div class="coverage-coords">10.6524&deg; N, 61.5123&deg; W</div>
+                <div class="coverage-info-row">Americas Marketing Company Limited, Trinidad and Tobago</div>
+                <div class="coverage-info-row">+1 (868) 399-9200</div>
+                <div class="coverage-info-row">Mon-Fri: 7am - 5pm, Sat: 7am - 4pm</div>
+                <div class="coverage-notice">
+                    <strong>HEAVY VEHICLE ENTRANCE</strong>
+                    All heavy transport and oversized loads must enter via the Western Gate to avoid administrative
+                    parking congestion.
+                </div>
+                <button class="coverage-direction-btn"
+                    onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=10.6524,-61.5123')">
+                    Get Driving Directions
+                </button>
+            </div>
+        </div>
+    </section>
+    <div class="section-transition-band" aria-hidden="true">
+        <div class="section-transition-grid"></div>
+        <div class="section-transition-accent left"></div>
+        <div class="section-transition-accent right"></div>
+    </div>
+    <section id="projects" class="featured-projects-section py-20">
+        <div class="featured-projects-map" aria-hidden="true">
+            <span class="featured-projects-map-fragment one"></span>
+            <span class="featured-projects-map-fragment two"></span>
+            <span class="featured-projects-map-fragment three"></span>
+            <span class="featured-projects-map-fragment four"></span>
+        </div>
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="featured-projects-stage">
+                <div class="featured-projects-header mb-12">
+                    <div class="featured-projects-intro">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="h-px w-12 bg-[#cc1f31]"></span>
+                            <span class="text-[#cc1f31] font-bold text-xs uppercase tracking-[0.2em]">Featured
+                                Projects</span>
+                        </div>
+                        <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tight">Built on Complex Lifts,
+                            Critical Moves, and Precision Delivery.</h2>
+                        <p class="mt-5 text-base sm:text-lg leading-relaxed text-slate-600">A snapshot of the heavy
+                            transport, crane-assisted lifts, tank relocations, industrial mobilizations, and specialized
+                            cargo operations AMCOL has delivered across demanding project environments.</p>
+                    </div>
+                    <div class="featured-projects-summary">
+                        <div class="featured-projects-stat">
+                            <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-[#1e40af]">Operations</p>
+                            <p class="mt-3 text-2xl font-black text-slate-900">7 Featured</p>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-500">Highlighted projects spanning lift
+                                support, fuel transport, tanker work, and industrial mobilization.</p>
+                        </div>
+                        <div class="featured-projects-stat">
+                            <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-[#cc1f31]">Delivery Focus
+                            </p>
+                            <p class="mt-3 text-2xl font-black text-slate-900">24/7 Ready</p>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-500">Project execution shaped around route
+                                planning, timed dispatch, and safe on-site handling.</p>
+                        </div>
+                        <div class="featured-projects-stat">
+                            <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-700">Field Support
+                            </p>
+                            <p class="mt-3 text-2xl font-black text-slate-900">Multi-Sector</p>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-500">Heavy haulage, hazardous cargo,
+                                crane-assisted lifting, and active site support under one team.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-projects-grid">
+                    <article class="featured-project-card featured-span tall">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Heavy tank lift and relocation project" class="featured-project-image"
+                                src="./assets/Crane-lift%20tank.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">Heavy Lift Relocation</span>
+                            <h3 class="mt-4 text-2xl font-black uppercase tracking-tight">Crane-Assisted Tank Handling
+                            </h3>
+                            <p class="mt-2 max-w-xl text-sm leading-relaxed text-slate-600">Specialized rigging,
+                                controlled lifting, and site coordination for oversized industrial tank movement.</p>
+                            <div class="featured-project-meta">
+                                <span>Lift Planning</span>
+                                <span>Execution</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="featured-project-card">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Nighttime crane lift project" class="featured-project-image"
+                                src="./assets/Night%20Crane%20Lift.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">Night Operations</span>
+                            <h3 class="mt-4 text-xl font-black uppercase tracking-tight">After-Hours Heavy Lift</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">Time-sensitive lift execution
+                                completed under controlled night-shift conditions.</p>
+                            <div class="featured-project-meta">
+                                <span>Lift Crew</span>
+                                <span>Stand-By</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="featured-project-card">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Industrial transport project" class="featured-project-image"
+                                src="./assets/Transport%20industrial.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">Industrial Logistics</span>
+                            <h3 class="mt-4 text-xl font-black uppercase tracking-tight">Equipment Mobilization</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">Multi-stage cargo movement
+                                coordinated from loading point to final industrial site access.</p>
+                            <div class="featured-project-meta">
+                                <span>Route Survey</span>
+                                <span>Escort Ready</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="featured-project-card">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Tanker haulage project" class="featured-project-image"
+                                src="./assets/Demo%20image%20with%20tanker%201.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">Fleet Operations</span>
+                            <h3 class="mt-4 text-xl font-black uppercase tracking-tight">Tanker Support Deployment</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">Road-ready tanker haulage delivered
+                                with dependable fleet support and safe load control.</p>
+                            <div class="featured-project-meta">
+                                <span>Haulage</span>
+                                <span>On Schedule</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="featured-project-card">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Hazardous cargo transport project" class="featured-project-image"
+                                src="./assets/Gas%20truck.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">Hazardous Cargo</span>
+                            <h3 class="mt-4 text-xl font-black uppercase tracking-tight">Controlled Fuel Transport</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">Certified handling and delivery
+                                planning for sensitive fuel and dangerous goods movement.</p>
+                            <div class="featured-project-meta">
+                                <span>Safety First</span>
+                                <span>Compliance</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="featured-project-card">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Heritage cargo lift project" class="featured-project-image"
+                                src="./assets/Heritage%20cargo%20lift.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">Specialized Lift</span>
+                            <h3 class="mt-4 text-xl font-black uppercase tracking-tight">Site Cargo Transfer</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">High-attention cargo transfer work
+                                executed with lifting support and disciplined staging.</p>
+                            <div class="featured-project-meta">
+                                <span>Project Crew</span>
+                                <span>Precision Move</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="featured-project-card">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Walking job site with truck project" class="featured-project-image"
+                                src="./assets/Walking%20Job%20Site%20with%20Truck.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">Site Access</span>
+                            <h3 class="mt-4 text-xl font-black uppercase tracking-tight">Walking Job Site With Truck
+                            </h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">On-site truck positioning and
+                                controlled access support for active work zones and project delivery points.</p>
+                            <div class="featured-project-meta">
+                                <span>Site Support</span>
+                                <span>Active Delivery</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="self-start">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-px w-12 bg-[#cc1f31]"></span>
+                        <span class="text-[#cc1f31] font-bold text-xs uppercase tracking-[0.2em]">Our Excellence</span>
+                    </div>
+                    <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tight mb-6">About Us</h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8 font-medium">
+                        With over 15 years of excellence, AMCOL provides professional haulage solutions tailored to the
+                        most demanding industrial requirements. Our reputation is built on reliability, precision, and a
+                        proven track record.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#cc1f31]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-bold text-sm uppercase text-slate-700 tracking-wide">Heavy Lifting &amp;
+                                Rigging</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#cc1f31]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-bold text-sm uppercase text-slate-700 tracking-wide">Abnormal &amp;
+                                Oversized Load Transport</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#cc1f31]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-bold text-sm uppercase text-slate-700 tracking-wide">Specialized Project
+                                Logistics</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#cc1f31]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="font-bold text-sm uppercase text-slate-700 tracking-wide">Hazardous Cargo
+                                Handling</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative lg:sticky lg:top-24">
+                    <div class="about-visual-stack">
+                        <div class="relative">
+                            <div class="about-image-rotator" aria-label="Professional Operations">
+                                <div class="about-image-slide about-image-dumper"></div>
+                                <div class="about-image-slide about-image-loader"></div>
+                                <div class="about-image-slide about-image-semi"></div>
+                                <div class="about-image-slide about-image-industrial"></div>
+                            </div>
+                            <div
+                                class="absolute -bottom-6 -right-6 bg-[#1e40af] text-white p-6 shadow-xl hidden md:block">
+                                <p class="text-3xl font-black">15+</p>
+                                <p class="text-[10px] uppercase font-bold tracking-widest">Years of Excellence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-[var(--subtle-grey)] border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                <div class="w-full lg:w-3/5">
+                    <div class="rounded-sm overflow-hidden shadow-2xl border-4 border-white bg-slate-950">
+                        <video aria-label="AMCOL drone footage" class="aspect-video h-full w-full object-cover" controls
+                            playsinline preload="metadata">
+                            <source src="./assets/Andre%20amcol%20raw%20drone%20footage.MOV" />
+                            Your browser does not support embedded video. Download the footage
+                            <a class="underline" href="./assets/Andre%20amcol%20raw%20drone%20footage.MOV">here</a>.
+                        </video>
+                    </div>
+                    <p class="mt-3 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">AMCOL Drone
+                        Footage</p>
+                </div>
+                <div class="w-full lg:w-2/5">
+                    <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tight mb-6">Why AMCOL?</h2>
+                    <div class="space-y-6">
+                        <div class="bg-white p-4 border-l-4 border-[#1e40af] shadow-sm">
+                            <h4 class="font-bold text-[#1e40af] uppercase text-sm mb-1">Unmatched KPIs</h4>
+                            <p class="text-xs text-slate-600">Consistently meeting and exceeding industrial performance
+                                benchmarks across all sectors.</p>
+                        </div>
+                        <div class="bg-white p-4 border-l-4 border-[#cc1f31] shadow-sm">
+                            <h4 class="font-bold text-[#cc1f31] uppercase text-sm mb-1">24/7 Call-Out Service</h4>
+                            <p class="text-xs text-slate-600">Round-the-clock emergency transport and stand-by support
+                                when you need it most.</p>
+                        </div>
+                        <div class="bg-white p-4 border-l-4 border-slate-800 shadow-sm">
+                            <h4 class="font-bold text-slate-800 uppercase text-sm mb-1">Safety First Culture</h4>
+                            <p class="text-xs text-slate-600">Rigorous safety protocols and continuous training to
+                                ensure zero-incident operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-16 stat-bar p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white rounded-sm shadow-xl">
+                <div>
+                    <p class="text-4xl font-black mb-1" data-counter data-target="15000" data-suffix="K+"
+                        data-format="compact">0</p>
+                    <p class="text-xs uppercase font-bold tracking-widest opacity-80">Deliveries</p>
+                </div>
+                <div class="border-y md:border-y-0 md:border-x border-white/20 py-4 md:py-0">
+                    <p class="text-4xl font-black mb-1" data-counter data-target="200" data-suffix="+">0</p>
+                    <p class="text-xs uppercase font-bold tracking-widest opacity-80">Customers</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-black mb-1" data-counter data-target="2">0</p>
+                    <p class="text-xs uppercase font-bold tracking-widest opacity-80">Locations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tight mb-4">Our Core Services</h2>
+                <div class="w-20 h-1.5 bg-[#cc1f31] mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card border border-slate-200 bg-white p-4 shadow-sm flex flex-col">
+                    <div class="aspect-video overflow-hidden mb-6">
+                        <img alt="Nationwide Transport" class="w-full h-full object-cover"
+                            src="./assets/flatbed%20with%20bg.png" />
+                    </div>
+                    <h3 class="font-bold text-slate-900 uppercase text-base mb-3 text-center">Nationwide Transport</h3>
+                    <p class="text-slate-500 text-sm text-center mb-6 flex-grow">Comprehensive logistics network
+                        covering all major routes with guaranteed delivery schedules.</p>
+                    <a href="cards.html?service=nationwide-transport"
+                        class="w-full border-2 border-[#1e40af] py-2 text-xs font-bold text-[#1e40af] hover:bg-[#1e40af] hover:text-white transition-colors uppercase inline-flex items-center justify-center">View
+                        Service</a>
+                </div>
+                <div class="service-card border border-slate-200 bg-white p-4 shadow-sm flex flex-col">
+                    <div class="aspect-video overflow-hidden mb-6">
+                        <img alt="24/7 Stand-by Service" class="w-full h-full object-cover"
+                            src="./assets/Semi%20truck.png" />
+                    </div>
+                    <h3 class="font-bold text-slate-900 uppercase text-base mb-3 text-center">Stand-by Truck and Trailer
+                        Service (24/7)</h3>
+                    <p class="text-slate-500 text-sm text-center mb-6 flex-grow">Emergency response vehicles ready 24/7
+                        to minimize your downtime and handle urgent requirements.</p>
+                    <a href="cards.html?service=standby-truck-trailer"
+                        class="w-full border-2 border-[#1e40af] py-2 text-xs font-bold text-[#1e40af] hover:bg-[#1e40af] hover:text-white transition-colors uppercase inline-flex items-center justify-center">View
+                        Service</a>
+                </div>
+                <div class="service-card border border-slate-200 bg-white p-4 shadow-sm flex flex-col">
+                    <div class="aspect-video overflow-hidden mb-6">
+                        <img alt="Heavy Haulage" class="w-full h-full object-cover" src="assets/Night Crane Lift.png" />
+                    </div>
+                    <h3 class="font-bold text-slate-900 uppercase text-base mb-3 text-center">Heavy Haulage Cargo</h3>
+                    <p class="text-slate-500 text-sm text-center mb-6 flex-grow">Specialized equipment for high-tonnage
+                        transport needs across demanding terrain and distances.</p>
+                    <a href="cards.html?service=heavy-haulage-cargo"
+                        class="w-full border-2 border-[#1e40af] py-2 text-xs font-bold text-[#1e40af] hover:bg-[#1e40af] hover:text-white transition-colors uppercase inline-flex items-center justify-center">View
+                        Service</a>
+                </div>
+                <div class="service-card border border-slate-200 bg-white p-4 shadow-sm flex flex-col">
+                    <div class="aspect-video overflow-hidden mb-6">
+                        <img alt="Oversized Cargo" class="w-full h-full object-cover"
+                            src="assets/Nighttime truck with office building.png" />
+                    </div>
+                    <h3 class="font-bold text-slate-900 uppercase text-base mb-3 text-center">Oversized Cargo Moves</h3>
+                    <p class="text-slate-500 text-sm text-center mb-6 flex-grow">Expert pilot car coordination and route
+                        planning for abnormal dimension loads and structures.</p>
+                    <a href="cards.html?service=oversized-cargo-moves"
+                        class="w-full border-2 border-[#1e40af] py-2 text-xs font-bold text-[#1e40af] hover:bg-[#1e40af] hover:text-white transition-colors uppercase inline-flex items-center justify-center">View
+                        Service</a>
+                </div>
+                <div class="service-card border border-slate-200 bg-white p-4 shadow-sm flex flex-col">
+                    <div class="aspect-video overflow-hidden mb-6">
+                        <img alt="Heavy Lifting" class="w-full h-full object-cover" src="assets/loader.png" />
+                    </div>
+                    <h3 class="font-bold text-slate-900 uppercase text-base mb-3 text-center">Heavy Lifting Services
+                    </h3>
+                    <p class="text-slate-500 text-sm text-center mb-6 flex-grow">Precision rigging and multi-crane lifts
+                        for industrial, construction, and manufacturing projects.</p>
+                    <a href="cards.html?service=heavy-lifting-services"
+                        class="w-full border-2 border-[#1e40af] py-2 text-xs font-bold text-[#1e40af] hover:bg-[#1e40af] hover:text-white transition-colors uppercase inline-flex items-center justify-center">View
+                        Service</a>
+                </div>
+                <div class="service-card border border-slate-200 bg-white p-4 shadow-sm flex flex-col">
+                    <div class="aspect-video overflow-hidden mb-6">
+                        <img alt="Hazardous Cargo" class="w-full h-full object-cover" src="assets/Gas truck.png" />
+                    </div>
+                    <h3 class="font-bold text-slate-900 uppercase text-base mb-3 text-center">
+                        Hazardous/Flammable/Explosive Cargo</h3>
+                    <p class="text-slate-500 text-sm text-center mb-6 flex-grow">Safety-certified transport for
+                        dangerous goods with specialized containers and trained handling teams.</p>
+                    <a href="cards.html?service=hazardous-cargo"
+                        class="w-full border-2 border-[#1e40af] py-2 text-xs font-bold text-[#1e40af] hover:bg-[#1e40af] hover:text-white transition-colors uppercase inline-flex items-center justify-center">View
+                        Service</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="coverage" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 mb-10">
+            <div class="text-center">
+                <h2 class="text-4xl font-black text-white uppercase tracking-tight mb-4">Coverage</h2>
+                <div class="w-20 h-1.5 bg-[#cc1f31] mx-auto"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="coverage-layout">
+                <div class="transport-solutions-panel">
+                    <p class="text-center text-lg font-black uppercase tracking-[0.34em] text-[#39d9cd]">Transport
+                        Solutions</p>
+                    <h3 class="mt-5 text-3xl font-black uppercase tracking-tight text-white">Land and Sea Logistics
+                        Transport
+                        coordinated from one logistics team.</h3>
+                    <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate-300">
+                        We build practical transport plans around cargo size, delivery windows, port handling, and
+                        final-mile access so your shipment moves with fewer delays and clearer accountability.
+                    </p>
+                    <div class="mt-8 grid gap-4">
+                        <article class="transport-solution-card">
+                            <div class="flex items-start gap-4">
+                                <span class="transport-solution-icon material-symbols-outlined">local_shipping</span>
+                                <div>
+                                    <h4 class="text-lg font-bold uppercase tracking-[0.16em] text-white">Land Haulage
+                                    </h4>
+                                    <p class="mt-2 text-sm leading-relaxed text-slate-300">
+                                        Dedicated trucks and route planning for container moves, heavy equipment,
+                                        oversized loads, and time-sensitive inland deliveries across Trinidad and
+                                        Tobago.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="transport-solution-card">
+                            <div class="flex items-start gap-4">
+                                <span class="transport-solution-icon material-symbols-outlined">directions_boat</span>
+                                <div>
+                                    <h4 class="text-lg font-bold uppercase tracking-[0.16em] text-white">Sea Logistics
+                                        Transport
+                                    </h4>
+                                    <p class="mt-2 text-sm leading-relaxed text-slate-300">
+                                        Port-to-port and island cargo support with vessel coordination, customs-ready
+                                        movement planning, and dependable marine connections for commercial freight.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="transport-solution-card">
+                            <div class="flex items-start gap-4">
+                                <span class="transport-solution-icon material-symbols-outlined">swap_horiz</span>
+                                <div>
+                                    <h4 class="text-lg font-bold uppercase tracking-[0.16em] text-white">Trinidad -
+                                        Miami Sea Freight</h4>
+                                    <p class="mt-2 text-sm leading-relaxed text-slate-300">
+                                        AMCOL provides integrated bi-directional sea freight between Trinidad and
+                                        Miami, including cargo pickup, export documentation, FCL/LCL ocean shipping,
+                                        customs clearance, U.S. distribution, Florida warehousing and consolidation,
+                                        customs brokerage, and final delivery with reliable sailing schedules for
+                                        individuals, SMEs, and commercial clients.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="coverage-map-stack">
+                    <div class="coverage-map-group">
+                        <div class="coverage-map-heading">
+                            <span>Caribbean Based Haulage</span>
+                        </div>
+                        <div class="coverage-map-section">
+                            <div id="coverage-map"></div>
+                            <div class="coverage-info-card">
+                                <div class="coverage-card-title">Headquarters &amp; Main Yard</div>
+                                <div class="coverage-coords">10.6524&deg; N, 61.5123&deg; W</div>
+                                <div class="coverage-info-row">Americas Marketing Company Limited, Trinidad and Tobago
+                                </div>
+                                <div class="coverage-info-row">+1 (868) 399-9200</div>
+                                <div class="coverage-info-row">Mon-Fri: 7am - 5pm, Sat: 7am - 4pm</div>
+                                <div class="coverage-notice">
+                                    <strong>HEAVY VEHICLE ENTRANCE</strong>
+                                    All heavy transport and oversized loads must enter via the Western Gate to avoid
+                                    administrative
+                                    parking congestion.
+                                </div>
+                                <button class="coverage-direction-btn"
+                                    onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=10.6524,-61.5123')">
+                                    Get Driving Directions
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="coverage-map-group">
+                        <div class="coverage-map-heading">
+                            <span>Miami USA Based Haulage</span>
+                        </div>
+                        <div class="coverage-map-section compact">
+                            <div id="miami-coverage-map"></div>
+                            <div class="coverage-info-card">
+                                <div class="coverage-card-title">Miami Logistics View</div>
+                                <div class="coverage-coords">25.7617&deg; N, 80.1918&deg; W</div>
+                                <div class="coverage-info-row">Miami, Florida, United States</div>
+                                <div class="coverage-info-row">Gateway view for international cargo movement</div>
+                                <div class="coverage-info-row">Port, yard, and onward route visibility</div>
+                                <div class="coverage-notice">
+                                    <strong>MIAMI FREIGHT CORRIDOR</strong>
+                                    Use this duplicate map card to highlight Miami as a logistics reference point for
+                                    inbound and outbound freight activity.
+                                </div>
+                                <button class="coverage-direction-btn"
+                                    onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=25.7617,-80.1918')">
+                                    Open Miami Directions
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="clients" class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-[#cc1f31] uppercase tracking-tight mb-4">What Our Clients Say</h2>
+                <div class="w-20 h-1.5 bg-[#cc1f31] mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
+                    <div class="flex mb-6 space-x-1">
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">"AMCOL demonstrated a strong
+                        commitment to clean energy initiatives during our relocation project, while supporting
+                        sustainable operations. Their 24/7 standby support ensured efficiency and reliability
+                        throughout the entire project lifecycle."</p>
+                    <div class="flex items-center justify-between border-t border-slate-50 pt-6">
+                        <div>
+                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">Robert Mitchell</p>
+                            <p class="text-[11px] text-slate-400 uppercase font-medium">Energy Operations Director</p>
+                        </div>
+                        <img alt="Client Company Logo" class="h-8 w-auto grayscale opacity-70"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHEOvC9InNf1UfbThFklsC8iPbRpNrsVl9ONfIRkjDDNg5tvAAsPgYxsmz-DWu4uwaH-OCY4jrrI-3_G5w6Kh9sKeccknMX7TgDfpaYmnJAaCv9TwsHFBlHwW-LerDYT8JddAUMIjj8MDQO6NyTKEyqCU0nZolSq9Vn_gCpnXc06HbvP5uC1eWwXE4GGfqLo34lFf6piLnoJ5ZHR_lE-MKrMVlw1wnU8scduT-ddKR--x2JRendXaUZXrK2LeZbifU9wJ7UCH6iCP2" />
+                    </div>
+                </div>
+                <div
+                    class="testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
+                    <div class="flex mb-6 space-x-1">
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">"Outstanding commitment to safety.
+                        We trust AMCOL exclusively for our hazardous cargo moves due to their rigorous protocols and
+                        certified team."</p>
+                    <div class="flex items-center justify-between border-t border-slate-50 pt-6">
+                        <div>
+                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">Sarah Henderson</p>
+                            <p class="text-[11px] text-slate-400 uppercase font-medium">Infrastructure Logistics Lead
+                            </p>
+                        </div>
+                        <img alt="Client Company Logo" class="h-8 w-auto grayscale opacity-70"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFugav4Bs1DrUhimcw92X-Pp1GRuOazjJCr-CxwkEp2MEzaFcRtVZMkO69lLBStSV1_0r06tjk-cOkXM1xY2QVkojhKKjjIWNph_D-jFX-1ZKt54kt5tdwE0bnrhcXkK_tbwL6w6OJWG2Gid0_7Nurh3EaC5IqBx9nccK36ylLWxjS3jlNAVlcu7-44ugGB960M4myKUn6CKSm8Nmp8whQR8yvH1z5pYz1j3MESVO1QEQy3N2GydCfXZ_eBVuM1MMi4MHd5QXLHLb5" />
+                    </div>
+                </div>
+                <div
+                    class="testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
+                    <div class="flex mb-6 space-x-1">
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
+                            style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">"Reliable nationwide coverage. Their
+                        ability to handle oversized loads across difficult terrain is unmatched in the industry today."
+                    </p>
+                    <div class="flex items-center justify-between border-t border-slate-50 pt-6">
+                        <div>
+                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">David Chen</p>
+                            <p class="text-[11px] text-slate-400 uppercase font-medium">Regional Plant Manager</p>
+                        </div>
+                        <img alt="Client Company Logo" class="h-8 w-auto grayscale opacity-70"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbU5Y5ymUVG_dm1xzyayukPflJTNSJG-POTm7T7fNwbEeMWtwDs71_20g--Pz9Xj6ouZn37UtjnvmnN4zo8Ckl437LIJOInzwuURsyJrUZrLFWxYllk50oomi_xO1ze1woyalY2haeGMv5_u2amWQeNTndHSv1rJWi6Eb0mFTzIXTvgp9y557zHiIkkKDCVyJ_wuoZYqSrtnicBupSOSFM3GDrI0qHEhOA1l-ZAqAP9lrKyN7ocamkRGXtsB6_z8jglnpQrhUz66DB" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-12 border-t border-slate-100 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div
+                class="flex flex-wrap justify-between items-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all">
+                <img alt="Client Logo" class="h-10 w-auto"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHEOvC9InNf1UfbThFklsC8iPbRpNrsVl9ONfIRkjDDNg5tvAAsPgYxsmz-DWu4uwaH-OCY4jrrI-3_G5w6Kh9sKeccknMX7TgDfpaYmnJAaCv9TwsHFBlHwW-LerDYT8JddAUMIjj8MDQO6NyTKEyqCU0nZolSq9Vn_gCpnXc06HbvP5uC1eWwXE4GGfqLo34lFf6piLnoJ5ZHR_lE-MKrMVlw1wnU8scduT-ddKR--x2JRendXaUZXrK2LeZbifU9wJ7UCH6iCP2" />
+                <img alt="Client Logo" class="h-10 w-auto"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFugav4Bs1DrUhimcw92X-Pp1GRuOazjJCr-CxwkEp2MEzaFcRtVZMkO69lLBStSV1_0r06tjk-cOkXM1xY2QVkojhKKjjIWNph_D-jFX-1ZKt54kt5tdwE0bnrhcXkK_tbwL6w6OJWG2Gid0_7Nurh3EaC5IqBx9nccK36ylLWxjS3jlNAVlcu7-44ugGB960M4myKUn6CKSm8Nmp8whQR8yvH1z5pYz1j3MESVO1QEQy3N2GydCfXZ_eBVuM1MMi4MHd5QXLHLb5" />
+                <img alt="Client Logo" class="h-10 w-auto"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbU5Y5ymUVG_dm1xzyayukPflJTNSJG-POTm7T7fNwbEeMWtwDs71_20g--Pz9Xj6ouZn37UtjnvmnN4zo8Ckl437LIJOInzwuURsyJrUZrLFWxYllk50oomi_xO1ze1woyalY2haeGMv5_u2amWQeNTndHSv1rJWi6Eb0mFTzIXTvgp9y557zHiIkkKDCVyJ_wuoZYqSrtnicBupSOSFM3GDrI0qHEhOA1l-ZAqAP9lrKyN7ocamkRGXtsB6_z8jglnpQrhUz66DB" />
+                <img alt="Client Logo" class="h-10 w-auto"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4EfDJkp4IjaP26suIDbOHvSp7L8_q2FsOw7JtMuMQED_iYDkgezKbWhpvOcRW-ebrnauGNXQIA-Hr4PnYeBMrOxAvqwWzy-ORbJD4Y01pDTOgF5QmG0HnyFJ3rg5wNGUyoZK0S242Brl6GBCnZ5GsMGC-oIIh01s8rivrzQ-hEN5N3_Tky1Fqd4LVos9dBU3Zr9vCvU91dS-5i0KxjzshoNXhquLXNu0muTjgEoMs_SFaOEumEtCcHjq1onRV2idNaRomamxQZyNH" />
+                <img alt="Client Logo" class="h-10 w-auto"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpzKShzUAxGEBHCOCV31OWPDQ8cGZYbUBm9gqBAIgnlZDpIH1SwG57l7ctkoEI9RpWZkwjP7oQQIH5WSb4pCZGtKpLAY5LQ2S0sJMueOVRxbUYayL93Sp-w_-fXsEgGAwLzkEgZp0kDHAn1VlPdb3TxE7y_n1Ji5KdyvfAAvH_0bzSx761mRCwL7fcDuY_oFqftkW7w1aXEsbbcBWKAkT5yNAqX_-3rUJw0usPaXwL2bwSeQieBJWpoCcOZ_cvuVxi0CcDp7mHeArJ" />
+            </div>
+        </div>
+    </section>
+    <footer id="contact" class="bg-[#4b4b4b] text-slate-100 py-16">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h3 class="text-lg font-bold mb-6 border-b border-slate-500 pb-2 uppercase tracking-wide">Contact AMCOL
+                </h3>
+                <div class="space-y-4 text-sm text-slate-300">
+                    <p class="flex items-start">
+                        <span class="material-symbols-outlined mr-3 text-sm text-red-400">phone</span>
+                        <span>Telephone: +1(868) 399-9200<br />Mobile: 389-6787</span>
+                    </p>
+                    <p class="flex items-start">
+                        <span class="material-symbols-outlined mr-3 text-sm text-red-400">location_on</span>
+                        <span>S.S. Erin Road Penal, #22 Ramjohn Trace</span>
+                    </p>
+                    <div class="pt-4 flex space-x-4">
+                        <a class="text-slate-300 hover:text-white" href="#"><span
+                                class="material-symbols-outlined">social_leaderboard</span></a>
+                        <a class="text-slate-300 hover:text-white" href="#"><span
+                                class="material-symbols-outlined">share</span></a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6 border-b border-slate-500 pb-2 uppercase tracking-wide">Division Hours
+                </h3>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex justify-between items-center">
+                        <span class="flex items-center"><span
+                                class="material-symbols-outlined mr-2 text-[16px]">schedule</span> Monday -
+                            Friday:</span>
+                        <span>7am - 5pm</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="flex items-center"><span
+                                class="material-symbols-outlined mr-2 text-[16px]">schedule</span> Saturday:</span>
+                        <span>7am - 4pm</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="flex items-center text-red-400 font-bold"><span
+                                class="material-symbols-outlined mr-2 text-[16px]">support_agent</span> 24/7
+                            Hotline:</span>
+                        <span class="font-bold">Available</span>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6 border-b border-slate-500 pb-2 uppercase tracking-wide">Quick Links
+                </h3>
+                <div class="grid grid-cols-2 gap-2 text-sm text-slate-300">
+                    <a class="hover:text-white" href="#services">Services</a>
+                    <a class="hover:text-white" href="#about">About Us</a>
+                    <a class="hover:text-white" href="#coverage">Coverage</a>
+                    <a class="hover:text-white" href="#clients">Clients</a>
+                    <a class="hover:text-white" href="#contact">Contact</a>
+                    <a class="hover:text-white" href="#top">Back to Top</a>
+                </div>
+                <div class="mt-8 pt-6 border-t border-slate-500 flex flex-wrap gap-2 items-center">
+                    <img alt="Visa" class="h-4 bg-white p-0.5 rounded"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_PxzNFGgsxPH6t2vcUsj7p7kKytD-oOvacnSbS9ObTqA0-Xxc7Ws7PG8ALWzbDOb_NSBHCHHNWDKaZRV-7Zz1udXCtc7ETV7esOexVr70g5gw65YqLNNdxv-hP7VrHP0zSz1lWbzpGSS7b2y0tFe16K2nzxJ4oTXZ7rxNS_CDue6oA-8YeBVDu2KkQ7zBDI0HB5pgnzjBMXjuvuNAcxuRGh92Nh4ipS-6dAF1-yPpY2uQZzWHqw6CbO8iDPNPhQnFS-rcRu-aUaU5" />
+                    <img alt="Mastercard" class="h-6 bg-white p-0.5 rounded"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkvor_TdcncpNakQBGxv24F_2Nv71Ci8Om-vcsKEI6X73BOkKcR4U7lBuVxeAK0U9tHEKUGSMciqk5qwDuQ3tT45U-V5-rwFo_X7oDnObQ-aUm1DiSESVYhmFr3ubqIsO7nxslUd7B4QEbdnjqAxUHi_8Y_UwHotDFFHkUxqPGsgJEfR_SUSBFIyYiF8yhkJBLU7arRq-YlHLepUSjqtmN4HhxwcHRZE9Q2Y4gCXeCIptGGRCbDAlT4Mu3_9h0Cm-9EoadH2krFvWW" />
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-slate-500 flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-widest">
+            <p>© 2024 AMCOL Group of Companies. All Rights Reserved. Privacy Policy. Terms of Service.</p>
+            <a class="bg-slate-300 text-slate-900 p-2 rounded hover:bg-white transition-colors" href="#top">
+                <span class="material-symbols-outlined text-sm">keyboard_arrow_up</span>
+            </a>
+        </div>
+    </footer>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const statCounters = document.querySelectorAll('[data-counter]');
+
+            function formatCounterValue(value, counter) {
+                const target = Number(counter.dataset.target || 0);
+                const suffix = counter.dataset.suffix || '';
+
+                if (counter.dataset.format === 'compact') {
+                    const compactValue = value >= 1000 ? (value / 1000) : value;
+                    const roundedValue = target >= 10000 ? Math.round(compactValue) : Number(compactValue.toFixed(1));
+                    return roundedValue + suffix;
+                }
+
+                return Math.round(value) + suffix;
+            }
+
+            function animateCounter(counter) {
+                if (counter.dataset.animated === 'true') return;
+
+                const target = Number(counter.dataset.target || 0);
+                const duration = 1400;
+                const startTime = performance.now();
+                counter.dataset.animated = 'true';
+
+                function step(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easedProgress = 1 - Math.pow(1 - progress, 3);
+                    const currentValue = target * easedProgress;
+
+                    counter.textContent = formatCounterValue(currentValue, counter);
+
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        counter.textContent = formatCounterValue(target, counter);
+                    }
+                }
+
+                window.requestAnimationFrame(step);
+            }
+
+            if (statCounters.length > 0) {
+                const statBar = document.querySelector('.stat-bar');
+
+                if ('IntersectionObserver' in window && statBar) {
+                    const counterObserver = new IntersectionObserver(function (entries, observer) {
+                        entries.forEach(function (entry) {
+                            if (!entry.isIntersecting) return;
+
+                            statCounters.forEach(animateCounter);
+                            observer.unobserve(entry.target);
+                        });
+                    }, {
+                        threshold: 0.35
+                    });
+
+                    counterObserver.observe(statBar);
+                } else {
+                    statCounters.forEach(animateCounter);
+                }
+            }
+
+            const coverageMapElement = document.getElementById('coverage-map');
+            const mapboxToken = window.AMCOL_MAPBOX_TOKEN || '';
+            if (!coverageMapElement || typeof mapboxgl === 'undefined' || !mapboxToken) {
+                if (coverageMapElement && !mapboxToken) {
+                    coverageMapElement.textContent = 'Map preview unavailable.';
+                }
+                return;
+            }
+
+            mapboxgl.accessToken = mapboxToken;
+            const coverageMap = new mapboxgl.Map({
+                container: 'coverage-map',
+                style: 'mapbox://styles/mapbox/dark-v11',
+                center: [-62.6, 13.2],
+                zoom: 4.9,
+                minZoom: 1.5,
+                maxZoom: 14,
+                dragPan: true,
+                dragRotate: false,
+                scrollZoom: true,
+                boxZoom: false,
+                doubleClickZoom: true,
+                touchZoomRotate: true,
+                keyboard: false
+            });
+            coverageMap.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
+            const coverageBounds = new mapboxgl.LngLatBounds(
+                [-68.8, 9.0],
+                [-57.2, 18.9]
+            );
+
+            function fitCoverageMapToCaribbean() {
+                coverageMap.fitBounds(coverageBounds, {
+                    padding: {
+                        top: 48,
+                        right: window.innerWidth < 640 ? 24 : 120,
+                        bottom: 48,
+                        left: window.innerWidth < 640 ? 24 : 48
+                    },
+                    duration: 0,
+                    maxZoom: 5.4
+                });
+            }
+
+            coverageMap.setMaxBounds(coverageBounds);
+
+            const portOfSpainCoords = [-61.5086914, 10.64878];
+            const grenadaPortCoords = [-61.75, 12.05];
+            const scarboroughPortCoords = [-60.7353, 11.1823];
+            const shipMidpointCoords = [-61.6293457, 11.38939];
+            const scarboroughShipMidpointCoords = [-61.122, 10.96];
+
+            function createCurvedRoute(start, end, lift = 0.18, steps = 36) {
+                const midLng = (start[0] + end[0]) / 2;
+                const midLat = (start[1] + end[1]) / 2;
+                const control = [midLng - 0.1, midLat + lift];
+                const points = [];
+
+                for (let i = 0; i <= steps; i += 1) {
+                    const t = i / steps;
+                    const oneMinusT = 1 - t;
+                    const lng = (oneMinusT * oneMinusT * start[0])
+                        + (2 * oneMinusT * t * control[0])
+                        + (t * t * end[0]);
+                    const lat = (oneMinusT * oneMinusT * start[1])
+                        + (2 * oneMinusT * t * control[1])
+                        + (t * t * end[1]);
+                    points.push([lng, lat]);
+                }
+
+                return points;
+            }
+
+            const shippingRouteCoords = createCurvedRoute(portOfSpainCoords, grenadaPortCoords);
+            const scarboroughRouteCoords = createCurvedRoute(portOfSpainCoords, scarboroughPortCoords, 0.1, 30);
+
+            coverageMap.on('load', function () {
+                fitCoverageMapToCaribbean();
+
+                coverageMap.addSource('port-route', {
+                    type: 'geojson',
+                    data: {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: shippingRouteCoords
+                        }
+                    }
+                });
+
+                coverageMap.addLayer({
+                    id: 'port-route-line',
+                    type: 'line',
+                    source: 'port-route',
+                    layout: {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    paint: {
+                        'line-color': '#e53935',
+                        'line-width': 3.5,
+                        'line-dasharray': [2, 2],
+                        'line-opacity': 0.95
+                    }
+                });
+
+                coverageMap.addSource('scarborough-route', {
+                    type: 'geojson',
+                    data: {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: scarboroughRouteCoords
+                        }
+                    }
+                });
+
+                coverageMap.addLayer({
+                    id: 'scarborough-route-line',
+                    type: 'line',
+                    source: 'scarborough-route',
+                    layout: {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    paint: {
+                        'line-color': '#e53935',
+                        'line-width': 3,
+                        'line-dasharray': [1.5, 2],
+                        'line-opacity': 0.8
+                    }
+                });
+
+                const dashPatterns = [
+                    [0, 2, 2, 2],
+                    [0.5, 2, 1.5, 2],
+                    [1, 2, 1, 2],
+                    [1.5, 2, 0.5, 2]
+                ];
+                let dashIndex = 0;
+                window.setInterval(function () {
+                    coverageMap.setPaintProperty('port-route-line', 'line-dasharray', dashPatterns[dashIndex]);
+                    coverageMap.setPaintProperty('scarborough-route-line', 'line-dasharray', dashPatterns[dashIndex]);
+                    dashIndex = (dashIndex + 1) % dashPatterns.length;
+                }, 180);
+            });
+
+            window.addEventListener('resize', fitCoverageMapToCaribbean);
+
+            const headquartersCoords = [-61.4667, 10.1667];
+
+            new mapboxgl.Marker({ color: '#e53935' })
+                .setLngLat(headquartersCoords)
+                .addTo(coverageMap);
+
+            const portOfSpainStar = document.createElement('div');
+            portOfSpainStar.className = 'map-star-marker';
+            portOfSpainStar.textContent = '★';
+
+            new mapboxgl.Marker({ element: portOfSpainStar })
+                .setLngLat(portOfSpainCoords)
+                .addTo(coverageMap);
+
+            const shipMarker = document.createElement('div');
+            shipMarker.className = 'map-ship-marker';
+            shipMarker.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M20 18c-1.1 0-1.99.45-2.63 1.17A3.46 3.46 0 0 0 14.74 18c-1.07 0-2.04.48-2.7 1.24A3.46 3.46 0 0 0 9.3 18c-1.09 0-2.07.49-2.7 1.26A3.44 3.44 0 0 0 3.87 18H2c.8 1.79 2.58 3 4.6 3c1.08 0 2.08-.36 2.88-.97c.77.61 1.76.97 2.82.97c1.08 0 2.07-.36 2.85-.96c.79.6 1.79.96 2.85.96c2.03 0 3.81-1.21 4.6-3H20ZM6 5.5l6-2.5l6 2.5V13h-2V7.06l-4-1.67l-4 1.67V15H6V5.5Z"/></svg>';
+
+            new mapboxgl.Marker({ element: shipMarker })
+                .setLngLat(shipMidpointCoords)
+                .addTo(coverageMap);
+
+            const scarboroughShipMarker = document.createElement('div');
+            scarboroughShipMarker.className = 'map-ship-marker';
+            scarboroughShipMarker.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M20 18c-1.1 0-1.99.45-2.63 1.17A3.46 3.46 0 0 0 14.74 18c-1.07 0-2.04.48-2.7 1.24A3.46 3.46 0 0 0 9.3 18c-1.09 0-2.07.49-2.7 1.26A3.44 3.44 0 0 0 3.87 18H2c.8 1.79 2.58 3 4.6 3c1.08 0 2.08-.36 2.88-.97c.77.61 1.76.97 2.82.97c1.08 0 2.07-.36 2.85-.96c.79.6 1.79.96 2.85.96c2.03 0 3.81-1.21 4.6-3H20ZM6 5.5l6-2.5l6 2.5V13h-2V7.06l-4-1.67l-4 1.67V15H6V5.5Z"/></svg>';
+
+            new mapboxgl.Marker({ element: scarboroughShipMarker })
+                .setLngLat(scarboroughShipMidpointCoords)
+                .addTo(coverageMap);
+
+            const grenadaPortMarker = document.createElement('div');
+            grenadaPortMarker.className = 'map-port-marker';
+            grenadaPortMarker.textContent = 'P';
+
+            new mapboxgl.Marker({ element: grenadaPortMarker })
+                .setLngLat(grenadaPortCoords)
+                .addTo(coverageMap);
+
+            const scarboroughPortMarker = document.createElement('div');
+            scarboroughPortMarker.className = 'map-port-marker';
+            scarboroughPortMarker.textContent = 'P';
+
+            new mapboxgl.Marker({ element: scarboroughPortMarker })
+                .setLngLat(scarboroughPortCoords)
+                .addTo(coverageMap);
+
+            const headquartersLabel = document.createElement('div');
+            headquartersLabel.className = 'map-route-label';
+            headquartersLabel.textContent = 'Headquarters';
+
+            new mapboxgl.Marker({ element: headquartersLabel, anchor: 'left', offset: [12, 0] })
+                .setLngLat(headquartersCoords)
+                .addTo(coverageMap);
+
+            const portOfSpainLabel = document.createElement('div');
+            portOfSpainLabel.className = 'map-route-label';
+            portOfSpainLabel.textContent = 'Port of Spain';
+
+            new mapboxgl.Marker({ element: portOfSpainLabel, anchor: 'left', offset: [12, 0] })
+                .setLngLat(portOfSpainCoords)
+                .addTo(coverageMap);
+
+            const grenadaLabel = document.createElement('div');
+            grenadaLabel.className = 'map-route-label';
+            grenadaLabel.textContent = "St. George's Port";
+
+            new mapboxgl.Marker({ element: grenadaLabel, anchor: 'right', offset: [-12, 0] })
+                .setLngLat(grenadaPortCoords)
+                .addTo(coverageMap);
+
+            const scarboroughLabel = document.createElement('div');
+            scarboroughLabel.className = 'map-route-label';
+            scarboroughLabel.textContent = 'Scarborough Port';
+
+            new mapboxgl.Marker({ element: scarboroughLabel, anchor: 'left', offset: [12, 0] })
+                .setLngLat(scarboroughPortCoords)
+                .addTo(coverageMap);
+
+            const miamiMapElement = document.getElementById('miami-coverage-map');
+
+            if (miamiMapElement) {
+                const miamiCoords = [-80.1918, 25.7617];
+                const portMiamiCoords = [-80.1777, 25.7781];
+                const miamiToPortOfSpainRoute = createCurvedRoute(portMiamiCoords, portOfSpainCoords, -4.5, 48);
+                const miamiRouteMidpoint = miamiToPortOfSpainRoute[Math.floor(miamiToPortOfSpainRoute.length / 2)];
+                const miamiMap = new mapboxgl.Map({
+                    container: 'miami-coverage-map',
+                    style: 'mapbox://styles/mapbox/dark-v11',
+                    center: [-70.5, 18.5],
+                    zoom: 4.2,
+                    minZoom: 3.2,
+                    maxZoom: 15,
+                    dragPan: true,
+                    dragRotate: false,
+                    scrollZoom: true,
+                    boxZoom: false,
+                    doubleClickZoom: true,
+                    touchZoomRotate: true,
+                    keyboard: false
+                });
+
+                miamiMap.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
+                const miamiCoverageBounds = new mapboxgl.LngLatBounds(
+                    [-81.6, 10.1],
+                    [-60.8, 26.6]
+                );
+
+                function fitMiamiCoverageMap() {
+                    miamiMap.fitBounds(miamiCoverageBounds, {
+                        padding: {
+                            top: 36,
+                            right: window.innerWidth < 640 ? 20 : 120,
+                            bottom: 36,
+                            left: window.innerWidth < 640 ? 20 : 36
+                        },
+                        duration: 0,
+                        maxZoom: 4.8
+                    });
+                }
+
+                miamiMap.setMaxBounds(miamiCoverageBounds);
+
+                miamiMap.on('load', function () {
+                    fitMiamiCoverageMap();
+
+                    miamiMap.addSource('miami-port-of-spain-route', {
+                        type: 'geojson',
+                        data: {
+                            type: 'Feature',
+                            geometry: {
+                                type: 'LineString',
+                                coordinates: miamiToPortOfSpainRoute
+                            }
+                        }
+                    });
+
+                    miamiMap.addLayer({
+                        id: 'miami-port-of-spain-route-line',
+                        type: 'line',
+                        source: 'miami-port-of-spain-route',
+                        layout: {
+                            'line-join': 'round',
+                            'line-cap': 'round'
+                        },
+                        paint: {
+                            'line-color': '#e53935',
+                            'line-width': 3.2,
+                            'line-dasharray': [2, 2],
+                            'line-opacity': 0.92
+                        }
+                    });
+
+                    const miamiDashPatterns = [
+                        [0, 2, 2, 2],
+                        [0.5, 2, 1.5, 2],
+                        [1, 2, 1, 2],
+                        [1.5, 2, 0.5, 2]
+                    ];
+                    let miamiDashIndex = 0;
+
+                    window.setInterval(function () {
+                        miamiMap.setPaintProperty('miami-port-of-spain-route-line', 'line-dasharray', miamiDashPatterns[miamiDashIndex]);
+                        miamiDashIndex = (miamiDashIndex + 1) % miamiDashPatterns.length;
+                    }, 180);
+                });
+
+                new mapboxgl.Marker({ color: '#e53935' })
+                    .setLngLat(miamiCoords)
+                    .addTo(miamiMap);
+
+                const miamiPortMarker = document.createElement('div');
+                miamiPortMarker.className = 'map-port-marker';
+                miamiPortMarker.textContent = 'P';
+
+                new mapboxgl.Marker({ element: miamiPortMarker })
+                    .setLngLat(portMiamiCoords)
+                    .addTo(miamiMap);
+
+                const trinidadPortMarker = document.createElement('div');
+                trinidadPortMarker.className = 'map-port-marker';
+                trinidadPortMarker.textContent = 'P';
+
+                new mapboxgl.Marker({ element: trinidadPortMarker })
+                    .setLngLat(portOfSpainCoords)
+                    .addTo(miamiMap);
+
+                const miamiShipMarker = document.createElement('div');
+                miamiShipMarker.className = 'map-ship-marker';
+                miamiShipMarker.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M20 18c-1.1 0-1.99.45-2.63 1.17A3.46 3.46 0 0 0 14.74 18c-1.07 0-2.04.48-2.7 1.24A3.46 3.46 0 0 0 9.3 18c-1.09 0-2.07.49-2.7 1.26A3.44 3.44 0 0 0 3.87 18H2c.8 1.79 2.58 3 4.6 3c1.08 0 2.08-.36 2.88-.97c.77.61 1.76.97 2.82.97c1.08 0 2.07-.36 2.85-.96c.79.6 1.79.96 2.85.96c2.03 0 3.81-1.21 4.6-3H20ZM6 5.5l6-2.5l6 2.5V13h-2V7.06l-4-1.67l-4 1.67V15H6V5.5Z"/></svg>';
+
+                new mapboxgl.Marker({ element: miamiShipMarker })
+                    .setLngLat(miamiRouteMidpoint)
+                    .addTo(miamiMap);
+
+                const miamiLabel = document.createElement('div');
+                miamiLabel.className = 'map-route-label';
+                miamiLabel.textContent = 'Miami';
+
+                new mapboxgl.Marker({ element: miamiLabel, anchor: 'left', offset: [12, 0] })
+                    .setLngLat(miamiCoords)
+                    .addTo(miamiMap);
+
+                const portMiamiLabel = document.createElement('div');
+                portMiamiLabel.className = 'map-route-label';
+                portMiamiLabel.textContent = 'PortMiami';
+
+                new mapboxgl.Marker({ element: portMiamiLabel, anchor: 'left', offset: [12, 0] })
+                    .setLngLat(portMiamiCoords)
+                    .addTo(miamiMap);
+
+                const portOfSpainMiamiLabel = document.createElement('div');
+                portOfSpainMiamiLabel.className = 'map-route-label';
+                portOfSpainMiamiLabel.textContent = 'Port of Spain';
+
+                new mapboxgl.Marker({ element: portOfSpainMiamiLabel, anchor: 'left', offset: [12, 0] })
+                    .setLngLat(portOfSpainCoords)
+                    .addTo(miamiMap);
+
+                window.addEventListener('resize', fitMiamiCoverageMap);
+            }
+        });
+    </script>
+</body>
+
+</html>

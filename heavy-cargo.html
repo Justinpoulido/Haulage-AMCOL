@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AMCOL Heavy Cargo | Specialized Transport Solutions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --primary-red: #cc1f31;
+            --teal-accent: #39d9cd;
+            --navy-950: #09131f;
+            --navy-900: #13273f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .hero-topbar {
+            background: linear-gradient(90deg, rgba(204, 31, 49, 0.96), rgba(142, 24, 39, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-mainnav {
+            background: rgba(9, 19, 31, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-brand-panel {
+            position: relative;
+            background: rgba(255, 255, 255, 0.96);
+            clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+        }
+
+        .hero-brand-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(30, 64, 175, 0.08));
+            pointer-events: none;
+        }
+
+        .hero-nav-link {
+            position: relative;
+        }
+
+        .hero-nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1.15rem;
+            width: 100%;
+            height: 3px;
+            background: var(--teal-accent);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
+        }
+
+        .hero-nav-link:hover::after,
+        .hero-nav-link:focus-visible::after {
+            transform: scaleX(1);
+        }
+
+        .cargo-hero {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top right, rgba(57, 217, 205, 0.16), transparent 30%),
+                linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+        }
+
+        .cargo-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(110deg, rgba(9, 19, 31, 0.04) 0%, transparent 30%),
+                linear-gradient(135deg, rgba(204, 31, 49, 0.06), transparent 55%);
+            pointer-events: none;
+        }
+
+        .section-kicker {
+            color: var(--primary-red);
+            letter-spacing: 0.28em;
+        }
+
+        .metric-card,
+        .capability-card,
+        .gallery-card,
+        .testimonial-card,
+        .dashboard-shell {
+            box-shadow: 0 24px 65px rgba(15, 23, 42, 0.08);
+        }
+
+        .capability-card,
+        .gallery-card,
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .capability-card:hover,
+        .gallery-card:hover,
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 75px rgba(15, 23, 42, 0.14);
+        }
+
+        .capability-icon {
+            background: rgba(19, 39, 63, 0.08);
+            color: var(--navy-900);
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .capability-card:hover .capability-icon {
+            background: var(--primary-red);
+            color: #ffffff;
+        }
+
+        .dashboard-shell {
+            background: linear-gradient(145deg, #13273f 0%, #09131f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dashboard-map::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(0deg, rgba(9, 19, 31, 0.38), rgba(9, 19, 31, 0.38)),
+                radial-gradient(circle at 28% 48%, rgba(204, 31, 49, 0.32), transparent 12%);
+        }
+
+        .process-strip {
+            background:
+                radial-gradient(circle at top left, rgba(57, 217, 205, 0.08), transparent 26%),
+                linear-gradient(180deg, #09131f 0%, #13273f 100%);
+        }
+
+        .cta-panel {
+            background:
+                linear-gradient(110deg, rgba(9, 19, 31, 0.96) 0%, rgba(19, 39, 63, 0.96) 68%, rgba(204, 31, 49, 0.3) 100%);
+        }
+
+        @media (max-width: 640px) {
+            .hero-brand-panel {
+                clip-path: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="hero-topbar">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                <div
+                    class="flex flex-col gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 lg:flex-row lg:items-center lg:justify-end lg:gap-8">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-base text-[#39d9cd]">location_on</span>
+                        <span>S.S. Erin Road Penal, #22 Ramjohn Trace</span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                        <span class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-base text-[#39d9cd]">call</span>
+                            Telephone: +1 (868) 288-5800
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-base text-[#39d9cd]">smartphone</span>
+                            Mobile: 389-6787
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-base text-[#39d9cd]">schedule</span>
+                            Mon-Fri: 7am - 5pm | Sat: 7am - 4pm
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-mainnav sticky top-0 z-50">
+            <div class="mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
+                <div
+                    class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:w-[34%] md:min-w-[320px] md:justify-start">
+                    <a class="relative z-10 shrink-0" href="index.html#top">
+                        <img alt="AMCOL Group of Companies" class="h-20 sm:h-24 md:h-[6.5rem] w-auto max-w-[420px]"
+                            src="./assets/AMCOL_Logo.png" />
+                    </a>
+                </div>
+                <div class="flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
+                    <nav
+                        class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#top">Home</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#about">About
+                            Us</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#services">Services</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#tracking">Tracking</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#projects">Projects</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#contact">Contact</a>
+                    </nav>
+                    <a class="hidden sm:inline-flex items-center justify-center rounded-sm border border-[#39d9cd] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#39d9cd] transition-colors hover:bg-[#39d9cd] hover:text-slate-950"
+                        href="client.html">Client Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="cargo-hero px-4 pb-20 pt-16 sm:px-6 lg:px-8 lg:pt-24">
+            <div class="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">
+                <div class="relative z-10 lg:col-span-7">
+                    <span
+                        class="inline-flex rounded-full bg-slate-200 px-4 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-slate-700">Industrial
+                        Precision</span>
+                    <h1
+                        class="mt-7 text-5xl font-black uppercase tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
+                        Heavy Cargo
+                        <span class="block">Movement</span>
+                        <span class="block text-slate-300">You Can Track</span>
+                        <span class="block">With Confidence</span>
+                    </h1>
+                    <p class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+                        AMCOL coordinates oversized loads, crane-ready transfers, and route-controlled deliveries with
+                        the same disciplined planning we bring to every transport operation across Trinidad and the
+                        Caribbean.
+                    </p>
+                    <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+                        <a class="inline-flex items-center justify-center rounded-sm bg-[#cc1f31] px-8 py-4 text-sm font-black uppercase tracking-[0.22em] text-white transition-transform hover:-translate-y-0.5"
+                            href="request.html">Request A Quote</a>
+                    </div>
+                </div>
+                <div class="relative lg:col-span-5">
+                    <div class="overflow-hidden rounded-[1.5rem] bg-slate-200 shadow-2xl">
+                        <img alt="AMCOL heavy cargo transport truck" class="h-full w-full object-cover"
+                            src="./assets/Heritage cargo lift.png" />
+                    </div>
+                    <div
+                        class="metric-card absolute -bottom-8 left-4 rounded-2xl border-l-4 border-[#cc1f31] bg-white p-5 sm:left-[-1.25rem]">
+                        <div class="text-3xl font-black uppercase tracking-tight text-slate-950">
+                            <span data-counter data-target="40000">0</span> Tons
+                        </div>
+                        <div class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">Moved This Quarter
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="bg-slate-50 px-4 py-24 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                    <div>
+                        <p class="section-kicker text-xs font-black uppercase">Project Gallery</p>
+                        <h2 class="mt-4 text-4xl font-black tracking-tight text-slate-950">Heavy Cargo We've Moved</h2>
+                    </div>
+                    <div class="flex gap-3">
+                        <button
+                            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition-colors hover:border-slate-900 hover:bg-slate-900 hover:text-white"
+                            type="button">
+                            <span class="material-symbols-outlined text-base">arrow_back</span>
+                        </button>
+                        <button
+                            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition-colors hover:border-slate-900 hover:bg-slate-900 hover:text-white"
+                            type="button">
+                            <span class="material-symbols-outlined text-base">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Industrial storage tank transport"
+                                class="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105"
+                                src="./assets/Crane-lift tank.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Industrial
+                            Storage
+                            Tanks</h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">42 Tonnes â€¢
+                            South
+                            Trinidad</p>
+                    </article>
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Mining plant equipment move"
+                                class="aspect-[3/4] w-full object-cover object-[72%_center] transition duration-500 group-hover:scale-105"
+                                src="./assets/Night Crane Lift.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Steel Plate
+                        </h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">110 Tonnes â€¢
+                            Island
+                            Transfer</p>
+                    </article>
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Fabricated steel framework transport"
+                                class="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105"
+                                src="./assets/Heritage cargo lift.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Heritage Oil Tank
+                            fabrication and Transport.</h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">85 Tonnes â€¢
+                            Coastal
+                            Route</p>
+                    </article>
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Precision turbine units on heavy transport"
+                                class="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105"
+                                src="./assets/Nighttime truck with office building.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Security Booths
+                        </h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">38 Tonnes â€¢
+                            High-Value
+                            Delivery</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="bg-slate-100 px-4 py-24 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-14">
+                    <p class="section-kicker text-xs font-black uppercase">Our Capabilities</p>
+                    <h2 class="mt-4 text-4xl font-black tracking-tight text-slate-950">Engineered Logistics
+                        Infrastructure
+                    </h2>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    <article class="capability-card rounded-2xl bg-white p-8">
+                        <div class="capability-icon inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                            <span class="material-symbols-outlined">local_shipping</span>
+                        </div>
+                        <h3 class="mt-6 text-xl font-black text-slate-950">Heavy Cargo Haulage</h3>
+                        <p class="mt-4 text-sm leading-7 text-slate-600">Specialized flatbeds and multi-axle transport
+                            plans
+                            for generators, tanks, fabricated steel, and plant equipment that demand close handling.</p>
+                    </article>
+                    <article class="capability-card rounded-2xl bg-white p-8">
+                        <div class="capability-icon inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                            <span class="material-symbols-outlined">construction</span>
+                        </div>
+                        <h3 class="mt-6 text-xl font-black text-slate-950">Crane-Assisted Loading</h3>
+                        <p class="mt-4 text-sm leading-7 text-slate-600">Lift planning, rigging coordination, and
+                            trailer
+                            interface support aligned with the realities of live industrial sites.</p>
+                    </article>
+                    <article class="capability-card rounded-2xl bg-white p-8">
+                        <div class="capability-icon inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                            <span class="material-symbols-outlined">map</span>
+                        </div>
+                        <h3 class="mt-6 text-xl font-black text-slate-950">Route Planning</h3>
+                        <p class="mt-4 text-sm leading-7 text-slate-600">Practical route checks for turning radius,
+                            bridge
+                            clearance, site approach, convoy timing, and permit-sensitive road segments.</p>
+                    </article>
+                    <article class="capability-card rounded-2xl bg-white p-8">
+                        <div class="capability-icon inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                            <span class="material-symbols-outlined">hub</span>
+                        </div>
+                        <h3 class="mt-6 text-xl font-black text-slate-950">Delivery Coordination</h3>
+                        <p class="mt-4 text-sm leading-7 text-slate-600">One operations team managing port release, yard
+                            staging, site scheduling, escort timing, and handoff accountability.</p>
+                    </article>
+                    <article class="capability-card rounded-2xl bg-white p-8">
+                        <div class="capability-icon inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                            <span class="material-symbols-outlined">radar</span>
+                        </div>
+                        <h3 class="mt-6 text-xl font-black text-slate-950">GPS Monitoring</h3>
+                        <p class="mt-4 text-sm leading-7 text-slate-600">Operations visibility with live status updates,
+                            milestone reporting, and route-aware tracking for high-value or time-sensitive cargo.</p>
+                    </article>
+                    <article class="capability-card rounded-2xl bg-white p-8">
+                        <div class="capability-icon inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </div>
+                        <h3 class="mt-6 text-xl font-black text-slate-950">Cargo Visibility</h3>
+                        <p class="mt-4 text-sm leading-7 text-slate-600">Clear communication from dispatch through
+                            delivery,
+                            so your project team always knows what is moving, where it is, and what comes next.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="tracking" class="bg-white px-4 py-24 sm:px-6 lg:px-8">
+            <div class="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
+                <div>
+                    <p class="section-kicker text-xs font-black uppercase">Live Operations</p>
+                    <h2 class="mt-4 text-4xl font-black tracking-tight text-slate-950">Total Visibility Over Your Assets
+                    </h2>
+                    <p class="mt-8 text-base leading-8 text-slate-600">
+                        Our heavy cargo jobs are managed with route discipline, live status control, and milestone
+                        updates
+                        that help clients plan cranes, site access, and receiving crews with fewer surprises.
+                    </p>
+                    <ul class="mt-10 space-y-6">
+                        <li class="flex items-start gap-4">
+                            <span class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100">
+                                <span class="h-2 w-2 rounded-full bg-[#cc1f31]"></span>
+                            </span>
+                            <div>
+                                <p class="font-black uppercase tracking-[0.14em] text-slate-900">Pre-Transport Surveying
+                                </p>
+                                <p class="mt-1 text-sm leading-6 text-slate-600">Every route is reviewed for access,
+                                    turning movement, and delivery-point readiness.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-sky-100">
+                                <span class="h-2 w-2 rounded-full bg-sky-600"></span>
+                            </span>
+                            <div>
+                                <p class="font-black uppercase tracking-[0.14em] text-slate-900">Adaptive Coordination
+                                </p>
+                                <p class="mt-1 text-sm leading-6 text-slate-600">Dispatch teams adjust to site
+                                    readiness,
+                                    police escort timing, weather, and traffic conditions.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dashboard-shell rounded-[1.5rem] p-4 sm:p-5">
+                    <div class="dashboard-map relative overflow-hidden rounded-2xl">
+                        <img alt="AMCOL tracking dashboard background" class="h-full w-full object-cover opacity-60"
+                            src="./assets/GPS Monitoring.png" />
+                    </div>
+                    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+                        <div class="rounded-2xl bg-white/5 p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-black uppercase tracking-[0.22em] text-white/60">In
+                                    Transit</span>
+                                <span
+                                    class="text-[10px] font-black uppercase tracking-[0.22em] text-[#39d9cd]">74%</span>
+                            </div>
+                            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
+                                <div class="h-full w-[74%] rounded-full bg-[#39d9cd]"></div>
+                            </div>
+                            <p class="mt-3 text-[11px] font-mono text-white/75">ETA: 14:30 AST</p>
+                        </div>
+                        <div class="rounded-2xl bg-white/5 p-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-black uppercase tracking-[0.22em] text-white/60">Payload
+                                    Weight</span>
+                                <span class="material-symbols-outlined text-sm text-white/50">weight</span>
+                            </div>
+                            <p class="mt-3 text-2xl font-black text-white">124.5 T</p>
+                            <p class="text-[11px] text-white/45">Load ID: HC-902-X</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div
+                            class="flex items-center justify-between rounded-2xl border-l-2 border-[#39d9cd] bg-white/5 p-3">
+                            <div class="flex items-center gap-3">
+                                <span class="h-2 w-2 rounded-full bg-green-400"></span>
+                                <span class="text-xs font-bold text-white">Heritage Oil Tank fabrication and
+                                    Transport.</span>
+                            </div>
+                            <span
+                                class="rounded-full bg-white/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white/60">On
+                                Schedule</span>
+                        </div>
+                        <div
+                            class="flex items-center justify-between rounded-2xl border-l-2 border-white/20 bg-white/5 p-3">
+                            <div class="flex items-center gap-3">
+                                <span class="h-2 w-2 rounded-full bg-amber-400"></span>
+                                <span class="text-xs font-bold text-white">Plant Machinery Package</span>
+                            </div>
+                            <span
+                                class="rounded-full bg-white/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white/60">At
+                                Loading Point</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hidden" aria-hidden="true">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                    <div>
+                        <p class="section-kicker text-xs font-black uppercase">Project Gallery</p>
+                        <h2 class="mt-4 text-4xl font-black tracking-tight text-slate-950">Heavy Cargo We've Moved</h2>
+                    </div>
+                    <div class="flex gap-3">
+                        <button
+                            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition-colors hover:border-slate-900 hover:bg-slate-900 hover:text-white"
+                            type="button">
+                            <span class="material-symbols-outlined text-base">arrow_back</span>
+                        </button>
+                        <button
+                            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 text-slate-500 transition-colors hover:border-slate-900 hover:bg-slate-900 hover:text-white"
+                            type="button">
+                            <span class="material-symbols-outlined text-base">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Industrial storage tank transport"
+                                class="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105"
+                                src="./assets/Crane-lift tank.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Industrial
+                            Storage
+                            Tanks</h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">42 Tonnes •
+                            South
+                            Trinidad</p>
+                    </article>
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Mining plant equipment move"
+                                class="aspect-[3/4] w-full object-cover object-[72%_center] transition duration-500 group-hover:scale-105"
+                                src="./assets/Night Crane Lift.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Steel Plate
+                        </h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">110 Tonnes •
+                            Island
+                            Transfer</p>
+                    </article>
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Fabricated steel framework transport"
+                                class="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105"
+                                src="./assets/Heritage cargo lift.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Heritage Oil Tank
+                            fabrication and Transport.</h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">85 Tonnes •
+                            Coastal
+                            Route</p>
+                    </article>
+                    <article class="gallery-card group rounded-2xl bg-white p-4">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img alt="Precision turbine units on heavy transport"
+                                class="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105"
+                                src="./assets/Nighttime truck with office building.png" />
+                            <span
+                                class="absolute left-3 top-3 rounded-sm bg-[#cc1f31] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">Completed</span>
+                        </div>
+                        <h3 class="mt-4 text-sm font-black uppercase tracking-[0.12em] text-slate-900">Security Booths
+                        </h3>
+                        <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">38 Tonnes •
+                            High-Value
+                            Delivery</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="process-strip px-4 py-24 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl">
+                <p class="section-kicker text-center text-xs font-black uppercase text-[#39d9cd]">Operational Pipeline
+                </p>
+                <h2 class="mt-4 text-center text-4xl font-black tracking-tight text-white">Engineering Every Ingress
+                </h2>
+                <div class="relative mt-16 grid gap-8 md:grid-cols-5">
+                    <div class="absolute left-0 right-0 top-8 hidden h-px bg-white/10 md:block"></div>
+                    <article class="relative text-center">
+                        <div
+                            class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-xl bg-[#cc1f31] text-xl font-black text-white">
+                            01</div>
+                        <h3 class="mt-5 text-xs font-black uppercase tracking-[0.24em] text-white">Assessment</h3>
+                        <p class="mt-3 text-sm leading-6 text-white/60">Initial site survey and cargo handling review.
+                        </p>
+                    </article>
+                    <article class="relative text-center">
+                        <div
+                            class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-xl bg-white/10 text-xl font-black text-white">
+                            02</div>
+                        <h3 class="mt-5 text-xs font-black uppercase tracking-[0.24em] text-white">Lift &amp; Load</h3>
+                        <p class="mt-3 text-sm leading-6 text-white/60">Rigging plan, trailer setup, and crane
+                            coordination.
+                        </p>
+                    </article>
+                    <article class="relative text-center">
+                        <div
+                            class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-xl bg-white/10 text-xl font-black text-white">
+                            03</div>
+                        <h3 class="mt-5 text-xs font-black uppercase tracking-[0.24em] text-white">Execution</h3>
+                        <p class="mt-3 text-sm leading-6 text-white/60">Convoy-led movement with dispatch oversight.</p>
+                    </article>
+                    <article class="relative text-center">
+                        <div
+                            class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-xl bg-white/10 text-xl font-black text-white">
+                            04</div>
+                        <h3 class="mt-5 text-xs font-black uppercase tracking-[0.24em] text-white">Monitoring</h3>
+                        <p class="mt-3 text-sm leading-6 text-white/60">Live milestone checks and exception reporting.
+                        </p>
+                    </article>
+                    <article class="relative text-center">
+                        <div
+                            class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-xl bg-white/10 text-xl font-black text-white">
+                            05</div>
+                        <h3 class="mt-5 text-xs font-black uppercase tracking-[0.24em] text-white">Safe Delivery</h3>
+                        <p class="mt-3 text-sm leading-6 text-white/60">Placement, offloading, and final handover
+                            signoff.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="bg-slate-100 px-4 py-24 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl">
+                <p class="section-kicker text-xs font-black uppercase">Client Feedback</p>
+                <h2 class="mt-4 text-4xl font-black tracking-tight text-slate-950">The Backbone of Industry</h2>
+                <div class="mt-14 grid gap-8 md:grid-cols-2">
+                    <article class="testimonial-card rounded-2xl bg-white p-10">
+                        <div class="flex gap-1 text-[#cc1f31]">
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="mt-6 text-xl italic leading-8 text-slate-600">
+                            "AMCOL handled the transport of our oversized process vessel with the kind of planning and
+                            communication that keeps shutdown schedules on track."
+                        </p>
+                        <div class="mt-8">
+                            <p class="font-black uppercase tracking-[0.12em] text-slate-950">Marcus Thorne</p>
+                            <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">Logistics
+                                Director, Atlas Power</p>
+                        </div>
+                    </article>
+                    <article class="testimonial-card rounded-2xl bg-white p-10">
+                        <div class="flex gap-1 text-[#cc1f31]">
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="mt-6 text-xl italic leading-8 text-slate-600">
+                            "Precision and reliability are non-negotiable for us. Their dispatch team, lift planning,
+                            and
+                            delivery sequencing made AMCOL an easy partner to trust."
+                        </p>
+                        <div class="mt-8">
+                            <p class="font-black uppercase tracking-[0.12em] text-slate-950">Sarah Chen</p>
+                            <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">Operations
+                                Lead, Zenith Mining</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="bg-white px-4 py-24 sm:px-6 lg:px-8">
+            <div class="cta-panel mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] px-8 py-14 sm:px-12 lg:px-16">
+                <div class="max-w-3xl">
+                    <h2 class="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">Need A Trusted
+                        Partner
+                        For Heavy Cargo Delivery?</h2>
+                    <div class="mt-10 flex justify-center">
+                        <a class="inline-flex items-center justify-center rounded-sm bg-[#cc1f31] px-8 py-4 text-sm font-black uppercase tracking-[0.22em] text-white transition-transform hover:-translate-y-0.5"
+                            href="request.html">Start Your Quote</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#4b4b4b] py-16 text-slate-100">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h3 class="text-lg font-bold mb-6 border-b border-slate-500 pb-2 uppercase tracking-wide">Contact AMCOL
+                </h3>
+                <div class="space-y-4 text-sm text-slate-300">
+                    <p class="flex items-start">
+                        <span class="material-symbols-outlined mr-3 text-sm text-red-400">phone</span>
+                        <span>Telephone: +1 (868) 288-5800<br />Mobile: 389-6787</span>
+                    </p>
+                    <p class="flex items-start">
+                        <span class="material-symbols-outlined mr-3 text-sm text-red-400">location_on</span>
+                        <span>S.S. Erin Road Penal, #22 Ramjohn Trace</span>
+                    </p>
+                    <div class="pt-4 flex space-x-4">
+                        <a class="text-slate-300 hover:text-white" href="#"><span
+                                class="material-symbols-outlined">social_leaderboard</span></a>
+                        <a class="text-slate-300 hover:text-white" href="#"><span
+                                class="material-symbols-outlined">share</span></a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6 border-b border-slate-500 pb-2 uppercase tracking-wide">Division Hours
+                </h3>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex justify-between items-center">
+                        <span class="flex items-center"><span
+                                class="material-symbols-outlined mr-2 text-[16px]">schedule</span> Monday -
+                            Friday:</span>
+                        <span>7am - 5pm</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="flex items-center"><span
+                                class="material-symbols-outlined mr-2 text-[16px]">schedule</span> Saturday:</span>
+                        <span>7am - 4pm</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="flex items-center text-red-400 font-bold"><span
+                                class="material-symbols-outlined mr-2 text-[16px]">support_agent</span> 24/7
+                            Hotline:</span>
+                        <span class="font-bold">Available</span>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6 border-b border-slate-500 pb-2 uppercase tracking-wide">Quick Links
+                </h3>
+                <div class="grid grid-cols-2 gap-2 text-sm text-slate-300">
+                    <a class="hover:text-white" href="#services">Services</a>
+                    <a class="hover:text-white" href="#tracking">Tracking</a>
+                    <a class="hover:text-white" href="#projects">Projects</a>
+                    <a class="hover:text-white" href="index.html#coverage">Coverage</a>
+                    <a class="hover:text-white" href="#contact">Contact</a>
+                    <a class="hover:text-white" href="index.html#top">Back to Home</a>
+                </div>
+                <div class="mt-8 pt-6 border-t border-slate-500 flex flex-wrap gap-2 items-center">
+                    <img alt="Visa" class="h-4 rounded bg-white p-0.5" src="./assets/visa.png" />
+                    <img alt="Mastercard" class="h-6 rounded bg-white p-0.5" src="./assets/mastercard.png" />
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-slate-500 flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-widest">
+            <p>&copy; 2024 AMCOL Group of Companies. All Rights Reserved. Privacy Policy. Terms of Service.</p>
+            <a class="bg-slate-300 text-slate-900 p-2 rounded hover:bg-white transition-colors" href="#">
+                <span class="material-symbols-outlined text-sm">keyboard_arrow_up</span>
+            </a>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const counter = document.querySelector('[data-counter]');
+            if (!counter) return;
+
+            const target = Number(counter.dataset.target || 0);
+            const duration = 1500;
+            const startTime = performance.now();
+
+            function animateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const value = Math.round(target * eased);
+
+                counter.textContent = value.toLocaleString('en-US');
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(animateCounter);
+                } else {
+                    counter.textContent = target.toLocaleString('en-US');
+                }
+            }
+
+            window.requestAnimationFrame(animateCounter);
+        });
+    </script>
+</body>
+
+</html>

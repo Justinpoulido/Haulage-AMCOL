@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AMCOL Transport - Request Standby Unit</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#46484d",
+                        "outline": "#74757a",
+                        "primary": "#8ff5ff",
+                        "primary-fixed": "#00eefc",
+                        "primary-dim": "#00deec",
+                        "surface": "#0c0e12",
+                        "surface-container-lowest": "#000000",
+                        "surface-container-low": "#111318",
+                        "surface-container": "#171a1f",
+                        "surface-container-high": "#1d2025",
+                        "surface-container-highest": "#23262c",
+                        "surface-variant": "#23262c",
+                        "surface-bright": "#292c32",
+                        "on-surface": "#f6f6fc",
+                        "on-surface-variant": "#aaabb0",
+                        "tertiary": "#ffb151",
+                        "background": "#0c0e12"
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(35, 38, 44, 0.52);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(143, 245, 255, 0.15);
+        }
+
+        .ghost-border {
+            border: 1px solid rgba(116, 117, 122, 0.15);
+        }
+
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #8ff5ff 0%, #00eefc 100%);
+        }
+
+        .hero-topbar {
+            background: linear-gradient(90deg, rgba(204, 31, 49, 0.96), rgba(142, 24, 39, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-mainnav {
+            background: rgba(9, 19, 31, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-brand-panel {
+            position: relative;
+            background: rgba(255, 255, 255, 0.96);
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+        }
+
+        .hero-brand-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(30, 64, 175, 0.08));
+            pointer-events: none;
+        }
+
+        .hero-nav-link {
+            position: relative;
+        }
+
+        .hero-nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1.1rem;
+            width: 100%;
+            height: 3px;
+            background: #39d9cd;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
+        }
+
+        .hero-nav-link:hover::after,
+        .hero-nav-link:focus-visible::after,
+        .hero-nav-link.is-active::after {
+            transform: scaleX(1);
+        }
+
+        .request-shell {
+            background:
+                radial-gradient(circle at top right, rgba(0, 238, 252, 0.08), transparent 28%),
+                radial-gradient(circle at left top, rgba(244, 162, 55, 0.06), transparent 22%),
+                #0c0e12;
+        }
+
+        .section-shell {
+            position: relative;
+        }
+
+        .section-shell::before {
+            content: "";
+            position: absolute;
+            left: 0.95rem;
+            top: 3rem;
+            bottom: -2rem;
+            width: 1px;
+            background: linear-gradient(180deg, rgba(143, 245, 255, 0.22), transparent);
+        }
+
+        .section-shell:last-child::before {
+            display: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #8ff5ff !important;
+            box-shadow: 0 0 0 2px rgba(143, 245, 255, 0.2);
+        }
+
+        @media (max-width: 767px) {
+            .hero-brand-panel {
+                clip-path: none;
+            }
+
+            .hero-nav-link::after {
+                bottom: -0.7rem;
+            }
+
+            .section-shell::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="request-shell font-body text-on-surface selection:bg-primary selection:text-slate-950">
+    <header class="sticky top-0 z-50">
+        <div class="hero-topbar">
+            <div
+                class="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 md:flex-row md:items-center md:justify-between md:px-12">
+                <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-base text-[#39d9cd]">bolt</span>
+                    Standby Deployment Console
+                </span>
+                <span class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-base text-[#39d9cd]">schedule</span>
+                    Immediate Dispatch Window Monitoring
+                </span>
+            </div>
+        </div>
+        <nav class="hero-mainnav">
+            <div class="mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
+                <div
+                    class="hero-brand-panel flex items-center justify-center px-5 py-4 md:w-[32%] md:min-w-[290px] md:justify-start md:px-8">
+                    <a class="relative z-10" href="index.html" aria-label="AMCOL Transport home">
+                        <img class="h-16 w-auto md:h-20" src="./assets/AMCOL_Logo.png" alt="AMCOL Transport" />
+                    </a>
+                </div>
+                <div class="flex flex-1 items-center justify-between gap-6 px-6 py-4 md:px-10">
+                    <div
+                        class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 md:gap-x-8">
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html">Home</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="cards.html">Standby
+                            Service</a>
+                        <a class="hero-nav-link is-active transition-colors hover:text-[#39d9cd]"
+                            href="request.html">Request Unit</a>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="rounded-full p-2 transition-colors hover:bg-white/10" type="button"
+                            aria-label="Notifications">
+                            <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+                        </button>
+                        <button class="rounded-full p-2 transition-colors hover:bg-white/10" type="button"
+                            aria-label="Settings">
+                            <span class="material-symbols-outlined text-on-surface-variant">settings</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="mx-auto max-w-[1400px] px-6 py-12 md:px-8">
+        <header class="mb-16 rounded-[2rem] border border-outline-variant/10 bg-surface-container-low/70 p-8 md:p-10">
+            <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+                <div>
+                    <span
+                        class="mb-4 block text-xs font-headline font-bold uppercase tracking-[0.3em] text-primary">Operation
+                        Protocol</span>
+                    <h1 class="text-5xl font-headline font-bold leading-tight text-on-surface md:text-6xl">Request
+                        Standby Unit</h1>
+                    <p class="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant">
+                        Build a fast, accurate dispatch brief for AMCOL operations. The more precise the route, cargo,
+                        and contact details, the faster we can position the correct standby asset.
+                    </p>
+                </div>
+                <div class="rounded-2xl border border-outline-variant/10 bg-surface-container-high/60 p-5 lg:max-w-sm">
+                    <p class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Rapid Response Note</p>
+                    <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
+                        Priority requests are screened continuously by operations, with live coordination once route
+                        details and cargo constraints are confirmed.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <div class="space-y-12 lg:col-span-8">
+                <section class="section-shell space-y-8">
+                    <div class="flex items-center gap-4">
+                        <span
+                            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-headline font-bold text-primary">01</span>
+                        <h2 class="text-2xl font-headline font-semibold">Route Information</h2>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Pickup
+                                Location</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">location_on</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                    placeholder="Enter origin terminal or facility" type="text" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Delivery
+                                Point</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">local_shipping</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                    placeholder="Final destination address" type="text" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Requested
+                                Dispatch Time</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">schedule</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface transition-all"
+                                    type="datetime-local" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Site
+                                Restrictions</label>
+                            <select
+                                class="ghost-border w-full cursor-pointer appearance-none rounded-lg bg-surface-container-low px-4 py-4 text-on-surface transition-all">
+                                <option>None</option>
+                                <option>High Security Clearance Required</option>
+                                <option>Loading Dock Height Only</option>
+                                <option>24/7 Access Only</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-shell space-y-8">
+                    <div class="flex items-center gap-4">
+                        <span
+                            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-headline font-bold text-primary">02</span>
+                        <h2 class="text-2xl font-headline font-semibold">Load Information</h2>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                        <div class="space-y-2 md:col-span-8">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Cargo
+                                Type</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">inventory_2</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                    placeholder="Description of goods (e.g., Electronics, Hazardous Materials)"
+                                    type="text" />
+                            </div>
+                        </div>
+                        <div class="space-y-2 md:col-span-4">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Estimated
+                                Weight (kg)</label>
+                            <input
+                                class="ghost-border w-full rounded-lg bg-surface-container-low px-4 py-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                placeholder="0.00" type="number" />
+                        </div>
+                        <div class="space-y-2 md:col-span-7">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Asset
+                                Preference</label>
+                            <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                                <button
+                                    class="rounded-lg border border-primary bg-primary/10 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary"
+                                    type="button">Dry Van</button>
+                                <button
+                                    class="rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                                    type="button">Reefer</button>
+                                <button
+                                    class="rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                                    type="button">Flatbed</button>
+                                <button
+                                    class="rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                                    type="button">Forklift</button>
+                            </div>
+                        </div>
+                        <div class="space-y-2 md:col-span-5">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Cargo
+                                Priority</label>
+                            <select
+                                class="ghost-border w-full cursor-pointer appearance-none rounded-lg bg-surface-container-low px-4 py-4 text-on-surface transition-all">
+                                <option>Standard</option>
+                                <option>Urgent</option>
+                                <option>Critical</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2 md:col-span-12">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Special
+                                Handling Notes</label>
+                            <textarea
+                                class="ghost-border w-full rounded-lg bg-surface-container-low px-4 py-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                placeholder="Specify any fragile items, hazardous classes, temperature requirements, escort needs, or priority handling protocols..."
+                                rows="4"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-shell space-y-8">
+                    <div class="flex items-center gap-4">
+                        <span
+                            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-headline font-bold text-primary">03</span>
+                        <h2 class="text-2xl font-headline font-semibold">Coordination Contact</h2>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Billing
+                                Contact Email</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">payments</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                    placeholder="finance@organization.com" type="email" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Dispatch/ETA
+                                Recipient</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">notifications_active</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                    placeholder="Contact Name or Group ID" type="text" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">On-Site
+                                Coordinator</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">badge</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                    placeholder="Supervisor or warehouse lead" type="text" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Direct
+                                Phone</label>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">call</span>
+                                <input
+                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
+                                    placeholder="+1 (868) 000-0000" type="tel" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="space-y-8 lg:col-span-4">
+                <div class="glass-panel sticky top-32 space-y-8 rounded-xl p-8 shadow-2xl">
+                    <div>
+                        <div class="mb-3 flex items-center justify-between">
+                            <h3 class="font-headline text-xl font-bold">Request Summary</h3>
+                            <span
+                                class="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">Live
+                                Intake</span>
+                        </div>
+                        <p class="text-sm text-on-surface-variant">Review the logistics parameters before initializing
+                            the standby unit sequence.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Asset
+                                Priority</span>
+                            <span
+                                class="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase text-primary">Standard</span>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Est. Lead
+                                Time</span>
+                            <span class="text-xs font-bold text-on-surface">45-90 MIN</span>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Coverage Zone</span>
+                            <span class="text-xs font-bold text-on-surface">Nationwide Transport</span>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden rounded-lg border border-outline-variant/20">
+                        <div class="relative h-56">
+                            <img alt="AMCOL fleet ready board"
+                                class="h-full w-full object-cover brightness-[0.45] saturate-0"
+                                src="./assets/flatbed with bg.png" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent">
+                            </div>
+                            <div class="absolute left-4 right-4 top-4 flex items-start justify-between">
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-[0.28em] text-primary">Fleet Node
+                                    </p>
+                                    <p class="mt-2 text-lg font-headline font-semibold text-on-surface">Region 4
+                                        Readiness</p>
+                                </div>
+                                <span
+                                    class="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">Online</span>
+                            </div>
+                            <div class="absolute bottom-4 left-4 right-4 flex items-center gap-2">
+                                <div class="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface">Standby
+                                    assets ready for dispatch sequencing</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-xl border border-outline-variant/10 bg-surface-container-high/60 p-5">
+                        <p class="text-xs font-bold uppercase tracking-[0.24em] text-primary">Protocol Checklist</p>
+                        <ul class="mt-4 space-y-3 text-sm text-on-surface-variant">
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined mt-0.5 text-sm text-primary">check_circle</span>
+                                Confirm pickup and drop-off details.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined mt-0.5 text-sm text-primary">check_circle</span>
+                                Verify load type, weight, and handling notes.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined mt-0.5 text-sm text-primary">check_circle</span>
+                                Share a direct on-site coordination contact.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="space-y-4 pt-2">
+                        <button
+                            class="kinetic-gradient flex w-full items-center justify-center gap-2 rounded-lg py-4 font-headline font-bold text-slate-950 shadow-[0_0_20px_rgba(143,245,255,0.3)] transition-all hover:brightness-110"
+                            type="button">
+                            Submit Request
+                            <span class="material-symbols-outlined text-lg">rocket_launch</span>
+                        </button>
+                        <button
+                            class="w-full rounded-lg bg-surface-container-highest/50 py-4 text-sm font-medium text-on-surface-variant transition-all hover:text-on-surface"
+                            type="button">
+                            Save Draft Protocol
+                        </button>
+                    </div>
+                    <p class="px-4 text-center text-[10px] italic leading-relaxed text-outline/60">
+                        By submitting, you acknowledge that dispatch costs may vary based on real-time fleet
+                        availability, route conditions, and after-hours coordination requirements.
+                    </p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="mt-24 border-t border-outline-variant/10 bg-surface-container-lowest px-8 py-16">
+        <div class="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+            <div class="space-y-4">
+                <img class="h-14 w-auto" src="./assets/AMCOL_Logo.png" alt="AMCOL Transport" />
+                <p class="max-w-sm text-sm text-on-surface-variant">
+                    Precision in motion. Standby units, direct dispatch support, and dependable response when routing
+                    continuity matters most.
+                </p>
+                <p class="text-xs text-outline">&copy; 2024 AMCOL Transport Standby Unit. All rights reserved.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-8 sm:grid-cols-4">
+                <div class="space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface">Compliance</h4>
+                    <ul class="space-y-2 text-sm text-on-surface-variant">
+                        <li><a class="transition-colors hover:text-primary" href="#">Terms of Service</a></li>
+                        <li><a class="transition-colors hover:text-primary" href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface">Infrastructure</h4>
+                    <ul class="space-y-2 text-sm text-on-surface-variant">
+                        <li><a class="transition-colors hover:text-primary" href="#">Operational Support</a></li>
+                        <li><a class="transition-colors hover:text-primary" href="#">System Status</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
