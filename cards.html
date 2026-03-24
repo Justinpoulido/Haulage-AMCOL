@@ -873,6 +873,7 @@
             </a>
         </div>
     </footer>
+    <script src="amcol-config.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -970,7 +971,7 @@
             }
 
             const coverageMapElement = document.getElementById('coverage-map');
-            const mapboxToken = window.AMCOL_MAPBOX_TOKEN || '';
+            const mapboxToken = window.AMCOL_CONFIG?.mapboxToken || window.AMCOL_MAPBOX_TOKEN || '';
             if (!coverageMapElement || typeof mapboxgl === 'undefined' || !mapboxToken) {
                 if (coverageMapElement && !mapboxToken) {
                     coverageMapElement.textContent = 'Map preview unavailable.';
