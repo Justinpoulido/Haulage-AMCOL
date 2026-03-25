@@ -156,6 +156,29 @@
         const mapElement = document.getElementById('map');
         const mapboxToken = window.AMCOL_CONFIG?.mapboxToken || window.AMCOL_MAPBOX_TOKEN || '';
 
+        function showMapFallback(message) {
+            if (!mapElement) {
+                return;
+            }
+
+            mapElement.innerHTML = '';
+            mapElement.classList.add('d-flex', 'align-items-center', 'justify-content-center', 'text-center');
+
+            const fallbackCard = document.createElement('div');
+            fallbackCard.style.maxWidth = '22rem';
+            fallbackCard.style.padding = '1rem 1.25rem';
+            fallbackCard.style.borderRadius = '1rem';
+            fallbackCard.style.border = '1px solid rgba(255,255,255,0.12)';
+            fallbackCard.style.background = 'rgba(15, 23, 42, 0.92)';
+            fallbackCard.style.color = '#e2e8f0';
+            fallbackCard.innerHTML = `
+                <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#39d9cd;">Mapbox Status</div>
+                <div style="margin-top:0.75rem;font-size:0.92rem;line-height:1.5;">${message}</div>
+                <div style="margin-top:0.75rem;font-size:0.78rem;line-height:1.5;color:#94a3b8;">Set your public Mapbox token in <code>amcol-config.js</code> as <code>window.AMCOL_CONFIG.mapboxToken</code>.</div>
+            `;
+            mapElement.appendChild(fallbackCard);
+        }
+
         if (mapElement && typeof mapboxgl !== 'undefined' && mapboxToken) {
             mapboxgl.accessToken = mapboxToken;
 
@@ -169,8 +192,11 @@
             new mapboxgl.Marker({ color: "#e53935" })
                 .setLngLat([-61.5123, 10.6524])
                 .addTo(map);
-        } else if (mapElement && !mapboxToken) {
-            mapElement.textContent = 'Map preview unavailable.';
+        } else if (mapElement) {
+            const message = !mapboxToken
+                ? 'Map view unavailable because the Mapbox access token is missing.'
+                : 'Map view unavailable because the Mapbox library did not load.';
+            showMapFallback(message);
         }
 
     </script>

@@ -1028,7 +1028,7 @@
                     <div class="featured-projects-summary">
                         <div class="featured-projects-stat">
                             <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-[#1e40af]">Operations</p>
-                            <p class="mt-3 text-2xl font-black text-slate-900">7 Featured</p>
+                            <p class="mt-3 text-2xl font-black text-slate-900">8 Featured</p>
                             <p class="mt-2 text-sm leading-relaxed text-slate-500">Highlighted projects spanning lift
                                 support, fuel transport, tanker work, and industrial mobilization.</p>
                         </div>
@@ -1111,6 +1111,22 @@
                             <div class="featured-project-meta">
                                 <span>Haulage</span>
                                 <span>On Schedule</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="featured-project-card">
+                        <div class="featured-project-image-wrap">
+                            <img alt="Lifting tanker on site project" class="featured-project-image"
+                                src="./assets/LIfting%20Tanker%20on%20Site.png" />
+                        </div>
+                        <div class="featured-project-content">
+                            <span class="featured-project-pill">On-Site Lifting</span>
+                            <h3 class="mt-4 text-xl font-black uppercase tracking-tight">Lifting Tanker on Site</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600">Crane-supported tanker handling carried
+                                out on-site with controlled lifting, stable positioning, and coordinated field support.</p>
+                            <div class="featured-project-meta">
+                                <span>Site Lift</span>
+                                <span>Tanker Handling</span>
                             </div>
                         </div>
                     </article>
@@ -1731,11 +1747,33 @@
             }
 
             const coverageMapElement = document.getElementById('coverage-map');
+            const miamiMapElement = document.getElementById('miami-coverage-map');
             const mapboxToken = window.AMCOL_CONFIG?.mapboxToken || window.AMCOL_MAPBOX_TOKEN || '';
-            if (!coverageMapElement || typeof mapboxgl === 'undefined' || !mapboxToken) {
-                if (coverageMapElement && !mapboxToken) {
-                    coverageMapElement.textContent = 'Map preview unavailable.';
+
+            function showMapFallback(mapElement, message) {
+                if (!mapElement) {
+                    return;
                 }
+
+                mapElement.innerHTML = '';
+                mapElement.classList.add('flex', 'items-center', 'justify-center', 'bg-slate-950/85', 'text-center', 'text-slate-200');
+
+                const fallbackCard = document.createElement('div');
+                fallbackCard.className = 'mx-6 max-w-sm rounded-2xl border border-white/10 bg-slate-900/90 px-5 py-4 shadow-2xl';
+                fallbackCard.innerHTML = `
+                    <p class="text-xs font-bold uppercase tracking-[0.24em] text-[#39d9cd]">Mapbox Status</p>
+                    <p class="mt-3 text-sm leading-relaxed text-slate-200">${message}</p>
+                    <p class="mt-3 text-xs leading-relaxed text-slate-400">Set your public Mapbox token in <code>amcol-config.js</code> as <code>window.AMCOL_CONFIG.mapboxToken</code>.</p>
+                `;
+                mapElement.appendChild(fallbackCard);
+            }
+
+            if (!coverageMapElement || typeof mapboxgl === 'undefined' || !mapboxToken) {
+                const missingTokenMessage = !mapboxToken
+                    ? 'Map view unavailable because the Mapbox access token is missing.'
+                    : 'Map view unavailable because the Mapbox library did not load.';
+                showMapFallback(coverageMapElement, missingTokenMessage);
+                showMapFallback(miamiMapElement, missingTokenMessage);
                 return;
             }
 
@@ -1958,8 +1996,6 @@
                 .setLngLat(scarboroughPortCoords)
                 .addTo(coverageMap);
 
-            const miamiMapElement = document.getElementById('miami-coverage-map');
-
             if (miamiMapElement) {
                 const miamiCoords = [-80.1918, 25.7617];
                 const portMiamiCoords = [-80.1777, 25.7781];
@@ -2101,6 +2137,12 @@
 
                 window.addEventListener('resize', fitMiamiCoverageMap);
             }
+
+            coverageMap.on('error', function (event) {
+                if (event?.error?.status === 401 || event?.error?.status === 403) {
+                    showMapFallback(coverageMapElement, 'Map view unavailable because the Mapbox token was rejected.');
+                }
+            });
         });
     </script>
 </body>
