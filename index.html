@@ -1784,6 +1784,8 @@
             }
 
             mapboxgl.accessToken = mapboxToken;
+            let coverageMapLoaded = false;
+            let coverageMapAuthFailed = false;
             const coverageMap = new mapboxgl.Map({
                 container: 'coverage-map',
                 style: 'mapbox://styles/mapbox/dark-v11',
@@ -1852,6 +1854,7 @@
             const scarboroughRouteCoords = createCurvedRoute(portOfSpainCoords, scarboroughPortCoords, 0.1, 30);
 
             coverageMap.on('load', function () {
+                coverageMapLoaded = true;
                 fitCoverageMapToCaribbean();
 
                 coverageMap.addSource('port-route', {
@@ -2007,6 +2010,8 @@
                 const portMiamiCoords = [-80.1777, 25.7781];
                 const miamiToPortOfSpainRoute = createCurvedRoute(portMiamiCoords, portOfSpainCoords, -4.5, 48);
                 const miamiRouteMidpoint = miamiToPortOfSpainRoute[Math.floor(miamiToPortOfSpainRoute.length / 2)];
+                let miamiMapLoaded = false;
+                let miamiMapAuthFailed = false;
                 const miamiMap = new mapboxgl.Map({
                     container: 'miami-coverage-map',
                     style: 'mapbox://styles/mapbox/dark-v11',
@@ -2046,6 +2051,7 @@
                 miamiMap.setMaxBounds(miamiCoverageBounds);
 
                 miamiMap.on('load', function () {
+                    miamiMapLoaded = true;
                     fitMiamiCoverageMap();
 
                     miamiMap.addSource('miami-port-of-spain-route', {
@@ -2142,10 +2148,26 @@
                     .addTo(miamiMap);
 
                 window.addEventListener('resize', fitMiamiCoverageMap);
+
+                miamiMap.on('error', function (event) {
+                    if (miamiMapAuthFailed || miamiMapLoaded) {
+                        return;
+                    }
+
+                    if (event?.error?.status === 401 || event?.error?.status === 403) {
+                        miamiMapAuthFailed = true;
+                        showMapFallback(miamiMapElement, 'Map view unavailable because the Mapbox token was rejected.');
+                    }
+                });
             }
 
             coverageMap.on('error', function (event) {
+                if (coverageMapAuthFailed || coverageMapLoaded) {
+                    return;
+                }
+
                 if (event?.error?.status === 401 || event?.error?.status === 403) {
+                    coverageMapAuthFailed = true;
                     showMapFallback(coverageMapElement, 'Map view unavailable because the Mapbox token was rejected.');
                 }
             });
