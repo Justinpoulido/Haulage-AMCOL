@@ -230,7 +230,7 @@
             </div>
         </header>
 
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+        <form id="standby-request-form" class="grid grid-cols-1 gap-8 lg:grid-cols-12">
             <div class="space-y-12 lg:col-span-8">
                 <section class="section-shell space-y-8">
                     <div class="flex items-center gap-4">
@@ -240,51 +240,51 @@
                     </div>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div class="space-y-2">
-                            <label
+                            <label for="pickup_location"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Pickup
                                 Location</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">location_on</span>
-                                <input
+                                <input id="pickup_location" name="pickup_location" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
                                     placeholder="Enter origin terminal or facility" type="text" />
                             </div>
                         </div>
                         <div class="space-y-2">
-                            <label
+                            <label for="delivery_point"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Delivery
                                 Point</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">local_shipping</span>
-                                <input
+                                <input id="delivery_point" name="delivery_point" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
                                     placeholder="Final destination address" type="text" />
                             </div>
                         </div>
                         <div class="space-y-2">
-                            <label
+                            <label for="requested_dispatch_time"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Requested
                                 Dispatch Time</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">schedule</span>
-                                <input
+                                <input id="requested_dispatch_time" name="requested_dispatch_time" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface transition-all"
                                     type="datetime-local" />
                             </div>
                         </div>
                         <div class="space-y-2">
-                            <label
+                            <label for="site_restrictions"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Site
                                 Restrictions</label>
-                            <select
+                            <select id="site_restrictions" name="site_restrictions"
                                 class="ghost-border w-full cursor-pointer appearance-none rounded-lg bg-surface-container-low px-4 py-4 text-on-surface transition-all">
-                                <option>None</option>
-                                <option>High Security Clearance Required</option>
-                                <option>Loading Dock Height Only</option>
-                                <option>24/7 Access Only</option>
+                                <option value="None">None</option>
+                                <option value="High Security Clearance Required">High Security Clearance Required</option>
+                                <option value="Loading Dock Height Only">Loading Dock Height Only</option>
+                                <option value="24/7 Access Only">24/7 Access Only</option>
                             </select>
                         </div>
                     </div>
@@ -298,23 +298,23 @@
                     </div>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
                         <div class="space-y-2 md:col-span-8">
-                            <label
+                            <label for="cargo_type"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Cargo
                                 Type</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">inventory_2</span>
-                                <input
+                                <input id="cargo_type" name="cargo_type" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
                                     placeholder="Description of goods (e.g., Electronics, Hazardous Materials)"
                                     type="text" />
                             </div>
                         </div>
                         <div class="space-y-2 md:col-span-4">
-                            <label
+                            <label for="estimated_weight_kg"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Estimated
                                 Weight (kg)</label>
-                            <input
+                            <input id="estimated_weight_kg" name="estimated_weight_kg" min="0" step="0.01"
                                 class="ghost-border w-full rounded-lg bg-surface-container-low px-4 py-4 text-on-surface placeholder:text-outline/50 transition-all"
                                 placeholder="0.00" type="number" />
                         </div>
@@ -322,37 +322,39 @@
                             <label
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Asset
                                 Preference</label>
-                            <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                            <input id="asset_preference" name="asset_preference" type="hidden" value="Dry Van" />
+                            <div class="grid grid-cols-2 gap-3 sm:grid-cols-4" role="group"
+                                aria-label="Choose an asset preference">
                                 <button
-                                    class="rounded-lg border border-primary bg-primary/10 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary"
-                                    type="button">Dry Van</button>
+                                    class="asset-option rounded-lg border border-primary bg-primary/10 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary"
+                                    type="button" data-asset-option="Dry Van" aria-pressed="true">Dry Van</button>
                                 <button
-                                    class="rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
-                                    type="button">Reefer</button>
+                                    class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                                    type="button" data-asset-option="Reefer" aria-pressed="false">Reefer</button>
                                 <button
-                                    class="rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
-                                    type="button">Flatbed</button>
+                                    class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                                    type="button" data-asset-option="Flatbed" aria-pressed="false">Flatbed</button>
                                 <button
-                                    class="rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
-                                    type="button">Forklift</button>
+                                    class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                                    type="button" data-asset-option="Forklift" aria-pressed="false">Forklift</button>
                             </div>
                         </div>
                         <div class="space-y-2 md:col-span-5">
-                            <label
+                            <label for="cargo_priority"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Cargo
                                 Priority</label>
-                            <select
+                            <select id="cargo_priority" name="cargo_priority"
                                 class="ghost-border w-full cursor-pointer appearance-none rounded-lg bg-surface-container-low px-4 py-4 text-on-surface transition-all">
-                                <option>Standard</option>
-                                <option>Urgent</option>
-                                <option>Critical</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Urgent">Urgent</option>
+                                <option value="Critical">Critical</option>
                             </select>
                         </div>
                         <div class="space-y-2 md:col-span-12">
-                            <label
+                            <label for="special_handling_notes"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Special
                                 Handling Notes</label>
-                            <textarea
+                            <textarea id="special_handling_notes" name="special_handling_notes"
                                 class="ghost-border w-full rounded-lg bg-surface-container-low px-4 py-4 text-on-surface placeholder:text-outline/50 transition-all"
                                 placeholder="Specify any fragile items, hazardous classes, temperature requirements, escort needs, or priority handling protocols..."
                                 rows="4"></textarea>
@@ -368,49 +370,49 @@
                     </div>
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div class="space-y-2">
-                            <label
+                            <label for="billing_contact_email"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Billing
                                 Contact Email</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">payments</span>
-                                <input
+                                <input id="billing_contact_email" name="billing_contact_email" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
                                     placeholder="finance@organization.com" type="email" />
                             </div>
                         </div>
                         <div class="space-y-2">
-                            <label
+                            <label for="dispatch_eta_recipient"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Dispatch/ETA
                                 Recipient</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">notifications_active</span>
-                                <input
+                                <input id="dispatch_eta_recipient" name="dispatch_eta_recipient" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
                                     placeholder="Contact Name or Group ID" type="text" />
                             </div>
                         </div>
                         <div class="space-y-2">
-                            <label
+                            <label for="on_site_coordinator"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">On-Site
                                 Coordinator</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">badge</span>
-                                <input
+                                <input id="on_site_coordinator" name="on_site_coordinator" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
                                     placeholder="Supervisor or warehouse lead" type="text" />
                             </div>
                         </div>
                         <div class="space-y-2">
-                            <label
+                            <label for="direct_phone"
                                 class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Direct
                                 Phone</label>
                             <div class="relative">
                                 <span
                                     class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">call</span>
-                                <input
+                                <input id="direct_phone" name="direct_phone" required
                                     class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
                                     placeholder="+1 (868) 000-0000" type="tel" />
                             </div>
@@ -433,20 +435,22 @@
                     </div>
                     <div class="space-y-4">
                         <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
-                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Asset
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Cargo
                                 Priority</span>
-                            <span
+                            <span id="summary-priority"
                                 class="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase text-primary">Standard</span>
                         </div>
                         <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
-                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Est. Lead
-                                Time</span>
-                            <span class="text-xs font-bold text-on-surface">45-90 MIN</span>
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Asset Type</span>
+                            <span id="summary-asset" class="text-xs font-bold text-on-surface">Dry Van</span>
                         </div>
                         <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
                             <span class="text-xs uppercase tracking-widest text-on-surface-variant">Coverage Zone</span>
                             <span class="text-xs font-bold text-on-surface">Nationwide Transport</span>
                         </div>
+                    </div>
+                    <div id="request-status-message"
+                        class="hidden rounded-xl border border-outline-variant/10 bg-surface-container-high/60 px-4 py-3 text-sm leading-relaxed">
                     </div>
                     <div class="overflow-hidden rounded-lg border border-outline-variant/20">
                         <div class="relative h-56">
@@ -490,14 +494,14 @@
                         </ul>
                     </div>
                     <div class="space-y-4 pt-2">
-                        <button
-                            class="kinetic-gradient flex w-full items-center justify-center gap-2 rounded-lg py-4 font-headline font-bold text-slate-950 shadow-[0_0_20px_rgba(143,245,255,0.3)] transition-all hover:brightness-110"
-                            type="button">
-                            Submit Request
+                        <button id="submit-request-button"
+                            class="kinetic-gradient flex w-full items-center justify-center gap-2 rounded-lg py-4 font-headline font-bold text-slate-950 shadow-[0_0_20px_rgba(143,245,255,0.3)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                            type="submit">
+                            <span>Submit Request</span>
                             <span class="material-symbols-outlined text-lg">rocket_launch</span>
                         </button>
-                        <button
-                            class="w-full rounded-lg bg-surface-container-highest/50 py-4 text-sm font-medium text-on-surface-variant transition-all hover:text-on-surface"
+                        <button id="save-draft-button"
+                            class="w-full rounded-lg bg-surface-container-highest/50 py-4 text-sm font-medium text-on-surface-variant transition-all hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-60"
                             type="button">
                             Save Draft Protocol
                         </button>
@@ -508,7 +512,7 @@
                     </p>
                 </div>
             </aside>
-        </div>
+        </form>
     </main>
 
     <footer class="mt-24 border-t border-outline-variant/10 bg-surface-container-lowest px-8 py-16">
@@ -539,6 +543,215 @@
             </div>
         </div>
     </footer>
+    <script src="amcol-config.js"></script>
+    <script src="/api/amcol-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+        (() => {
+            const form = document.getElementById("standby-request-form");
+            const draftButton = document.getElementById("save-draft-button");
+            const submitButton = document.getElementById("submit-request-button");
+            const statusMessage = document.getElementById("request-status-message");
+            const prioritySelect = document.getElementById("cargo_priority");
+            const summaryPriority = document.getElementById("summary-priority");
+            const assetInput = document.getElementById("asset_preference");
+            const summaryAsset = document.getElementById("summary-asset");
+            const assetButtons = Array.from(document.querySelectorAll("[data-asset-option]"));
+            const draftStorageKey = "amcol-standby-request-draft";
+            const clientReferenceKey = "amcol-standby-request-client-reference";
+            const supabaseUrl = window.AMCOL_CONFIG?.supabaseUrl || "";
+            const supabaseKey = window.AMCOL_CONFIG?.supabasePublishableKey || window.AMCOL_CONFIG?.supabaseAnonKey || "";
+            const supabaseClient = supabaseUrl && supabaseKey && window.supabase?.createClient
+                ? window.supabase.createClient(supabaseUrl, supabaseKey)
+                : null;
+
+            function setStatus(message, tone) {
+                const toneClasses = {
+                    success: "rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm leading-relaxed text-primary",
+                    error: "rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm leading-relaxed text-rose-200",
+                    warning: "rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm leading-relaxed text-amber-100"
+                };
+
+                statusMessage.className = toneClasses[tone] || toneClasses.warning;
+                statusMessage.textContent = message;
+                statusMessage.classList.remove("hidden");
+            }
+
+            function setBusyState(isBusy) {
+                submitButton.disabled = isBusy;
+                draftButton.disabled = isBusy;
+                submitButton.querySelector("span").textContent = isBusy ? "Saving Request..." : "Submit Request";
+            }
+
+            function updateAssetSelection(value) {
+                assetInput.value = value;
+                summaryAsset.textContent = value;
+
+                assetButtons.forEach((button) => {
+                    const isActive = button.dataset.assetOption === value;
+                    button.setAttribute("aria-pressed", String(isActive));
+                    button.className = isActive
+                        ? "asset-option rounded-lg border border-primary bg-primary/10 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary"
+                        : "asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high";
+                });
+            }
+
+            function updatePrioritySummary() {
+                summaryPriority.textContent = prioritySelect.value || "Standard";
+            }
+
+            function getClientReference() {
+                try {
+                    const existingReference = window.localStorage.getItem(clientReferenceKey);
+                    if (existingReference) {
+                        return existingReference;
+                    }
+
+                    const nextReference = window.crypto?.randomUUID
+                        ? window.crypto.randomUUID()
+                        : "request-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+                    window.localStorage.setItem(clientReferenceKey, nextReference);
+                    return nextReference;
+                } catch (error) {
+                    return "request-" + Date.now();
+                }
+            }
+
+            function readDraft() {
+                try {
+                    const draft = window.localStorage.getItem(draftStorageKey);
+                    return draft ? JSON.parse(draft) : null;
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function saveDraftLocally() {
+                const draftPayload = Object.fromEntries(new FormData(form).entries());
+
+                try {
+                    window.localStorage.setItem(draftStorageKey, JSON.stringify(draftPayload));
+                    setStatus("Draft saved on this device. Submit the request when you're ready to send it to operations.", "success");
+                } catch (error) {
+                    setStatus("Draft storage is unavailable in this browser, so the request could not be saved locally.", "error");
+                }
+            }
+
+            function loadDraft() {
+                const draft = readDraft();
+                if (!draft) {
+                    return;
+                }
+
+                Object.entries(draft).forEach(([name, value]) => {
+                    const field = form.elements.namedItem(name);
+                    if (!field || typeof value !== "string") {
+                        return;
+                    }
+
+                    field.value = value;
+                });
+
+                updateAssetSelection(draft.asset_preference || "Dry Van");
+                updatePrioritySummary();
+                setStatus("Saved draft loaded. Review the details and submit when ready.", "warning");
+            }
+
+            function clearDraft() {
+                try {
+                    window.localStorage.removeItem(draftStorageKey);
+                } catch (error) {
+                    // Ignore local storage cleanup issues.
+                }
+            }
+
+            function buildRequestPayload() {
+                const formData = new FormData(form);
+                const estimatedWeight = formData.get("estimated_weight_kg");
+                const estimatedWeightValue = estimatedWeight ? Number.parseFloat(String(estimatedWeight)) : null;
+                const requestedDispatchTime = String(formData.get("requested_dispatch_time") || "");
+
+                return {
+                    pickup_location: String(formData.get("pickup_location") || "").trim(),
+                    delivery_point: String(formData.get("delivery_point") || "").trim(),
+                    requested_dispatch_time: requestedDispatchTime ? new Date(requestedDispatchTime).toISOString() : null,
+                    site_restrictions: String(formData.get("site_restrictions") || "None"),
+                    cargo_type: String(formData.get("cargo_type") || "").trim(),
+                    estimated_weight_kg: Number.isFinite(estimatedWeightValue) ? estimatedWeightValue : null,
+                    asset_preference: String(formData.get("asset_preference") || "Dry Van"),
+                    cargo_priority: String(formData.get("cargo_priority") || "Standard"),
+                    special_handling_notes: String(formData.get("special_handling_notes") || "").trim() || null,
+                    billing_contact_email: String(formData.get("billing_contact_email") || "").trim(),
+                    dispatch_eta_recipient: String(formData.get("dispatch_eta_recipient") || "").trim(),
+                    on_site_coordinator: String(formData.get("on_site_coordinator") || "").trim(),
+                    direct_phone: String(formData.get("direct_phone") || "").trim(),
+                    request_status: "submitted",
+                    submission_page: "request.html",
+                    client_reference: getClientReference(),
+                    metadata: {
+                        source: "website-request-form",
+                        path: window.location.pathname,
+                        user_agent: window.navigator.userAgent
+                    }
+                };
+            }
+
+            assetButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    updateAssetSelection(button.dataset.assetOption || "Dry Van");
+                });
+            });
+
+            prioritySelect.addEventListener("change", updatePrioritySummary);
+
+            draftButton.addEventListener("click", () => {
+                saveDraftLocally();
+            });
+
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                if (!form.reportValidity()) {
+                    setStatus("Fill in the required request details before sending this standby unit request.", "warning");
+                    return;
+                }
+
+                if (!supabaseClient) {
+                    setStatus("Supabase is not configured yet. Add the project URL and publishable key in amcol-config.js.", "error");
+                    return;
+                }
+
+                try {
+                    setBusyState(true);
+                    const { error } = await supabaseClient
+                        .from("standby_unit_requests")
+                        .insert(buildRequestPayload());
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    form.reset();
+                    clearDraft();
+                    updateAssetSelection("Dry Van");
+                    updatePrioritySummary();
+                    setStatus("Request submitted successfully. The request entry is now logged in Supabase for operations tracking.", "success");
+                } catch (error) {
+                    setStatus(error.message || "Something went wrong while saving the request to Supabase.", "error");
+                } finally {
+                    setBusyState(false);
+                }
+            });
+
+            updateAssetSelection(assetInput.value || "Dry Van");
+            updatePrioritySummary();
+            loadDraft();
+
+            if (!supabaseClient) {
+                setStatus("Supabase credentials are missing in amcol-config.js, so submissions cannot be sent yet.", "warning");
+            }
+        })();
+    </script>
 </body>
 
 </html>
