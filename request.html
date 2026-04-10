@@ -4,6 +4,15 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Request an AMCOL standby unit for heavy haulage, urgent dispatch support, and time-sensitive transport coordination across Trinidad and Tobago."
+        name="description" />
+    <meta content="#0c0e12" name="theme-color" />
+    <meta content="AMCOL Transport - Request Standby Unit" property="og:title" />
+    <meta content="Request an AMCOL standby unit for heavy haulage, urgent dispatch support, and time-sensitive transport coordination across Trinidad and Tobago."
+        property="og:description" />
+    <meta content="website" property="og:type" />
+    <meta content="summary" name="twitter:card" />
+    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
     <title>AMCOL Transport - Request Standby Unit</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -160,6 +169,8 @@
 </head>
 
 <body class="request-shell font-body text-on-surface selection:bg-primary selection:text-slate-950">
+    <a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-slate-950 focus:shadow-lg"
+        href="#main-content">Skip to main content</a>
     <header class="sticky top-0 z-50">
         <div class="hero-topbar">
             <div
@@ -174,7 +185,7 @@
                 </span>
             </div>
         </div>
-        <nav class="hero-mainnav">
+        <nav aria-label="Primary" class="hero-mainnav">
             <div class="mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
                 <div
                     class="hero-brand-panel flex items-center justify-center px-5 py-4 md:w-[32%] md:min-w-[290px] md:justify-start md:px-8">
@@ -206,7 +217,7 @@
         </nav>
     </header>
 
-    <main class="mx-auto max-w-[1400px] px-6 py-12 md:px-8">
+    <main class="mx-auto max-w-[1400px] px-6 py-12 md:px-8" id="main-content">
         <header class="mb-16 rounded-[2rem] border border-outline-variant/10 bg-surface-container-low/70 p-8 md:p-10">
             <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                 <div>
@@ -456,7 +467,8 @@
                     <div class="overflow-hidden rounded-lg border border-outline-variant/20">
                         <div class="relative h-56">
                             <img alt="AMCOL fleet ready board"
-                                class="h-full w-full object-cover brightness-[0.45] saturate-0"
+                                class="h-full w-full object-cover brightness-[0.45] saturate-0" decoding="async"
+                                loading="lazy"
                                 src="./assets/flatbed with bg.png" />
                             <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent">
                             </div>
@@ -530,15 +542,16 @@
                 <div class="space-y-4">
                     <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface">Compliance</h4>
                     <ul class="space-y-2 text-sm text-on-surface-variant">
-                        <li><a class="transition-colors hover:text-primary" href="#">Terms of Service</a></li>
-                        <li><a class="transition-colors hover:text-primary" href="#">Privacy Policy</a></li>
+                        <li><a class="transition-colors hover:text-primary" href="terms.html">Terms of Service</a></li>
+                        <li><a class="transition-colors hover:text-primary" href="privacy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="space-y-4">
                     <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface">Infrastructure</h4>
                     <ul class="space-y-2 text-sm text-on-surface-variant">
-                        <li><a class="transition-colors hover:text-primary" href="#">Operational Support</a></li>
-                        <li><a class="transition-colors hover:text-primary" href="#">System Status</a></li>
+                        <li><a class="transition-colors hover:text-primary" href="tel:+18683999200">Operational
+                                Support</a></li>
+                        <li><a class="transition-colors hover:text-primary" href="client.html">Client Portal</a></li>
                     </ul>
                 </div>
             </div>

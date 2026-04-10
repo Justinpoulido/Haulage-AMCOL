@@ -4,6 +4,15 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="Access the AMCOL client portal for haulage updates, account support, and dispatch tracking assistance."
+        name="description" />
+    <meta content="#0b1220" name="theme-color" />
+    <meta content="AMCOL Client Portal" property="og:title" />
+    <meta content="Access the AMCOL client portal for haulage updates, account support, and dispatch tracking assistance."
+        property="og:description" />
+    <meta content="website" property="og:type" />
+    <meta content="summary" name="twitter:card" />
+    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
     <title>AMCOL Client Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
@@ -125,7 +134,9 @@
 </head>
 
 <body class="antialiased text-slate-900">
-    <main class="portal-shell">
+    <a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-slate-950 focus:shadow-lg"
+        href="#main-content">Skip to main content</a>
+    <main class="portal-shell" id="main-content">
         <header class="relative z-20 px-4 sm:px-8 lg:px-14 pt-6 sm:pt-8">
             <div class="mx-auto max-w-7xl flex items-center justify-between gap-4">
                 <a href="index.html" class="flex items-center gap-3 sm:gap-4">
@@ -136,11 +147,13 @@
                         <span>AMCOL </span><span class="text-[#cc1f31]">HAULAGE</span>
                     </p>
                 </a>
-                <nav class="nav-glass hidden md:flex items-center rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+                <nav aria-label="Primary"
+                    class="nav-glass hidden md:flex items-center rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm">
                     <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#top">Home</a>
                     <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#services">Services</a>
                     <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#contact">Support</a>
-                    <a class="ml-2 inline-flex items-center rounded-full bg-[#cc1f31] px-6 py-2.5 font-bold text-white shadow-lg shadow-red-900/20 transition-transform hover:-translate-y-0.5" href="#">Register</a>
+                    <a class="ml-2 inline-flex items-center rounded-full bg-[#cc1f31] px-6 py-2.5 font-bold text-white shadow-lg shadow-red-900/20 transition-transform hover:-translate-y-0.5"
+                        href="request.html">Request Unit</a>
                 </nav>
             </div>
         </header>
@@ -178,7 +191,9 @@
                                 <input id="rememberMe" type="checkbox" class="h-5 w-5 rounded border-slate-300 text-[#cc1f31] focus:ring-[#cc1f31]/30" />
                                 Remember me
                             </label>
-                            <a href="#" class="font-semibold text-[#cc1f31] transition-colors hover:text-red-700">Forgot password?</a>
+                            <a href="index.html#contact"
+                                class="font-semibold text-[#cc1f31] transition-colors hover:text-red-700">Forgot
+                                password?</a>
                         </div>
 
                         <button type="submit" class="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#cc1f31] px-6 py-4 text-2xl font-black text-white shadow-xl shadow-red-900/20 transition-all hover:-translate-y-0.5 hover:bg-red-700">
@@ -192,7 +207,9 @@
                             <span class="pulse-dot h-2 w-2 rounded-full bg-[#39d9cd]"></span>
                             <span>Secure Client Access</span>
                         </div>
-                        <p class="mt-8 text-xl text-slate-700">Need assistance? <a class="font-bold text-[#cc1f31] hover:text-red-700" href="index.html#contact">Contact Support</a></p>
+                        <p class="mt-8 text-xl text-slate-700">Need assistance? <a
+                                class="font-bold text-[#cc1f31] hover:text-red-700"
+                                href="tel:+18683999200">Call Dispatch Support</a></p>
                     </div>
                 </div>
             </div>
