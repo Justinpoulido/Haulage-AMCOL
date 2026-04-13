@@ -167,6 +167,21 @@
                 linear-gradient(110deg, rgba(9, 19, 31, 0.96) 0%, rgba(19, 39, 63, 0.96) 68%, rgba(204, 31, 49, 0.3) 100%);
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            html:focus-within {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
         @media (max-width: 640px) {
             .hero-brand-panel {
                 clip-path: none;
@@ -716,7 +731,7 @@
         </div>
         <div
             class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-slate-500 flex justify-between items-center text-[10px] text-slate-400 uppercase tracking-widest">
-            <p>&copy; 2024 AMCOL Group of Companies. All Rights Reserved. <a class="hover:text-white"
+            <p>&copy; <span data-current-year></span> AMCOL Group of Companies. All Rights Reserved. <a class="hover:text-white"
                     href="privacy.html">Privacy Policy</a>. <a class="hover:text-white" href="terms.html">Terms of
                     Service</a>.</p>
             <a aria-label="Back to top" class="bg-slate-300 text-slate-900 p-2 rounded hover:bg-white transition-colors"
@@ -727,10 +742,19 @@
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const counter = document.querySelector('[data-counter]');
+            document.querySelectorAll('[data-current-year]').forEach(function (element) {
+                element.textContent = new Date().getFullYear();
+            });
             if (!counter) return;
 
             const target = Number(counter.dataset.target || 0);
+            if (prefersReducedMotion) {
+                counter.textContent = target.toLocaleString('en-US');
+                return;
+            }
+
             const duration = 1500;
             const startTime = performance.now();
 

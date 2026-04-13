@@ -122,6 +122,21 @@
             }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            html:focus-within {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
         @media (max-width: 900px) {
             .portal-shell {
                 background:
@@ -155,6 +170,22 @@
                     <a class="ml-2 inline-flex items-center rounded-full bg-[#cc1f31] px-6 py-2.5 font-bold text-white shadow-lg shadow-red-900/20 transition-transform hover:-translate-y-0.5"
                         href="request.html">Request Unit</a>
                 </nav>
+                <button id="mobileNavToggle"
+                    class="nav-glass inline-flex items-center justify-center rounded-full p-3 text-slate-700 shadow-sm transition-colors hover:text-[#cc1f31] md:hidden"
+                    type="button" aria-expanded="false" aria-controls="mobileNavPanel" aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+            <div id="mobileNavPanel"
+                class="nav-glass mt-4 hidden rounded-[1.5rem] p-3 text-sm font-semibold text-slate-700 shadow-sm md:hidden"
+                hidden>
+                <div class="flex flex-col gap-1">
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#top">Home</a>
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#services">Services</a>
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#contact">Support</a>
+                    <a class="mt-2 inline-flex items-center justify-center rounded-2xl bg-[#cc1f31] px-4 py-3 font-bold text-white shadow-lg shadow-red-900/20 transition-transform hover:-translate-y-0.5"
+                        href="request.html">Request Unit</a>
+                </div>
             </div>
         </header>
 
@@ -201,6 +232,7 @@
                             <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
                         </button>
                     </form>
+                    <p id="loginStatus" class="mt-4 hidden rounded-2xl border border-slate-300/80 bg-white/55 px-4 py-3 text-sm leading-relaxed text-slate-700"></p>
 
                     <div class="mt-8 border-t border-slate-300/80 pt-5 text-center">
                         <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
@@ -226,17 +258,70 @@
         const passwordInput = document.getElementById('password');
         const rememberMeInput = document.getElementById('rememberMe');
         const togglePasswordBtn = document.getElementById('togglePassword');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNavPanel = document.getElementById('mobileNavPanel');
         const yearEl = document.getElementById('year');
         const liveTimeEl = document.getElementById('liveTime');
         const loginForm = document.getElementById('loginForm');
+        const loginStatus = document.getElementById('loginStatus');
 
         yearEl.textContent = new Date().getFullYear();
 
-        const rememberedClientId = localStorage.getItem('amcol_client_id');
+        const readStoredClientId = () => {
+            try {
+                return window.localStorage.getItem('amcol_client_id');
+            } catch (_error) {
+                return '';
+            }
+        };
+
+        const writeStoredClientId = (value) => {
+            try {
+                if (value) {
+                    window.localStorage.setItem('amcol_client_id', value);
+                } else {
+                    window.localStorage.removeItem('amcol_client_id');
+                }
+                return true;
+            } catch (_error) {
+                return false;
+            }
+        };
+
+        const rememberedClientId = readStoredClientId();
         if (rememberedClientId) {
             clientIdInput.value = rememberedClientId;
             rememberMeInput.checked = true;
         }
+
+        const setMobileNavOpen = (isOpen) => {
+            mobileNavPanel.hidden = !isOpen;
+            mobileNavPanel.classList.toggle('hidden', !isOpen);
+            mobileNavToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileNavToggle.querySelector('.material-symbols-outlined').textContent = isOpen ? 'close' : 'menu';
+        };
+
+        mobileNavToggle.addEventListener('click', () => {
+            const isOpen = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+            setMobileNavOpen(!isOpen);
+        });
+
+        mobileNavPanel.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                setMobileNavOpen(false);
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                setMobileNavOpen(false);
+            }
+        });
+
+        const setLoginStatus = (message) => {
+            loginStatus.textContent = message;
+            loginStatus.classList.remove('hidden');
+        };
 
         const updateClock = () => {
             const now = new Date();
@@ -259,20 +344,28 @@
         loginForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
+            const clientId = clientIdInput.value.trim();
+            let storageSaved = true;
             if (rememberMeInput.checked) {
-                localStorage.setItem('amcol_client_id', clientIdInput.value.trim());
+                storageSaved = writeStoredClientId(clientId);
             } else {
-                localStorage.removeItem('amcol_client_id');
+                storageSaved = writeStoredClientId('');
             }
 
             const button = loginForm.querySelector('button[type="submit"]');
             const oldText = button.innerHTML;
             button.disabled = true;
             button.innerHTML = '<span>Authenticating...</span><span class="material-symbols-outlined animate-spin">progress_activity</span>';
+            loginStatus.classList.add('hidden');
 
             setTimeout(() => {
                 button.disabled = false;
                 button.innerHTML = oldText;
+                setLoginStatus(
+                    storageSaved
+                        ? `Portal access for ${clientId || 'this account'} is still being wired up. Dispatch support can assist immediately at +1 (868) 399-9200.`
+                        : `Portal access for ${clientId || 'this account'} is still being wired up. Browser storage is unavailable, so the client ID could not be remembered on this device.`
+                );
             }, 1300);
         });
     </script>

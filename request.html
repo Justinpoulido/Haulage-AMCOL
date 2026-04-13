@@ -152,6 +152,21 @@
             box-shadow: 0 0 0 2px rgba(143, 245, 255, 0.2);
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            html:focus-within {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
         @media (max-width: 767px) {
             .hero-brand-panel {
                 clip-path: none;
@@ -536,7 +551,7 @@
                     Precision in motion. Standby units, direct dispatch support, and dependable response when routing
                     continuity matters most.
                 </p>
-                <p class="text-xs text-outline">&copy; 2024 AMCOL Transport Standby Unit. All rights reserved.</p>
+                <p class="text-xs text-outline">&copy; <span data-current-year></span> AMCOL Transport Standby Unit. All rights reserved.</p>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:grid-cols-4">
                 <div class="space-y-4">
@@ -562,6 +577,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script>
         (() => {
+            document.querySelectorAll('[data-current-year]').forEach((element) => {
+                element.textContent = new Date().getFullYear();
+            });
             const form = document.getElementById("standby-request-form");
             const draftButton = document.getElementById("save-draft-button");
             const submitButton = document.getElementById("submit-request-button");
@@ -731,7 +749,7 @@
                 }
 
                 if (!supabaseClient) {
-                    setStatus("Supabase is not configured yet. Add the project URL and publishable key in amcol-config.js.", "error");
+                    setStatus("Supabase is not configured yet. Add the project URL and publishable key to window.AMCOL_CONFIG before submitting requests.", "error");
                     return;
                 }
 
@@ -762,7 +780,7 @@
             loadDraft();
 
             if (!supabaseClient) {
-                setStatus("Supabase credentials are missing in amcol-config.js, so submissions cannot be sent yet.", "warning");
+                setStatus("Supabase credentials are missing from window.AMCOL_CONFIG, so submissions cannot be sent yet.", "warning");
             }
         })();
     </script>
