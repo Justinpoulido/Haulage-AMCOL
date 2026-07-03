@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="View AMCOL headquarters, dispatch location details, and driving directions for the main yard in Trinidad and Tobago."
+        name="description">
+    <meta content="#0f172a" name="theme-color">
+    <meta content="AMCOL Coverage Map" property="og:title">
+    <meta content="View AMCOL headquarters, dispatch location details, and driving directions for the main yard in Trinidad and Tobago."
+        property="og:description">
+    <meta content="website" property="og:type">
+    <meta content="summary" name="twitter:card">
+    <title>AMCOL Coverage Map</title>
+    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png">
+    <link href="https://api.mapbox.com" rel="preconnect">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            background: #0f172a;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            z-index: 20;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: #ffffff;
+            color: #0f172a;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-decoration: none;
+            transform: translateY(-140%);
+            transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        .map-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+
+        #map {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+        }
+
+        .top-bar {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 3;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .top-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(15, 23, 42, 0.92);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .info-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+            width: min(420px, calc(100% - 2rem));
+            transform: translate(-50%, -50%);
+            background: #13273f;
+            border-radius: var(--ds-radius-md, 16px);
+            padding: 28px;
+            color: #ffffff;
+            box-shadow: var(--ds-shadow-2xl, 0 32px 70px rgba(15, 23, 42, 0.22));
+        }
+
+        .info-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e53935;
+            border-radius: var(--ds-radius-md, 16px) var(--ds-radius-md, 16px) 0 0;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .coords {
+            color: #a8b2c0;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .info-row {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #d1d5db;
+        }
+
+        .notice {
+            background: #1c3552;
+            border-radius: var(--ds-radius-sm, 10px);
+            padding: 14px;
+            margin: 18px 0;
+            font-size: 13px;
+        }
+
+        .notice strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .direction-btn {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 14px;
+            border-radius: var(--ds-radius-sm, 10px);
+            background: var(--ds-red, #cc1f31);
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .direction-btn:hover {
+            background: #e0293d;
+        }
+
+        @media (max-width: 640px) {
+            .info-card {
+                top: auto;
+                bottom: 1rem;
+                left: 1rem;
+                transform: none;
+                padding: 22px;
+            }
+        }
+    </style>
+    <style type="text/tailwindcss">
+        /* ===== AMCOL-PREMIUM-DS : shared design system (do not fork values) ===== */
+        :root {
+            --ds-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+            --ds-shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.08);
+            --ds-shadow-md: 0 6px 16px rgba(15, 23, 42, 0.10);
+            --ds-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.14);
+            --ds-shadow-xl: 0 20px 44px rgba(15, 23, 42, 0.18);
+            --ds-shadow-2xl: 0 32px 70px rgba(15, 23, 42, 0.22);
+            --ds-shadow-brand: 0 10px 26px rgba(204, 31, 49, 0.28);
+            --ds-shadow-teal: 0 10px 26px rgba(57, 217, 205, 0.24);
+            --ds-radius-sm: 10px;
+            --ds-radius-md: 16px;
+            --ds-radius-lg: 24px;
+            --ds-radius-xl: 32px;
+            --ds-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ds-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ds-teal: #39d9cd;
+            --ds-red: #cc1f31;
+        }
+        /* Accessible focus ring for all interactive elements */
+        a:focus-visible,
+        button:focus-visible,
+        [tabindex]:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--ds-teal);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        /* Button polish — additive; compose with existing Tailwind utility classes */
+        .amcol-btn {
+            transition: transform 0.2s var(--ds-ease-smooth),
+                        box-shadow 0.2s var(--ds-ease-smooth),
+                        background-color 0.2s var(--ds-ease-smooth),
+                        color 0.2s var(--ds-ease-smooth);
+            will-change: transform;
+        }
+        .amcol-btn:hover { transform: translateY(-2px); }
+        .amcol-btn:active {
+            transform: translateY(0);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.14);
+        }
+        .amcol-btn-primary { box-shadow: var(--ds-shadow-brand); }
+        .amcol-btn-primary:hover { box-shadow: 0 16px 34px rgba(204, 31, 49, 0.38); }
+        .amcol-btn-teal { box-shadow: var(--ds-shadow-teal); }
+        .amcol-btn-teal:hover { box-shadow: 0 16px 34px rgba(57, 217, 205, 0.34); }
+        .amcol-btn-ghost:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22); }
+        /* Progressive-enhancement scroll reveal — content is fully visible without JS */
+        html.amcol-reveal-ready .amcol-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s var(--ds-ease-smooth), transform 0.6s var(--ds-ease-smooth);
+        }
+        html.amcol-reveal-ready .amcol-reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html.amcol-reveal-ready .amcol-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+        /* Footer polish — shared across pages */
+        footer h3 {
+            position: relative;
+        }
+        footer h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 3rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--ds-red), var(--ds-teal));
+        }
+        /* ===== end AMCOL-PREMIUM-DS ===== */
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <main id="main-content">
+        <div class="map-section">
+            <div class="top-bar">
+                <a class="top-link amcol-btn amcol-btn-ghost" href="index.html#coverage">Back to Site</a>
+                <a class="top-link amcol-btn amcol-btn-ghost" href="tel:+18683999200">24/7 Hotline</a>
+            </div>
+            <div id="map"></div>
+            <div class="info-card">
+                <div class="card-title">Headquarters &amp; Main Yard</div>
+                <div class="coords">10.6524&deg; N, 61.5123&deg; W</div>
+                <div class="info-row">Americas Marketing Company Limited, Trinidad and Tobago</div>
+                <div class="info-row">24/7 dispatch hotline: +1 (868) 399-9200</div>
+                <div class="info-row">Mon-Fri: 7am - 5pm, Sat: 7am - 4pm</div>
+                <div class="notice">
+                    <strong>HEAVY VEHICLE ENTRANCE</strong>
+                    All heavy transport and oversized loads must enter via the Western Gate to avoid administrative
+                    parking congestion.
+                </div>
+                <a class="direction-btn amcol-btn amcol-btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=10.6524,-61.5123"
+                    rel="noopener noreferrer" target="_blank">Get Driving Directions</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="amcol-config.js"></script>
+    <script src="/api/amcol-config.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script>
+        const mapElement = document.getElementById('map');
+        const mapboxToken = window.AMCOL_CONFIG?.mapboxToken || window.AMCOL_MAPBOX_TOKEN || '';
+
+        function showMapFallback(message) {
+            if (!mapElement) {
+                return;
+            }
+
+            mapElement.innerHTML = '';
+            mapElement.style.display = 'flex';
+            mapElement.style.alignItems = 'center';
+            mapElement.style.justifyContent = 'center';
+            mapElement.style.textAlign = 'center';
+
+            const fallbackCard = document.createElement('div');
+            fallbackCard.style.maxWidth = '22rem';
+            fallbackCard.style.padding = '1rem 1.25rem';
+            fallbackCard.style.borderRadius = '1rem';
+            fallbackCard.style.border = '1px solid rgba(255,255,255,0.12)';
+            fallbackCard.style.background = 'rgba(15, 23, 42, 0.92)';
+            fallbackCard.style.color = '#e2e8f0';
+            fallbackCard.innerHTML = `
+                <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#39d9cd;">Mapbox Status</div>
+                <div style="margin-top:0.75rem;font-size:0.92rem;line-height:1.5;">${message}</div>
+                <div style="margin-top:0.75rem;font-size:0.78rem;line-height:1.5;color:#94a3b8;">Set your public Mapbox token in <code>amcol-config.js</code> as <code>window.AMCOL_CONFIG.mapboxToken</code>.</div>
+            `;
+            mapElement.appendChild(fallbackCard);
+        }
+
+        if (mapElement && typeof mapboxgl !== 'undefined' && mapboxToken) {
+            mapboxgl.accessToken = mapboxToken;
+
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/dark-v11',
+                center: [-61.5123, 10.6524],
+                zoom: 8
+            });
+
+            new mapboxgl.Marker({ color: '#e53935' })
+                .setLngLat([-61.5123, 10.6524])
+                .addTo(map);
+        } else if (mapElement) {
+            const message = !mapboxToken
+                ? 'Map view unavailable because the Mapbox access token is missing.'
+                : 'Map view unavailable because the Mapbox library did not load.';
+            showMapFallback(message);
+        }
+    </script>
+</body>
+
+</html>
