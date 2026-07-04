@@ -108,22 +108,263 @@
             padding-top: 0.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
+
+        /* ===== AMCOL shared nav/contact bar (matches index.html) ===== */
+        .hero-topbar {
+            background: linear-gradient(90deg, rgba(204, 31, 49, 0.96), rgba(142, 24, 39, 0.96));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hero-mainnav {
+            background: rgba(9, 19, 31, 0.8);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--ds-shadow-lg);
+        }
+        .hero-brand-panel {
+            position: relative;
+            background: rgba(255, 255, 255, 0.96);
+            clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+        }
+        .hero-brand-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(30, 64, 175, 0.08));
+            pointer-events: none;
+        }
+        .hero-nav-link {
+            position: relative;
+        }
+        .hero-nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1.15rem;
+            width: 100%;
+            height: 3px;
+            background: #39d9cd;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
+        }
+        .hero-nav-link:hover::after,
+        .hero-nav-link:focus-visible::after {
+            transform: scaleX(1);
+        }
+        .hero-nav-link.active {
+            color: #39d9cd;
+        }
+        .hero-nav-link.active::after {
+            transform: scaleX(1);
+        }
+        .hero-mainnav nav {
+            min-width: 0;
+        }
+        .hero-topbar-strip {
+            display: grid !important;
+            grid-template-columns: minmax(max-content, 1.35fr) minmax(max-content, 0.9fr) minmax(max-content, 1fr) minmax(max-content, 1.15fr);
+            align-items: center;
+            gap: 0.85rem;
+            width: 100%;
+            letter-spacing: 0.1em;
+        }
+        .hero-topbar-items {
+            display: contents !important;
+        }
+        .hero-topbar-item {
+            min-width: 0;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+            overflow-wrap: normal;
+        }
+        .hero-topbar-strip > .hero-topbar-item:first-child {
+            justify-content: flex-start;
+            text-align: left;
+        }
+        .hero-topbar-items .hero-topbar-item:last-child {
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .hero-nav-shell {
+            max-width: none !important;
+            width: 100%;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            overflow: visible !important;
+        }
+        .hero-mainnav .hero-brand-panel {
+            flex: 0 0 clamp(20rem, 27vw, 27rem);
+            justify-content: flex-start !important;
+            padding-left: clamp(1rem, 3vw, 3.5rem) !important;
+            padding-right: 2.75rem !important;
+        }
+        .hero-mainnav .hero-brand-panel img {
+            max-width: min(100%, 23rem);
+        }
+        .hero-nav-content {
+            min-width: 0;
+            padding-left: clamp(1.25rem, 2.4vw, 2.75rem) !important;
+            padding-right: clamp(1rem, 2.4vw, 3rem) !important;
+        }
+        .hero-primary-nav {
+            flex: 1 1 auto;
+            justify-content: space-evenly;
+            min-width: 0;
+            gap: clamp(1rem, 2vw, 2.75rem) !important;
+        }
+        .hero-primary-nav .hero-nav-link {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            text-align: center;
+        }
+        @media (max-width: 1023px) {
+            .hero-topbar-strip {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                letter-spacing: 0.12em;
+            }
+            .hero-topbar-item,
+            .hero-topbar-strip > .hero-topbar-item:first-child,
+            .hero-topbar-items .hero-topbar-item:last-child {
+                justify-content: flex-start;
+                text-align: left;
+                white-space: normal;
+            }
+            .hero-mainnav .hero-brand-panel {
+                flex-basis: 18rem;
+                padding-right: 2rem !important;
+            }
+            .hero-nav-content {
+                gap: 1.25rem;
+                padding-left: 1.25rem !important;
+                padding-right: 1.25rem !important;
+            }
+            .hero-primary-nav {
+                justify-content: center;
+                gap: 1rem 1.35rem !important;
+                letter-spacing: 0.15em !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .hero-topbar-strip {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            .hero-mainnav > div,
+            .hero-nav-shell {
+                overflow: visible;
+            }
+            .hero-brand-panel {
+                padding: 1rem !important;
+            }
+            .hero-mainnav .hero-brand-panel {
+                flex-basis: auto;
+                justify-content: center !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .hero-brand-panel img {
+                height: auto !important;
+                max-height: 5.5rem;
+                width: min(100%, 20rem) !important;
+            }
+            .hero-nav-content,
+            .hero-mainnav .flex-1 {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .hero-mainnav nav,
+            .hero-primary-nav {
+                justify-content: center;
+                gap: 0.85rem 1rem !important;
+                font-size: 0.64rem !important;
+                letter-spacing: 0.13em !important;
+                text-align: center;
+            }
+            .hero-nav-link::after {
+                bottom: -0.45rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .hero-brand-panel {
+                clip-path: none;
+            }
+        }
+        @media (max-width: 480px) {
+            .amcol-btn {
+                max-width: 100%;
+                width: 100%;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+                letter-spacing: 0.12em !important;
+                text-align: center;
+            }
+        }
+        /* ===== end shared nav/contact bar ===== */
     </style>
 </head>
 
 <body class="bg-slate-950 text-slate-100 antialiased">
     <a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-slate-950"
         href="#main-content">Skip to main content</a>
-    <header class="border-b border-white/10 bg-slate-950/90 backdrop-blur">
-        <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-            <a class="flex items-center gap-3" href="index.html#top">
-                <img alt="AMCOL Group of Companies" class="h-12 w-auto" src="./assets/AMCOL_Logo.png" />
-            </a>
-            <nav aria-label="Primary" class="flex items-center gap-3 text-sm font-semibold text-slate-300">
-                <a class="transition-colors hover:text-white" href="index.html#top">Home</a>
-                <a class="transition-colors hover:text-white" href="request.html">Request Unit</a>
-                <a class="transition-colors hover:text-white" href="index.html#contact">Support</a>
-            </nav>
+    <header id="top" class="relative z-20">
+        <div class="hero-topbar">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                <div
+                    class="hero-topbar-strip flex flex-col gap-3 text-[11px] font-semibold uppercase text-white/85 lg:flex-row lg:items-center lg:justify-end lg:gap-8">
+                    <div class="hero-topbar-item flex items-center gap-2">
+                        <span class="material-symbols-outlined text-base text-[#39d9cd]">location_on</span>
+                        <a class="transition-colors hover:text-white"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=S.S.+Erin+Road+Penal,+%2322+Ramjohn+Trace,+Trinidad+and+Tobago">S.S.
+                            Erin Road Penal, #22 Ramjohn Trace</a>
+                    </div>
+                    <div class="hero-topbar-items flex flex-wrap items-center gap-x-6 gap-y-2">
+                        <a class="hero-topbar-item flex items-center gap-2 transition-colors hover:text-white"
+                            href="tel:+18682885800">
+                            <span class="material-symbols-outlined text-base text-[#39d9cd]">call</span>
+                            Office: +1 (868) 288-5800
+                        </a>
+                        <a class="hero-topbar-item flex items-center gap-2 transition-colors hover:text-white"
+                            href="tel:+18683999200">
+                            <span class="material-symbols-outlined text-base text-[#39d9cd]">smartphone</span>
+                            24/7 Hotline: +1 (868) 399-9200
+                        </a>
+                        <span class="hero-topbar-item flex items-center gap-2">
+                            <span class="material-symbols-outlined text-base text-[#39d9cd]">schedule</span>
+                            Mon-Fri: 7am - 5pm | Sat: 7am - 4pm
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-mainnav">
+            <div class="hero-nav-shell mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
+                <div
+                    class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:justify-start">
+                    <a class="relative z-10 shrink-0" href="index.html#top">
+                        <img alt="AMCOL Group of Companies" class="h-20 sm:h-24 md:h-[6.5rem] w-auto max-w-[420px]"
+                            src="./assets/AMCOL_Logo.png" />
+                    </a>
+                </div>
+                <div class="hero-nav-content flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
+                    <nav aria-label="Primary"
+                        class="hero-primary-nav flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#top">Home</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#about">About Us</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
+                            href="index.html#services">Services</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
+                            href="index.html#coverage">Coverage</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#clients">Clients</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#contact">Contact
+                            Us</a>
+                    </nav>
+                    <a class="amcol-btn amcol-btn-ghost hidden sm:inline-flex items-center justify-center rounded-sm border border-[#39d9cd] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#39d9cd] transition-colors hover:bg-[#39d9cd] hover:text-slate-950"
+                        href="client.html">Client Login</a>
+                </div>
+            </div>
         </div>
     </header>
 

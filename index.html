@@ -522,6 +522,8 @@
             background-size: cover;
             background-repeat: no-repeat;
             filter: brightness(1.08) saturate(1.08);
+            opacity: 0;
+            animation: hero-slideshow 32s ease-in-out infinite;
         }
         .hero-background-frame::after {
             content: "";
@@ -534,12 +536,19 @@
         }
         .hero-background-crane {
             background-image: url('./assets/Night Crane Lift.png');
-            animation: hero-background-crane 16s ease-in-out infinite;
+            animation-delay: -2s;
         }
         .hero-background-industrial {
             background-image: url('./assets/Transport%20industrial.png');
-            animation: hero-background-industrial 16s ease-in-out infinite;
-            opacity: 0;
+            animation-delay: 6s;
+        }
+        .hero-background-fleet {
+            background-image: url('./assets/AMCOL_FLEET2.png');
+            animation-delay: 14s;
+        }
+        .hero-background-cargo {
+            background-image: url('./assets/Crane-lift%20tank.png');
+            animation-delay: 22s;
         }
         .hero-dashboard::before {
             content: "";
@@ -716,23 +725,28 @@
                 opacity: 0.35;
             }
         }
-        @keyframes hero-background-crane {
-            0%, 45% {
-                opacity: 1;
-            }
-            50%, 100% {
+        @keyframes hero-slideshow {
+            0% {
                 opacity: 0;
+                transform: scale(1.025);
+            }
+            6.25%, 25% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            31.25%, 100% {
+                opacity: 0;
+                transform: scale(1.025);
             }
         }
-        @keyframes hero-background-industrial {
-            0%, 45% {
+        @media (prefers-reduced-motion: reduce) {
+            .hero-background-frame {
+                animation: none !important;
                 opacity: 0;
+                transform: none;
             }
-            50%, 95% {
+            .hero-background-crane {
                 opacity: 1;
-            }
-            100% {
-                opacity: 0;
             }
         }
         @keyframes about-image-dumper {
@@ -925,6 +939,274 @@
         .hero-nav-link.active::after {
             transform: scaleX(1);
         }
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        img,
+        video,
+        svg {
+            max-width: 100%;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        a,
+        span:not(.material-symbols-outlined) {
+            overflow-wrap: anywhere;
+        }
+        .hero-mainnav nav,
+        .featured-project-meta,
+        footer .max-w-7xl {
+            min-width: 0;
+        }
+        .featured-project-meta {
+            flex-wrap: wrap;
+        }
+        .hero-topbar-strip {
+            display: grid !important;
+            grid-template-columns: minmax(max-content, 1.35fr) minmax(max-content, 0.9fr) minmax(max-content, 1fr) minmax(max-content, 1.15fr);
+            align-items: center;
+            gap: 0.85rem;
+            width: 100%;
+            letter-spacing: 0.1em;
+        }
+        .hero-topbar-items {
+            display: contents !important;
+        }
+        .hero-topbar-item {
+            min-width: 0;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+            overflow-wrap: normal;
+        }
+        .hero-topbar-strip > .hero-topbar-item:first-child {
+            justify-content: flex-start;
+            text-align: left;
+        }
+        .hero-topbar-items .hero-topbar-item:last-child {
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .hero-nav-shell {
+            max-width: none !important;
+            width: 100%;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            overflow: visible !important;
+        }
+        .hero-mainnav .hero-brand-panel {
+            flex: 0 0 clamp(20rem, 27vw, 27rem);
+            justify-content: flex-start !important;
+            padding-left: clamp(1rem, 3vw, 3.5rem) !important;
+            padding-right: 2.75rem !important;
+        }
+        .hero-mainnav .hero-brand-panel img {
+            max-width: min(100%, 23rem);
+        }
+        .hero-nav-content {
+            min-width: 0;
+            padding-left: clamp(1.25rem, 2.4vw, 2.75rem) !important;
+            padding-right: clamp(1rem, 2.4vw, 3rem) !important;
+        }
+        .hero-primary-nav {
+            flex: 1 1 auto;
+            justify-content: space-evenly;
+            min-width: 0;
+            gap: clamp(1rem, 2vw, 2.75rem) !important;
+        }
+        .hero-primary-nav .hero-nav-link {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .hero-nav-actions {
+            flex: 0 0 auto;
+        }
+        .hero-admin-login {
+            width: 3rem;
+            height: 3rem;
+            padding: 0 !important;
+        }
+        .hero-copy-wrap {
+            max-width: none !important;
+            width: 100%;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: clamp(1rem, 3vw, 3.5rem) !important;
+            padding-right: clamp(1rem, 3vw, 3.5rem) !important;
+        }
+        .hero-copy-panel {
+            margin-left: 0 !important;
+        }
+        @media (max-width: 1023px) {
+            .hero-topbar-strip {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                letter-spacing: 0.12em;
+            }
+            .hero-topbar-item,
+            .hero-topbar-strip > .hero-topbar-item:first-child,
+            .hero-topbar-items .hero-topbar-item:last-child {
+                justify-content: flex-start;
+                text-align: left;
+                white-space: normal;
+            }
+            .coverage-layout {
+                grid-template-columns: 1fr;
+            }
+            .transport-solutions-panel {
+                padding: 1.5rem;
+            }
+            .coverage-map-section {
+                min-height: 520px;
+            }
+            .hero-dashboard {
+                min-height: auto;
+            }
+            .hero-mainnav .hero-brand-panel {
+                flex-basis: 18rem;
+                padding-right: 2rem !important;
+            }
+            .hero-nav-content {
+                gap: 1.25rem;
+                padding-left: 1.25rem !important;
+                padding-right: 1.25rem !important;
+            }
+            .hero-primary-nav {
+                justify-content: center;
+                gap: 1rem 1.35rem !important;
+                letter-spacing: 0.15em !important;
+            }
+            .hero-copy-wrap {
+                padding-left: 1.5rem !important;
+                padding-right: 1.5rem !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .hero-topbar-strip {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            .hero-mainnav > div,
+            .hero-nav-shell {
+                overflow: visible;
+            }
+            .hero-brand-panel {
+                padding: 1rem !important;
+            }
+            .hero-mainnav .hero-brand-panel {
+                flex-basis: auto;
+                justify-content: center !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .hero-brand-panel img {
+                height: auto !important;
+                max-height: 5.5rem;
+                width: min(100%, 20rem) !important;
+            }
+            .hero-nav-content,
+            .hero-mainnav .flex-1 {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .hero-nav-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-nav-actions .amcol-btn:not(.hero-admin-login) {
+                flex: 1 1 13rem;
+                max-width: 18rem;
+            }
+            .hero-mainnav nav,
+            .hero-primary-nav {
+                justify-content: center;
+                gap: 0.85rem 1rem !important;
+                font-size: 0.64rem !important;
+                letter-spacing: 0.13em !important;
+                text-align: center;
+            }
+            .hero-nav-link::after {
+                bottom: -0.45rem;
+            }
+            .hero-copy-wrap {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .hero-dashboard h1 {
+                font-size: clamp(2.6rem, 13vw, 4.5rem) !important;
+                line-height: 0.95 !important;
+            }
+            .hero-dashboard h1 + p,
+            .hero-dashboard p {
+                max-width: 100%;
+            }
+            .featured-projects-stage {
+                border-radius: 18px;
+                padding: 1rem;
+            }
+            .featured-project-image-wrap,
+            .featured-project-card.tall .featured-project-image-wrap {
+                min-height: 14rem;
+            }
+            .section-transition-band {
+                display: none;
+            }
+            footer .max-w-7xl:last-child {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-dashboard .inline-flex,
+            .amcol-btn {
+                max-width: 100%;
+            }
+            .amcol-btn {
+                width: 100%;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+                letter-spacing: 0.12em !important;
+                text-align: center;
+            }
+            .hero-dashboard h1 {
+                font-size: clamp(2.15rem, 12vw, 3.4rem) !important;
+            }
+            .hero-dashboard .text-\[11px\],
+            .hero-dashboard .text-\[10px\],
+            .transport-solutions-panel .tracking-\[0\.34em\] {
+                letter-spacing: 0.14em !important;
+            }
+            .transport-solutions-panel {
+                padding: 1rem;
+            }
+            .transport-solution-card {
+                padding: 1rem;
+            }
+            .transport-solution-card .flex {
+                flex-direction: column;
+            }
+            .coverage-map-section {
+                min-height: 430px;
+            }
+            .coverage-info-card {
+                font-size: 0.75rem;
+            }
+            .featured-projects-map-fragment {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -935,30 +1217,32 @@
         <div class="hero-backgrounds" aria-hidden="true">
             <div class="hero-background-frame hero-background-crane"></div>
             <div class="hero-background-frame hero-background-industrial"></div>
+            <div class="hero-background-frame hero-background-fleet"></div>
+            <div class="hero-background-frame hero-background-cargo"></div>
         </div>
         <header class="relative z-20">
             <div class="hero-topbar">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
                     <div
-                        class="flex flex-col gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 lg:flex-row lg:items-center lg:justify-end lg:gap-8">
-                        <div class="flex items-center gap-2">
+                        class="hero-topbar-strip flex flex-col gap-3 text-[11px] font-semibold uppercase text-white/85 lg:flex-row lg:items-center lg:justify-end lg:gap-8">
+                        <div class="hero-topbar-item flex items-center gap-2">
                             <span class="material-symbols-outlined text-base text-[#39d9cd]">location_on</span>
                             <a class="transition-colors hover:text-white"
                                 href="https://www.google.com/maps/search/?api=1&amp;query=S.S.+Erin+Road+Penal,+%2322+Ramjohn+Trace,+Trinidad+and+Tobago">S.S.
                                 Erin Road Penal, #22 Ramjohn Trace</a>
                         </div>
-                        <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-                            <a class="flex items-center gap-2 transition-colors hover:text-white"
+                        <div class="hero-topbar-items flex flex-wrap items-center gap-x-6 gap-y-2">
+                            <a class="hero-topbar-item flex items-center gap-2 transition-colors hover:text-white"
                                 href="tel:+18682885800">
                                 <span class="material-symbols-outlined text-base text-[#39d9cd]">call</span>
                                 Office: +1 (868) 288-5800
                             </a>
-                            <a class="flex items-center gap-2 transition-colors hover:text-white"
+                            <a class="hero-topbar-item flex items-center gap-2 transition-colors hover:text-white"
                                 href="tel:+18683999200">
                                 <span class="material-symbols-outlined text-base text-[#39d9cd]">smartphone</span>
                                 24/7 Hotline: +1 (868) 399-9200
                             </a>
-                            <span class="flex items-center gap-2">
+                            <span class="hero-topbar-item flex items-center gap-2">
                                 <span class="material-symbols-outlined text-base text-[#39d9cd]">schedule</span>
                                 Mon-Fri: 7am - 5pm | Sat: 7am - 4pm
                             </span>
@@ -967,17 +1251,17 @@
                 </div>
             </div>
             <div class="hero-mainnav">
-                <div class="mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
+                <div class="hero-nav-shell mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
                     <div
-                        class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:w-[34%] md:min-w-[320px] md:justify-start">
+                        class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:justify-start">
                         <a class="relative z-10 shrink-0" href="#top">
                             <img alt="AMCOL Group of Companies" class="h-20 sm:h-24 md:h-[6.5rem] w-auto max-w-[420px]"
                                 src="./assets/AMCOL_Logo.png" />
                         </a>
                     </div>
-                    <div class="flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
+                    <div class="hero-nav-content flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
                         <nav aria-label="Primary"
-                            class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
+                            class="hero-primary-nav flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
                             <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#top">Home</a>
                             <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#about">About Us</a>
                             <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
@@ -988,8 +1272,14 @@
                             <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#contact">Contact
                                 Us</a>
                         </nav>
-                        <a class="amcol-btn amcol-btn-ghost hidden sm:inline-flex items-center justify-center rounded-sm border border-[#39d9cd] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#39d9cd] transition-colors hover:bg-[#39d9cd] hover:text-slate-950"
-                            href="client.html">Client Login</a>
+                        <div class="hero-nav-actions flex items-center gap-3">
+                            <a class="amcol-btn amcol-btn-ghost inline-flex items-center justify-center rounded-sm border border-[#39d9cd] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#39d9cd] transition-colors hover:bg-[#39d9cd] hover:text-slate-950"
+                                href="client.html">Client Login</a>
+                            <a class="hero-admin-login amcol-btn amcol-btn-ghost inline-flex items-center justify-center rounded-sm border border-white/20 text-[#39d9cd] transition-colors hover:border-[#39d9cd] hover:bg-[#39d9cd] hover:text-slate-950"
+                                href="/admin/admin.html" aria-label="Admin login" title="Admin login">
+                                <span class="material-symbols-outlined text-[22px]">admin_panel_settings</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1025,9 +1315,9 @@
                 </div>
             </div>
         </div>
-        <div class="relative z-10 mx-auto max-w-[88rem] px-4 sm:px-6 lg:px-8 pt-8 pb-28 sm:pb-32 lg:pb-36">
+        <div class="hero-copy-wrap relative z-10 mx-auto max-w-[88rem] px-4 sm:px-6 lg:px-8 pt-8 pb-28 sm:pb-32 lg:pb-36">
             <div class="grid items-center gap-12">
-                <div class="max-w-2xl xl:-ml-10">
+                <div class="hero-copy-panel max-w-2xl xl:-ml-10">
                     <div
                         class="mb-6 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/70">
                         <span class="pulse-dot h-2.5 w-2.5 rounded-full bg-[#39d9cd]"></span>
@@ -1070,14 +1360,15 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <main id="main-content">
-    <div class="section-transition-band" aria-hidden="true">
-        <div class="section-transition-grid"></div>
-        <div class="section-transition-accent left"></div>
-        <div class="section-transition-accent right"></div>
-    </div>
-    <section id="projects" class="featured-projects-section py-20">
+        <div class="section-transition-band" aria-hidden="true">
+            <div class="section-transition-grid"></div>
+            <div class="section-transition-accent left"></div>
+            <div class="section-transition-accent right"></div>
+        </div>
+        <section id="projects" class="featured-projects-section py-20">
         <div class="featured-projects-map" aria-hidden="true">
             <span class="featured-projects-map-fragment one"></span>
             <span class="featured-projects-map-fragment two"></span>
@@ -1149,11 +1440,38 @@
                             <span class="featured-project-pill">Night Operations</span>
                             <h3 class="mt-4 text-xl font-black uppercase tracking-tight">After-Hours Heavy Lift</h3>
                             <p class="mt-2 text-sm leading-relaxed text-slate-600">Time-sensitive lift execution
-                                completed under controlled night-shift conditions.</p>
-                            <div class="featured-project-meta">
-                                <span>Lift Crew</span>
-                                <span>Stand-By</span>
+                                completed under controlled night-shift conditions, including crew coordination, site
+                                lighting, safety perimeter setup, and standby rigging support for restricted-hour
+                                industrial work.</p>
+                            <ul class="mt-4 space-y-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+                                <li class="flex items-center gap-2">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>
+                                    After-hours scheduling
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>
+                                    Safety perimeter setup
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#39d9cd]"></span>
+                                    Crane and rigging coordination
+                                </li>
+                            </ul>
+                            
+                            <div class="flex justify-between gap-2">
+                                <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-slate-600">
+                                    Night Shift
+                                </span>
+                            
+                                <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-slate-600">
+                                    Lift Crew
+                                </span>
+                            
+                                <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-slate-600">
+                                    Site Lighting
+                                </span>
                             </div>
+                            
                         </div>
                     </article>
                     <article class="amcol-reveal featured-project-card">
@@ -1191,7 +1509,7 @@
                     <article class="amcol-reveal featured-project-card">
                         <div class="featured-project-image-wrap">
                             <img alt="AMCOL fleet lineup project" class="featured-project-image" decoding="async" loading="lazy"
-                                src="./assets/AMCOL_FLEET.png" />
+                                src="./assets/AMCOL_FLEET2.png" />
                         </div>
                         <div class="featured-project-content">
                             <span class="featured-project-pill">Fleet Readiness</span>
@@ -1377,9 +1695,10 @@
                 <div class="w-full lg:w-3/5">
                     <div class="rounded-sm overflow-hidden shadow-2xl border-4 border-white bg-slate-950">
                         <video aria-label="AMCOL drone footage" class="aspect-video h-full w-full object-cover" controls
-                            playsinline preload="metadata">
+                            playsinline preload="none" poster="./assets/Nighttime%20truck%20with%20office%20building.png"
+                            data-lazy-video>
                             <source
-                                src="https://xyiwtr86h1disgpz.public.blob.vercel-storage.com/Andre%20amcol%20raw%20drone%20footage%20%20copy.mp4"
+                                data-src="https://xyiwtr86h1disgpz.public.blob.vercel-storage.com/Andre%20amcol%20raw%20drone%20footage%20%20copy.mp4"
                                 type="video/mp4" />
                             Your browser does not support embedded video. Download the footage
                             <a class="underline"
@@ -1672,108 +1991,83 @@
     <section id="clients" class="py-20 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black text-[#cc1f31] uppercase tracking-tight mb-4">What Our Clients Say</h2>
-                <div class="w-20 h-1.5 bg-[#cc1f31] mx-auto"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div
-                    class="amcol-reveal testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
-                    <div class="flex mb-6 space-x-1">
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                    </div>
-                    <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">"AMCOL demonstrated a strong
-                        commitment to clean energy initiatives during our relocation project, while supporting
-                        sustainable operations. Their 24/7 standby support ensured efficiency and reliability
-                        throughout the entire project lifecycle."</p>
-                    <div class="flex items-center justify-between border-t border-slate-50 pt-6">
-                        <div>
-                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">Robert Mitchell</p>
-                            <p class="text-[11px] text-slate-400 uppercase font-medium">Energy Operations Director</p>
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <!-- Card 1 -->
+                    <div class="amcol-reveal testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
+                        
+                        <div class="flex mb-6 space-x-1">
+                            <span class="material-symbols-outlined text-[#cc1f31] text-xl" style="font-variation-settings: 'FILL' 1;">verified</span>
                         </div>
-                        <img alt="Client Company Logo" class="h-8 w-auto grayscale opacity-70" decoding="async" loading="lazy"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHEOvC9InNf1UfbThFklsC8iPbRpNrsVl9ONfIRkjDDNg5tvAAsPgYxsmz-DWu4uwaH-OCY4jrrI-3_G5w6Kh9sKeccknMX7TgDfpaYmnJAaCv9TwsHFBlHwW-LerDYT8JddAUMIjj8MDQO6NyTKEyqCU0nZolSq9Vn_gCpnXc06HbvP5uC1eWwXE4GGfqLo34lFf6piLnoJ5ZHR_lE-MKrMVlw1wnU8scduT-ddKR--x2JRendXaUZXrK2LeZbifU9wJ7UCH6iCP2" />
-                    </div>
-                </div>
-                <div
-                    class="amcol-reveal testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
-                    <div class="flex mb-6 space-x-1">
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                    </div>
-                    <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">"Outstanding commitment to safety.
-                        We trust AMCOL exclusively for our hazardous cargo moves due to their rigorous protocols and
-                        certified team."</p>
-                    <div class="flex items-center justify-between border-t border-slate-50 pt-6">
-                        <div>
-                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">Sarah Henderson</p>
-                            <p class="text-[11px] text-slate-400 uppercase font-medium">Infrastructure Logistics Lead
+                
+                        <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">
+                            “Oversized and heavy-load transport executed across challenging terrain routes with strict safety and route planning controls.”
+                        </p>
+                
+                        <div class="border-t border-slate-50 pt-6">
+                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">
+                                Heavy Haulage Operations
+                            </p>
+                            <p class="text-[11px] text-slate-400 uppercase font-medium">
+                                Specialized Transport Capability
                             </p>
                         </div>
-                        <img alt="Client Company Logo" class="h-8 w-auto grayscale opacity-70" decoding="async" loading="lazy"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFugav4Bs1DrUhimcw92X-Pp1GRuOazjJCr-CxwkEp2MEzaFcRtVZMkO69lLBStSV1_0r06tjk-cOkXM1xY2QVkojhKKjjIWNph_D-jFX-1ZKt54kt5tdwE0bnrhcXkK_tbwL6w6OJWG2Gid0_7Nurh3EaC5IqBx9nccK36ylLWxjS3jlNAVlcu7-44ugGB960M4myKUn6CKSm8Nmp8whQR8yvH1z5pYz1j3MESVO1QEQy3N2GydCfXZ_eBVuM1MMi4MHd5QXLHLb5" />
                     </div>
-                </div>
-                <div
-                    class="amcol-reveal testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
-                    <div class="flex mb-6 space-x-1">
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[#cc1f31] text-xl"
-                            style="font-variation-settings: 'FILL' 1;">star</span>
-                    </div>
-                    <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">"Reliable nationwide coverage. Their
-                        ability to handle oversized loads across difficult terrain is unmatched in the industry today."
-                    </p>
-                    <div class="flex items-center justify-between border-t border-slate-50 pt-6">
-                        <div>
-                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">David Chen</p>
-                            <p class="text-[11px] text-slate-400 uppercase font-medium">Regional Plant Manager</p>
+                
+                    <!-- Card 2 -->
+                    <div class="amcol-reveal testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
+                
+                        <div class="flex mb-6 space-x-1">
+                            <span class="material-symbols-outlined text-[#cc1f31] text-xl" style="font-variation-settings: 'FILL' 1;">verified</span>
                         </div>
-                        <img alt="Client Company Logo" class="h-8 w-auto grayscale opacity-70" decoding="async" loading="lazy"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbU5Y5ymUVG_dm1xzyayukPflJTNSJG-POTm7T7fNwbEeMWtwDs71_20g--Pz9Xj6ouZn37UtjnvmnN4zo8Ckl437LIJOInzwuURsyJrUZrLFWxYllk50oomi_xO1ze1woyalY2haeGMv5_u2amWQeNTndHSv1rJWi6Eb0mFTzIXTvgp9y557zHiIkkKDCVyJ_wuoZYqSrtnicBupSOSFM3GDrI0qHEhOA1l-ZAqAP9lrKyN7ocamkRGXtsB6_z8jglnpQrhUz66DB" />
+                
+                        <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">
+                            “Hazardous and sensitive cargo transported under strict compliance procedures, certified handling protocols, and trained personnel oversight.”
+                        </p>
+                
+                        <div class="border-t border-slate-50 pt-6">
+                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">
+                                Compliance Logistics
+                            </p>
+                            <p class="text-[11px] text-slate-400 uppercase font-medium">
+                                Safety-First Operations
+                            </p>
+                        </div>
                     </div>
-                </div>
+                
+                    <!-- Card 3 -->
+                    <div class="amcol-reveal testimonial-card bg-white p-8 border border-slate-100 shadow-lg flex flex-col h-full rounded-sm">
+                
+                        <div class="flex mb-6 space-x-1">
+                            <span class="material-symbols-outlined text-[#cc1f31] text-xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        </div>
+                
+                        <p class="text-slate-600 italic leading-relaxed mb-8 flex-grow">
+                            “Nationwide haulage support including industrial relocation, equipment transport, and scheduled logistics coordination for continuous operations.”
+                        </p>
+                
+                        <div class="border-t border-slate-50 pt-6">
+                            <p class="font-bold text-slate-900 uppercase text-xs tracking-wider">
+                                Nationwide Coverage
+                            </p>
+                            <p class="text-[11px] text-slate-400 uppercase font-medium">
+                                Industrial Logistics Support
+                            </p>
+                        </div>
+                    </div>
+                
+                </section>
+               
             </div>
         </div>
     </section>
     <section class="py-12 border-t border-slate-100 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div
-                class="flex flex-wrap justify-between items-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all">
-                <img alt="Client Logo" class="h-10 w-auto" decoding="async" loading="lazy"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHEOvC9InNf1UfbThFklsC8iPbRpNrsVl9ONfIRkjDDNg5tvAAsPgYxsmz-DWu4uwaH-OCY4jrrI-3_G5w6Kh9sKeccknMX7TgDfpaYmnJAaCv9TwsHFBlHwW-LerDYT8JddAUMIjj8MDQO6NyTKEyqCU0nZolSq9Vn_gCpnXc06HbvP5uC1eWwXE4GGfqLo34lFf6piLnoJ5ZHR_lE-MKrMVlw1wnU8scduT-ddKR--x2JRendXaUZXrK2LeZbifU9wJ7UCH6iCP2" />
-                <img alt="Client Logo" class="h-10 w-auto" decoding="async" loading="lazy"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFugav4Bs1DrUhimcw92X-Pp1GRuOazjJCr-CxwkEp2MEzaFcRtVZMkO69lLBStSV1_0r06tjk-cOkXM1xY2QVkojhKKjjIWNph_D-jFX-1ZKt54kt5tdwE0bnrhcXkK_tbwL6w6OJWG2Gid0_7Nurh3EaC5IqBx9nccK36ylLWxjS3jlNAVlcu7-44ugGB960M4myKUn6CKSm8Nmp8whQR8yvH1z5pYz1j3MESVO1QEQy3N2GydCfXZ_eBVuM1MMi4MHd5QXLHLb5" />
-                <img alt="Client Logo" class="h-10 w-auto" decoding="async" loading="lazy"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbU5Y5ymUVG_dm1xzyayukPflJTNSJG-POTm7T7fNwbEeMWtwDs71_20g--Pz9Xj6ouZn37UtjnvmnN4zo8Ckl437LIJOInzwuURsyJrUZrLFWxYllk50oomi_xO1ze1woyalY2haeGMv5_u2amWQeNTndHSv1rJWi6Eb0mFTzIXTvgp9y557zHiIkkKDCVyJ_wuoZYqSrtnicBupSOSFM3GDrI0qHEhOA1l-ZAqAP9lrKyN7ocamkRGXtsB6_z8jglnpQrhUz66DB" />
-                <img alt="Client Logo" class="h-10 w-auto" decoding="async" loading="lazy"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4EfDJkp4IjaP26suIDbOHvSp7L8_q2FsOw7JtMuMQED_iYDkgezKbWhpvOcRW-ebrnauGNXQIA-Hr4PnYeBMrOxAvqwWzy-ORbJD4Y01pDTOgF5QmG0HnyFJ3rg5wNGUyoZK0S242Brl6GBCnZ5GsMGC-oIIh01s8rivrzQ-hEN5N3_Tky1Fqd4LVos9dBU3Zr9vCvU91dS-5i0KxjzshoNXhquLXNu0muTjgEoMs_SFaOEumEtCcHjq1onRV2idNaRomamxQZyNH" />
-                <img alt="Client Logo" class="h-10 w-auto" decoding="async" loading="lazy"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpzKShzUAxGEBHCOCV31OWPDQ8cGZYbUBm9gqBAIgnlZDpIH1SwG57l7ctkoEI9RpWZkwjP7oQQIH5WSb4pCZGtKpLAY5LQ2S0sJMueOVRxbUYayL93Sp-w_-fXsEgGAwLzkEgZp0kDHAn1VlPdb3TxE7y_n1Ji5KdyvfAAvH_0bzSx761mRCwL7fcDuY_oFqftkW7w1aXEsbbcBWKAkT5yNAqX_-3rUJw0usPaXwL2bwSeQieBJWpoCcOZ_cvuVxi0CcDp7mHeArJ" />
-            </div>
+        <div class="max-w-4x2 mx-auto px-4">
+            <img
+            src="assets/AMCOL_Logo.png"
+            alt="Company Logo"
+            class="h-24 w-auto"
+        />
         </div>
     </section>
     </main>
@@ -1847,12 +2141,7 @@
                     <a class="hover:text-white" href="#contact">Contact</a>
                     <a class="hover:text-white" href="#top">Back to Top</a>
                 </div>
-                <div class="mt-8 pt-6 border-t border-slate-500 flex flex-wrap gap-2 items-center">
-                    <img alt="Visa" class="h-4 bg-white p-0.5 rounded" decoding="async" loading="lazy"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_PxzNFGgsxPH6t2vcUsj7p7kKytD-oOvacnSbS9ObTqA0-Xxc7Ws7PG8ALWzbDOb_NSBHCHHNWDKaZRV-7Zz1udXCtc7ETV7esOexVr70g5gw65YqLNNdxv-hP7VrHP0zSz1lWbzpGSS7b2y0tFe16K2nzxJ4oTXZ7rxNS_CDue6oA-8YeBVDu2KkQ7zBDI0HB5pgnzjBMXjuvuNAcxuRGh92Nh4ipS-6dAF1-yPpY2uQZzWHqw6CbO8iDPNPhQnFS-rcRu-aUaU5" />
-                    <img alt="Mastercard" class="h-6 bg-white p-0.5 rounded" decoding="async" loading="lazy"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkvor_TdcncpNakQBGxv24F_2Nv71Ci8Om-vcsKEI6X73BOkKcR4U7lBuVxeAK0U9tHEKUGSMciqk5qwDuQ3tT45U-V5-rwFo_X7oDnObQ-aUm1DiSESVYhmFr3ubqIsO7nxslUd7B4QEbdnjqAxUHi_8Y_UwHotDFFHkUxqPGsgJEfR_SUSBFIyYiF8yhkJBLU7arRq-YlHLepUSjqtmN4HhxwcHRZE9Q2Y4gCXeCIptGGRCbDAlT4Mu3_9h0Cm-9EoadH2krFvWW" />
-                </div>
+               
             </div>
         </div>
         <div
@@ -1876,6 +2165,45 @@
             document.querySelectorAll('[data-current-year]').forEach(function (element) {
                 element.textContent = new Date().getFullYear();
             });
+
+            const lazyVideos = document.querySelectorAll('[data-lazy-video]');
+
+            function loadLazyVideo(video) {
+                if (!video || video.dataset.loaded === 'true') return;
+
+                video.querySelectorAll('source[data-src]').forEach(function (source) {
+                    source.src = source.dataset.src;
+                    source.removeAttribute('data-src');
+                });
+                video.dataset.loaded = 'true';
+                video.load();
+            }
+
+            if (lazyVideos.length > 0) {
+                if ('IntersectionObserver' in window) {
+                    const videoObserver = new IntersectionObserver(function (entries, observer) {
+                        entries.forEach(function (entry) {
+                            if (!entry.isIntersecting) return;
+                            loadLazyVideo(entry.target);
+                            observer.unobserve(entry.target);
+                        });
+                    }, {
+                        rootMargin: '300px 0px'
+                    });
+
+                    lazyVideos.forEach(function (video) {
+                        videoObserver.observe(video);
+                        video.addEventListener('pointerdown', function () {
+                            loadLazyVideo(video);
+                        }, { once: true });
+                        video.addEventListener('focus', function () {
+                            loadLazyVideo(video);
+                        }, { once: true });
+                    });
+                } else {
+                    lazyVideos.forEach(loadLazyVideo);
+                }
+            }
 
             function formatCounterValue(value, counter) {
                 const target = Number(counter.dataset.target || 0);

@@ -45,6 +45,39 @@
             background: linear-gradient(90deg, rgba(204, 31, 49, 0.96), rgba(142, 24, 39, 0.96));
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
+        .section-transition-band {
+            position: relative;
+            height: 188px;
+            margin-top: -78px;
+            overflow: visible;
+            background: transparent;
+            z-index: 10;
+        }
+        .section-transition-band::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            opacity: 0;
+        }
+        .section-transition-band::after {
+            content: "";
+            position: absolute;
+            inset: -52px 0 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            clip-path: polygon(0 36%, 18% 36%, 24% 0, 62% 0, 68% 36%, 100% 36%, 100% 74%, 84% 74%, 78% 100%, 12% 100%, 6% 74%, 0 74%);
+            background:
+                linear-gradient(90deg, rgba(7, 14, 23, 0.96) 0%, rgba(30, 41, 59, 0.58) 24%, rgba(127, 29, 29, 0.56) 52%, rgba(30, 58, 138, 0.46) 100%);
+            box-shadow: 0 30px 58px rgba(2, 6, 23, 0.42);
+        }
+        .section-transition-grid {
+            position: absolute;
+            inset: 0;
+            display: none;
+        }
+        .section-transition-accent {
+            display: none;
+        }
 
         .hero-mainnav {
             background: rgba(9, 19, 31, 0.88);
@@ -88,6 +121,176 @@
         .hero-nav-link:focus-visible::after {
             transform: scaleX(1);
         }
+
+        .hero-nav-link.active {
+            color: #39d9cd;
+        }
+
+        .hero-nav-link.active::after {
+            transform: scaleX(1);
+        }
+
+        /* ===== shared nav/contact bar layout (matches index.html) ===== */
+        .hero-mainnav nav {
+            min-width: 0;
+        }
+
+        .hero-topbar-strip {
+            display: grid !important;
+            grid-template-columns: minmax(max-content, 1.35fr) minmax(max-content, 0.9fr) minmax(max-content, 1fr) minmax(max-content, 1.15fr);
+            align-items: center;
+            gap: 0.85rem;
+            width: 100%;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-topbar-items {
+            display: contents !important;
+        }
+
+        .hero-topbar-item {
+            min-width: 0;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+            overflow-wrap: normal;
+        }
+
+        .hero-topbar-strip > .hero-topbar-item:first-child {
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .hero-topbar-items .hero-topbar-item:last-child {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .hero-nav-shell {
+            max-width: none !important;
+            width: 100%;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            overflow: visible !important;
+        }
+
+        .hero-mainnav .hero-brand-panel {
+            flex: 0 0 clamp(20rem, 27vw, 27rem);
+            justify-content: flex-start !important;
+            padding-left: clamp(1rem, 3vw, 3.5rem) !important;
+            padding-right: 2.75rem !important;
+        }
+
+        .hero-mainnav .hero-brand-panel img {
+            max-width: min(100%, 23rem);
+        }
+
+        .hero-nav-content {
+            min-width: 0;
+            padding-left: clamp(1.25rem, 2.4vw, 2.75rem) !important;
+            padding-right: clamp(1rem, 2.4vw, 3rem) !important;
+        }
+
+        .hero-primary-nav {
+            flex: 1 1 auto;
+            justify-content: space-evenly;
+            min-width: 0;
+            gap: clamp(1rem, 2vw, 2.75rem) !important;
+        }
+
+        .hero-primary-nav .hero-nav-link {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        @media (max-width: 1023px) {
+            .hero-topbar-strip {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                letter-spacing: 0.12em;
+            }
+            .hero-topbar-item,
+            .hero-topbar-strip > .hero-topbar-item:first-child,
+            .hero-topbar-items .hero-topbar-item:last-child {
+                justify-content: flex-start;
+                text-align: left;
+                white-space: normal;
+            }
+            .hero-mainnav .hero-brand-panel {
+                flex-basis: 18rem;
+                padding-right: 2rem !important;
+            }
+            .hero-nav-content {
+                gap: 1.25rem;
+                padding-left: 1.25rem !important;
+                padding-right: 1.25rem !important;
+            }
+            .hero-primary-nav {
+                justify-content: center;
+                gap: 1rem 1.35rem !important;
+                letter-spacing: 0.15em !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-topbar-strip {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            .hero-mainnav > div,
+            .hero-nav-shell {
+                overflow: visible;
+            }
+            .hero-brand-panel {
+                padding: 1rem !important;
+            }
+            .hero-mainnav .hero-brand-panel {
+                flex-basis: auto;
+                justify-content: center !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .hero-brand-panel img {
+                height: auto !important;
+                max-height: 5.5rem;
+                width: min(100%, 20rem) !important;
+            }
+            .hero-nav-content,
+            .hero-mainnav .flex-1 {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .hero-mainnav nav,
+            .hero-primary-nav {
+                justify-content: center;
+                gap: 0.85rem 1rem !important;
+                font-size: 0.64rem !important;
+                letter-spacing: 0.13em !important;
+                text-align: center;
+            }
+            .hero-nav-link::after {
+                bottom: -0.45rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-brand-panel {
+                clip-path: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .amcol-btn {
+                max-width: 100%;
+                width: 100%;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+                letter-spacing: 0.12em !important;
+                text-align: center;
+            }
+        }
+        /* ===== end shared nav/contact bar layout ===== */
 
         .cargo-hero {
             position: relative;
@@ -457,10 +660,23 @@
             box-shadow: var(--ds-shadow-brand);
         }
 
+        .equipment-card,
         .testimonial-card {
             position: relative;
             overflow: hidden;
             box-shadow: var(--ds-shadow-md);
+        }
+
+        .equipment-card {
+            transition: transform 0.3s var(--ds-ease-spring), box-shadow 0.3s ease;
+        }
+
+        .equipment-card img {
+            transition: transform 0.6s ease;
+        }
+
+        .equipment-card:hover img {
+            transform: scale(1.06);
         }
 
         .testimonial-card::before {
@@ -477,6 +693,7 @@
         }
 
         .gallery-card:hover,
+        .equipment-card:hover,
         .testimonial-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--ds-shadow-xl);
@@ -498,32 +715,32 @@
     </style>
 </head>
 
-<body>
+<body class="antialiased text-slate-900"> 
     <a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-sm focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-slate-900 focus:shadow-lg"
         href="#main-content">Skip to main content</a>
-    <header id="top">
+    <header id="top" class="relative z-20">
         <div class="hero-topbar">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
                 <div
-                    class="flex flex-col gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 lg:flex-row lg:items-center lg:justify-end lg:gap-8">
-                    <div class="flex items-center gap-2">
+                    class="hero-topbar-strip flex flex-col gap-3 text-[11px] font-semibold uppercase text-white/85 lg:flex-row lg:items-center lg:justify-end lg:gap-8">
+                    <div class="hero-topbar-item flex items-center gap-2">
                         <span class="material-symbols-outlined text-base text-[#39d9cd]">location_on</span>
                         <a class="transition-colors hover:text-white"
                             href="https://www.google.com/maps/search/?api=1&amp;query=S.S.+Erin+Road+Penal,+%2322+Ramjohn+Trace,+Trinidad+and+Tobago">S.S.
                             Erin Road Penal, #22 Ramjohn Trace</a>
                     </div>
-                    <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-                        <a class="flex items-center gap-2 transition-colors hover:text-white"
+                    <div class="hero-topbar-items flex flex-wrap items-center gap-x-6 gap-y-2">
+                        <a class="hero-topbar-item flex items-center gap-2 transition-colors hover:text-white"
                             href="tel:+18682885800">
                             <span class="material-symbols-outlined text-base text-[#39d9cd]">call</span>
                             Office: +1 (868) 288-5800
                         </a>
-                        <a class="flex items-center gap-2 transition-colors hover:text-white"
+                        <a class="hero-topbar-item flex items-center gap-2 transition-colors hover:text-white"
                             href="tel:+18683999200">
                             <span class="material-symbols-outlined text-base text-[#39d9cd]">smartphone</span>
                             24/7 Hotline: +1 (868) 399-9200
                         </a>
-                        <span class="flex items-center gap-2">
+                        <span class="hero-topbar-item flex items-center gap-2">
                             <span class="material-symbols-outlined text-base text-[#39d9cd]">schedule</span>
                             Mon-Fri: 7am - 5pm | Sat: 7am - 4pm
                         </span>
@@ -531,25 +748,27 @@
                 </div>
             </div>
         </div>
-        <div class="hero-mainnav sticky top-0 z-50">
-            <div class="mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
+        <div class="hero-mainnav">
+            <div class="hero-nav-shell mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
                 <div
-                    class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:w-[34%] md:min-w-[320px] md:justify-start">
+                    class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:justify-start">
                     <a class="relative z-10 shrink-0" href="index.html#top">
                         <img alt="AMCOL Group of Companies" class="h-20 sm:h-24 md:h-[6.5rem] w-auto max-w-[420px]"
                             src="./assets/AMCOL_Logo.png" />
                     </a>
                 </div>
-                <div class="flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
+                <div class="hero-nav-content flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
                     <nav aria-label="Primary"
-                        class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
+                        class="hero-primary-nav flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
                         <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#top">Home</a>
-                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#about">About
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#about">About Us</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
+                            href="index.html#services">Services</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
+                            href="index.html#coverage">Coverage</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#clients">Clients</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html#contact">Contact
                             Us</a>
-                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#services">Services</a>
-                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#tracking">Tracking</a>
-                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#projects">Projects</a>
-                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#contact">Contact</a>
                     </nav>
                     <a class="amcol-btn amcol-btn-ghost hidden sm:inline-flex items-center justify-center rounded-sm border border-[#39d9cd] px-5 py-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#39d9cd] transition-colors hover:bg-[#39d9cd] hover:text-slate-950"
                         href="client.html">Client Login</a>
@@ -861,54 +1080,63 @@
         </section>
         <section class="bg-slate-100 px-4 py-24 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-7xl">
-                <p class="section-kicker text-xs font-black uppercase">Client Feedback</p>
-                <h2 class="mt-4 text-4xl font-black tracking-tight text-slate-950">The Backbone of Industry</h2>
-                <div class="mt-14 grid gap-8 md:grid-cols-2">
-                    <article class="testimonial-card amcol-reveal rounded-2xl bg-white p-10">
-                        <div class="flex gap-1 text-[#cc1f31]">
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
+                <p class="section-kicker text-xs font-black uppercase">Equipment Used</p>
+                <div class="mt-4 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="max-w-3xl">
+                        <h2 class="text-4xl font-black tracking-tight text-slate-950">Built Around the Right Fleet</h2>
+                        <p class="mt-4 text-base leading-7 text-slate-600">AMCOL matches each move with equipment suited
+                            to cargo weight, site access, lift requirements, and delivery windows.</p>
+                    </div>
+                    <a class="inline-flex items-center justify-center rounded-sm border border-slate-300 px-5 py-3 text-xs font-black uppercase tracking-[0.18em] text-slate-700 transition-colors hover:border-[#cc1f31] hover:text-[#cc1f31]"
+                        href="request.html">Request Equipment</a>
+                </div>
+                <div class="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+                    <article class="equipment-card amcol-reveal rounded-2xl bg-white">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img alt="Flatbed trailer used for heavy haulage" class="h-full w-full object-cover"
+                                decoding="async" loading="lazy" src="./assets/flatbed%20with%20bg.png" />
                         </div>
-                        <p class="mt-6 text-xl italic leading-8 text-slate-600">
-                            "AMCOL handled the transport of our oversized process vessel with the kind of planning and
-                            communication that keeps shutdown schedules on track."
-                        </p>
-                        <div class="mt-8 border-t border-slate-100 pt-6">
-                            <p class="font-black uppercase tracking-[0.12em] text-slate-950">Marcus Thorne</p>
-                            <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">Logistics
-                                Director, Atlas Power</p>
+                        <div class="p-6">
+                            <span class="inline-flex rounded-full bg-[#1e40af]/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#1e40af]">Heavy Transport</span>
+                            <h3 class="mt-4 text-lg font-black uppercase tracking-tight text-slate-950">Flatbed Trailers</h3>
+                            <p class="mt-3 text-sm leading-6 text-slate-600">Open-deck capacity for machinery,
+                                fabricated steel, containers, and abnormal loads requiring flexible loading access.</p>
                         </div>
                     </article>
-                    <article class="testimonial-card amcol-reveal rounded-2xl bg-white p-10">
-                        <div class="flex gap-1 text-[#cc1f31]">
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined"
-                                style="font-variation-settings: 'FILL' 1;">star</span>
+                    <article class="equipment-card amcol-reveal rounded-2xl bg-white">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img alt="Semi truck tractor for scheduled dispatch" class="h-full w-full object-cover"
+                                decoding="async" loading="lazy" src="./assets/Semi%20truck.png" />
                         </div>
-                        <p class="mt-6 text-xl italic leading-8 text-slate-600">
-                            "Precision and reliability are non-negotiable for us. Their dispatch team, lift planning,
-                            and
-                            delivery sequencing made AMCOL an easy partner to trust."
-                        </p>
-                        <div class="mt-8 border-t border-slate-100 pt-6">
-                            <p class="font-black uppercase tracking-[0.12em] text-slate-950">Sarah Chen</p>
-                            <p class="mt-2 text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">Operations
-                                Lead, Zenith Mining</p>
+                        <div class="p-6">
+                            <span class="inline-flex rounded-full bg-[#cc1f31]/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#cc1f31]">Dispatch Ready</span>
+                            <h3 class="mt-4 text-lg font-black uppercase tracking-tight text-slate-950">Truck Tractors</h3>
+                            <p class="mt-3 text-sm leading-6 text-slate-600">Prime movers for scheduled haulage,
+                                standby transport, port movements, and route-controlled industrial deliveries.</p>
+                        </div>
+                    </article>
+                    <article class="equipment-card amcol-reveal rounded-2xl bg-white">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img alt="Loader equipment supporting heavy lifting work" class="h-full w-full object-cover"
+                                decoding="async" loading="lazy" src="./assets/loader.png" />
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-flex rounded-full bg-[#39d9cd]/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-slate-700">Lift Support</span>
+                            <h3 class="mt-4 text-lg font-black uppercase tracking-tight text-slate-950">Loaders &amp; Site Support</h3>
+                            <p class="mt-3 text-sm leading-6 text-slate-600">On-site handling support for positioning,
+                                staging, material movement, and coordinated lift preparation.</p>
+                        </div>
+                    </article>
+                    <article class="equipment-card amcol-reveal rounded-2xl bg-white">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img alt="Bucket truck used for field access support" class="h-full w-full object-cover"
+                                decoding="async" loading="lazy" src="./assets/Bucket_Truck.png" />
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-flex rounded-full bg-slate-900/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-slate-700">Field Access</span>
+                            <h3 class="mt-4 text-lg font-black uppercase tracking-tight text-slate-950">Specialized Support Units</h3>
+                            <p class="mt-3 text-sm leading-6 text-slate-600">Support vehicles for site access,
+                                coordination, inspection, and jobsite readiness during specialized operations.</p>
                         </div>
                     </article>
                 </div>
