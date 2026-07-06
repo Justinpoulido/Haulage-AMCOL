@@ -29,6 +29,17 @@
 
         <link rel="canonical" href="https://www.caribbeantransportservices.com/" />
     <link rel="alternate" hreflang="en-TT" href="https://www.caribbeantransportservices.com/" />
+    <script>
+        (function () {
+            const cleanPath = window.location.pathname.replace(/\/index\.html$/, '/');
+            const cleanHash = window.location.hash === '#top' ? '' : window.location.hash;
+
+            if (window.location.pathname !== cleanPath || window.location.hash === '#top') {
+                window.history.replaceState(null, '', cleanPath + window.location.search + cleanHash);
+            }
+        })();
+    </script>
+
 <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://api.mapbox.com" rel="preconnect" />
@@ -1362,7 +1373,7 @@
                 <div class="hero-nav-shell mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
                     <div
                         class="hero-brand-panel flex items-center justify-center px-6 py-5 sm:px-8 md:justify-start">
-                        <a class="relative z-10 shrink-0" href="#top">
+                        <a class="relative z-10 shrink-0" href="/">
                             <img alt="AMCOL Group of Companies" class="h-20 sm:h-24 md:h-[6.5rem] w-auto max-w-[420px]"
                                 src="./assets/AMCOL_Logo.png" />
                         </a>
@@ -1370,7 +1381,7 @@
                     <div class="hero-nav-content flex flex-1 items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10">
                         <nav aria-label="Primary"
                             class="hero-primary-nav flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 sm:gap-x-8">
-                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#top">Home</a>
+                            <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="/">Home</a>
                             <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="#about">About Us</a>
                             <a class="hero-nav-link transition-colors hover:text-[#39d9cd]"
                                 href="#services">Services</a>
@@ -2254,7 +2265,7 @@
                     <a class="hover:text-white" href="#coverage">Coverage</a>
                     <a class="hover:text-white" href="#clients">Clients</a>
                     <a class="hover:text-white" href="#contact">Contact</a>
-                    <a class="hover:text-white" href="#top">Back to Top</a>
+                    <a class="hover:text-white" href="/">Back to Top</a>
                 </div>
                
             </div>
@@ -2265,7 +2276,7 @@
                     href="privacy.html">Privacy Policy</a>. <a class="hover:text-white" href="terms.html">Terms of
                     Service</a>.</p>
             <a aria-label="Back to top" class="bg-slate-300 text-slate-900 p-2 rounded hover:bg-white transition-colors"
-                href="#top">
+                href="/">
                 <span class="material-symbols-outlined text-sm">keyboard_arrow_up</span>
             </a>
         </div>
