@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="twitter:description" content="Secure AMCOL Haulage admin portal for internal service request review, dispatch oversight and operations management." />
+    <meta name="twitter:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta name="twitter:title" content="Admin Portal | AMCOL Haulage" />
+    <meta property="og:locale" content="en_TT" />
+    <meta property="og:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta property="og:site_name" content="AMCOL Haulage & Logistics" />
+    <meta property="og:url" content="https://www.caribbeantransportservices.com/admin/admin.html" />
+    <meta name="keywords" content="AMCOL admin portal, haulage admin, service request dashboard" />
+    <meta name="author" content="AMCOL Group of Companies" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Secure AMCOL Haulage admin portal for internal service request review, dispatch oversight and operations management." />
+    <meta content="#0b1220" name="theme-color" />
+    <meta property="og:title" content="Admin Portal | AMCOL Haulage" />
+    <meta property="og:description" content="Secure AMCOL Haulage admin portal for internal service request review, dispatch oversight and operations management." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href="https://www.caribbeantransportservices.com/admin/admin.html" />
+    <link rel="alternate" hreflang="en-TT" href="https://www.caribbeantransportservices.com/admin/admin.html" />
+<link href="../assets/AMCOL_Logo.png" rel="icon" type="image/png" />
+    <title>Admin Portal | AMCOL Haulage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --primary-red: #cc1f31;
+            --primary-blue: #1e40af;
+            --accent-cyan: #39d9cd;
+            --ink: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.7);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1220;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .portal-shell {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(248, 250, 252, 0.96) 0%, rgba(248, 250, 252, 0.92) 58%, rgba(15, 23, 42, 0.72) 58%),
+                linear-gradient(130deg, rgba(204, 31, 49, 0.14) 0%, rgba(30, 64, 175, 0.12) 55%, rgba(57, 217, 205, 0.08) 100%),
+                url('../assets/GPS Monitoring.webp') center / cover no-repeat;
+        }
+
+        .portal-shell::before,
+        .portal-shell::after {
+            content: "";
+            position: absolute;
+            border-radius: 9999px;
+            filter: blur(10px);
+            pointer-events: none;
+        }
+
+        .portal-shell::before {
+            width: 360px;
+            height: 360px;
+            left: -120px;
+            top: 28%;
+            background: radial-gradient(circle, rgba(57, 217, 205, 0.22), rgba(57, 217, 205, 0));
+            animation: floaty 8s ease-in-out infinite;
+        }
+
+        .portal-shell::after {
+            width: 280px;
+            height: 280px;
+            right: 6%;
+            bottom: 8%;
+            background: radial-gradient(circle, rgba(204, 31, 49, 0.22), rgba(204, 31, 49, 0));
+            animation: floaty 9s ease-in-out infinite reverse;
+        }
+
+        @keyframes floaty {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+
+        .glass-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.58));
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: var(--ds-radius-lg);
+            box-shadow: var(--ds-shadow-xl);
+        }
+
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.48);
+            border: 1px solid rgba(255, 255, 255, 0.62);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .input-shell {
+            @apply relative rounded-2xl border border-slate-300/70 bg-white/45;
+        }
+
+        .input-shell:focus-within {
+            @apply bg-white/70;
+            border-color: var(--ds-teal);
+            box-shadow: 0 0 0 4px rgba(57, 217, 205, 0.18);
+        }
+
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html:focus-within {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .portal-shell {
+                background:
+                    linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(248, 250, 252, 0.84) 44%, rgba(15, 23, 42, 0.62) 100%),
+                    linear-gradient(130deg, rgba(204, 31, 49, 0.14) 0%, rgba(30, 64, 175, 0.12) 55%, rgba(57, 217, 205, 0.08) 100%),
+                    url('../assets/GPS Monitoring.webp') center / cover no-repeat;
+            }
+        }
+
+        /* ===== AMCOL-PREMIUM-DS : shared design system (do not fork values) ===== */
+        :root {
+            --ds-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+            --ds-shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.08);
+            --ds-shadow-md: 0 6px 16px rgba(15, 23, 42, 0.10);
+            --ds-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.14);
+            --ds-shadow-xl: 0 20px 44px rgba(15, 23, 42, 0.18);
+            --ds-shadow-2xl: 0 32px 70px rgba(15, 23, 42, 0.22);
+            --ds-shadow-brand: 0 10px 26px rgba(204, 31, 49, 0.28);
+            --ds-shadow-teal: 0 10px 26px rgba(57, 217, 205, 0.24);
+            --ds-radius-sm: 10px;
+            --ds-radius-md: 16px;
+            --ds-radius-lg: 24px;
+            --ds-radius-xl: 32px;
+            --ds-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ds-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ds-teal: #39d9cd;
+            --ds-red: #cc1f31;
+        }
+        /* Accessible focus ring for all interactive elements */
+        a:focus-visible,
+        button:focus-visible,
+        [tabindex]:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--ds-teal);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        /* Button polish — additive; compose with existing Tailwind utility classes */
+        .amcol-btn {
+            transition: transform 0.2s var(--ds-ease-smooth),
+                        box-shadow 0.2s var(--ds-ease-smooth),
+                        background-color 0.2s var(--ds-ease-smooth),
+                        color 0.2s var(--ds-ease-smooth);
+            will-change: transform;
+        }
+        .amcol-btn:hover { transform: translateY(-2px); }
+        .amcol-btn:active {
+            transform: translateY(0);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.14);
+        }
+        .amcol-btn-primary { box-shadow: var(--ds-shadow-brand); }
+        .amcol-btn-primary:hover { box-shadow: 0 16px 34px rgba(204, 31, 49, 0.38); }
+        .amcol-btn-teal { box-shadow: var(--ds-shadow-teal); }
+        .amcol-btn-teal:hover { box-shadow: 0 16px 34px rgba(57, 217, 205, 0.34); }
+        .amcol-btn-ghost:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22); }
+        /* Progressive-enhancement scroll reveal — content is fully visible without JS */
+        html.amcol-reveal-ready .amcol-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s var(--ds-ease-smooth), transform 0.6s var(--ds-ease-smooth);
+        }
+        html.amcol-reveal-ready .amcol-reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html.amcol-reveal-ready .amcol-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+        /* Footer polish — shared across pages */
+        footer h3 {
+            position: relative;
+        }
+        footer h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 3rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--ds-red), var(--ds-teal));
+        }
+        /* ===== end AMCOL-PREMIUM-DS ===== */
+    </style>
+</head>
+
+<body class="antialiased text-slate-900">
+    <a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-slate-950 focus:shadow-lg"
+        href="#main-content">Skip to main content</a>
+    <main class="portal-shell" id="main-content">
+        <header class="relative z-20 px-4 sm:px-8 lg:px-14 pt-6 sm:pt-8">
+            <div class="mx-auto max-w-7xl flex items-center justify-between gap-4">
+                <a href="index.html" class="flex items-center gap-3 sm:gap-4">
+                    <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-[#cc1f31] text-white flex items-center justify-center shadow-lg shadow-red-900/25">
+                        <span class="material-symbols-outlined text-[26px]">local_shipping</span>
+                    </div>
+                    <p class="text-lg sm:text-3xl font-black tracking-tight text-slate-900">
+                        <span>AMCOL </span><span class="text-[#cc1f31]">HAULAGE</span>
+                    </p>
+                </a>
+                <nav aria-label="Primary"
+                    class="nav-glass hidden md:flex items-center rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+                    <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#top">Home</a>
+                    <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#services">Services</a>
+                    <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#contact">Support</a>
+                    <a class="amcol-btn amcol-btn-primary ml-2 inline-flex items-center rounded-full bg-[#cc1f31] px-6 py-2.5 font-bold text-white transition-transform hover:-translate-y-0.5"
+                        href="index.html#contact">Operations Support</a>
+                </nav>
+                <button id="mobileNavToggle"
+                    class="nav-glass inline-flex items-center justify-center rounded-full p-3 text-slate-700 shadow-sm transition-colors hover:text-[#cc1f31] md:hidden"
+                    type="button" aria-expanded="false" aria-controls="mobileNavPanel" aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+            <div id="mobileNavPanel"
+                class="nav-glass mt-4 hidden rounded-[1.5rem] p-3 text-sm font-semibold text-slate-700 shadow-sm md:hidden"
+                hidden>
+                <div class="flex flex-col gap-1">
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#top">Home</a>
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#services">Services</a>
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#contact">Support</a>
+                    <a class="amcol-btn amcol-btn-primary mt-2 inline-flex items-center justify-center rounded-2xl bg-[#cc1f31] px-4 py-3 font-bold text-white transition-transform hover:-translate-y-0.5"
+                        href="index.html#contact">Operations Support</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="relative z-10 px-4 pb-10 pt-10 sm:pt-14">
+            <div class="mx-auto max-w-7xl flex justify-center">
+                <div class="glass-card w-full max-w-xl rounded-[var(--ds-radius-lg)] px-6 sm:px-10 py-9 sm:py-11">
+                    <div class="text-center">
+                        <div class="mx-auto mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-xl shadow-slate-900/20">
+                            <span class="material-symbols-outlined text-[34px]">admin_panel_settings</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-slate-900">Admin Portal</h1>
+                        <p class="mt-4 text-lg leading-relaxed text-slate-700">Manage dispatch activity, review service requests, and coordinate internal haulage operations.</p>
+                    </div>
+
+                    <form id="loginForm" class="mt-10 space-y-6" autocomplete="on">
+                        <div>
+                            <label class="mb-2.5 block text-lg font-bold text-slate-800" for="adminEmail">Admin Email</label>
+                            <div class="input-shell">
+                                <span class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">alternate_email</span>
+                                <input id="adminEmail" name="adminEmail" type="email" placeholder="admin@amcol.co.tt" class="w-full rounded-2xl border-0 bg-transparent py-4 pl-14 pr-4 text-lg font-medium text-slate-700 placeholder:text-slate-400 focus:ring-0" required />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="mb-2.5 block text-lg font-bold text-slate-800" for="password">Password</label>
+                            <div class="input-shell">
+                                <span class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
+                                <input id="password" name="password" type="password" placeholder="........" class="w-full rounded-2xl border-0 bg-transparent py-4 pl-14 pr-14 text-lg font-medium text-slate-700 placeholder:text-slate-400 focus:ring-0" required minlength="6" />
+                                <button id="togglePassword" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-500 transition-colors hover:bg-white/70 hover:text-slate-700" aria-label="Show password">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-3 text-lg">
+                            <label class="inline-flex cursor-pointer select-none items-center gap-2.5 text-slate-700">
+                                <input id="rememberMe" type="checkbox" class="h-5 w-5 rounded border-slate-300 text-[#cc1f31] focus:ring-[#cc1f31]/30" />
+                                Remember admin email
+                            </label>
+                            <a href="index.html#contact"
+                                class="font-semibold text-[#cc1f31] transition-colors hover:text-red-700">Need access?</a>
+                        </div>
+
+                        <button type="submit" class="amcol-btn amcol-btn-primary group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#cc1f31] px-6 py-4 text-2xl font-black text-white transition-all hover:-translate-y-0.5 hover:bg-red-700">
+                            <span>Admin Sign In</span>
+                            <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                        </button>
+                    </form>
+                    <p id="loginStatus" class="mt-4 hidden rounded-2xl border border-slate-300/80 bg-white/55 px-4 py-3 text-sm leading-relaxed text-slate-700"></p>
+
+                    <div class="mt-8 border-t border-slate-300/80 pt-5 text-center">
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+                            <span class="pulse-dot h-2 w-2 rounded-full bg-[#39d9cd]"></span>
+                            <span>Secure Admin Access</span>
+                        </div>
+                        <p class="mt-8 text-xl text-slate-700">Need assistance? <a
+                                class="font-bold text-[#cc1f31] hover:text-red-700"
+                                href="tel:+18683999200">Call Operations Support</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="relative z-10 pb-8 text-center">
+            <p class="text-sm text-slate-500">&copy; <span id="year"></span> AMCOL Haulage &amp; Logistics. All rights reserved.</p>
+            <p class="mt-1 text-xs text-slate-500/90">Admin session time: <span id="liveTime">--:--:--</span></p>
+        </footer>
+    </main>
+
+    <script>
+        const adminEmailInput = document.getElementById('adminEmail');
+        const passwordInput = document.getElementById('password');
+        const rememberMeInput = document.getElementById('rememberMe');
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNavPanel = document.getElementById('mobileNavPanel');
+        const yearEl = document.getElementById('year');
+        const liveTimeEl = document.getElementById('liveTime');
+        const loginForm = document.getElementById('loginForm');
+        const loginStatus = document.getElementById('loginStatus');
+
+        yearEl.textContent = new Date().getFullYear();
+
+        const readStoredAdminEmail = () => {
+            try {
+                return window.localStorage.getItem('amcol_admin_email');
+            } catch (_error) {
+                return '';
+            }
+        };
+
+        const writeStoredAdminEmail = (value) => {
+            try {
+                if (value) {
+                    window.localStorage.setItem('amcol_admin_email', value);
+                } else {
+                    window.localStorage.removeItem('amcol_admin_email');
+                }
+                return true;
+            } catch (_error) {
+                return false;
+            }
+        };
+
+        const rememberedAdminEmail = readStoredAdminEmail();
+        if (rememberedAdminEmail) {
+            adminEmailInput.value = rememberedAdminEmail;
+            rememberMeInput.checked = true;
+        }
+
+        const setMobileNavOpen = (isOpen) => {
+            mobileNavPanel.hidden = !isOpen;
+            mobileNavPanel.classList.toggle('hidden', !isOpen);
+            mobileNavToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileNavToggle.querySelector('.material-symbols-outlined').textContent = isOpen ? 'close' : 'menu';
+        };
+
+        mobileNavToggle.addEventListener('click', () => {
+            const isOpen = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+            setMobileNavOpen(!isOpen);
+        });
+
+        mobileNavPanel.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                setMobileNavOpen(false);
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                setMobileNavOpen(false);
+            }
+        });
+
+        const setLoginStatus = (message) => {
+            loginStatus.textContent = message;
+            loginStatus.classList.remove('hidden');
+        };
+
+        const updateClock = () => {
+            const now = new Date();
+            liveTimeEl.textContent = now.toLocaleTimeString('en-TT', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        };
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        togglePasswordBtn.addEventListener('click', () => {
+            const isHidden = passwordInput.type === 'password';
+            passwordInput.type = isHidden ? 'text' : 'password';
+            togglePasswordBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+            togglePasswordBtn.querySelector('.material-symbols-outlined').textContent = isHidden ? 'visibility_off' : 'visibility';
+        });
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const adminEmail = adminEmailInput.value.trim();
+            let storageSaved = true;
+            if (rememberMeInput.checked) {
+                storageSaved = writeStoredAdminEmail(adminEmail);
+            } else {
+                storageSaved = writeStoredAdminEmail('');
+            }
+
+            const button = loginForm.querySelector('button[type="submit"]');
+            const oldText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = '<span>Authenticating...</span><span class="material-symbols-outlined animate-spin">progress_activity</span>';
+            loginStatus.classList.add('hidden');
+
+            setTimeout(() => {
+                button.disabled = false;
+                button.innerHTML = oldText;
+                try {
+                    window.sessionStorage.setItem('amcol_admin_demo_session', JSON.stringify({
+                        email: adminEmail,
+                        createdAt: new Date().toISOString()
+                    }));
+                } catch (_error) {
+                    // Session storage is a front-end placeholder until real auth is connected.
+                }
+                setLoginStatus(
+                    storageSaved
+                        ? `Admin access for ${adminEmail || 'this account'} accepted for dashboard preview. Redirecting...`
+                        : `Admin access for ${adminEmail || 'this account'} accepted for dashboard preview. Browser storage is unavailable, so the admin email could not be remembered on this device. Redirecting...`
+                );
+                window.setTimeout(() => {
+                    window.location.href = 'admin-dashboard.html';
+                }, 700);
+            }, 1300);
+        });
+    </script>
+    <script src="/api/amcol-config"></script>
+
+<script>
+(function () {
+    var measurementId = window.AMCOL_CONFIG && window.AMCOL_CONFIG.ga4MeasurementId;
+    if (!measurementId) return;
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = window.gtag || gtag;
+    gtag('js', new Date());
+    gtag('config', measurementId);
+})();
+</script>
+</body>
+
+</html>
