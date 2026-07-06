@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="AMCOL admin dashboard for dispatch oversight, service requests, fleet status, and operations coordination."
+        name="description" />
+    <meta content="#0b1220" name="theme-color" />
+    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
+    <title>AMCOL Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --primary-red: #cc1f31;
+            --primary-blue: #1e40af;
+            --accent-cyan: #39d9cd;
+            --ink: #0f172a;
+            --panel: rgba(255, 255, 255, 0.86);
+            --ds-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.14);
+            --ds-shadow-xl: 0 20px 44px rgba(15, 23, 42, 0.18);
+            --ds-radius-md: 16px;
+            --ds-radius-lg: 24px;
+            --ds-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ds-teal: #39d9cd;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at 12% 0%, rgba(57, 217, 205, 0.18), transparent 30%),
+                radial-gradient(circle at 86% 10%, rgba(204, 31, 49, 0.16), transparent 28%),
+                linear-gradient(135deg, #f8fafc 0%, #eef2f7 45%, #dce5ef 100%);
+            color: var(--ink);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .dashboard-shell {
+            min-height: 100vh;
+        }
+
+        .glass-panel {
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            box-shadow: var(--ds-shadow-lg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .metric-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.9));
+            border: 1px solid rgba(226, 232, 240, 0.88);
+            box-shadow: var(--ds-shadow-lg);
+        }
+
+        .status-dot {
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 999px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 0 5px rgba(57, 217, 205, 0.14);
+        }
+
+        .amcol-btn {
+            transition: transform 0.2s var(--ds-ease-smooth), box-shadow 0.2s var(--ds-ease-smooth), background-color 0.2s var(--ds-ease-smooth), color 0.2s var(--ds-ease-smooth);
+        }
+
+        .amcol-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid var(--ds-teal);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-slate-950 focus:shadow-lg"
+        href="#main-content">Skip to main content</a>
+    <div class="dashboard-shell">
+        <header class="px-4 py-5 sm:px-6 lg:px-8">
+            <div class="glass-panel mx-auto flex max-w-[96rem] flex-col gap-4 rounded-[24px] px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+                <a class="flex items-center gap-4" href="index.html">
+                    <img alt="AMCOL Group of Companies" class="h-14 w-auto rounded-sm bg-white p-1 shadow-sm"
+                        src="./assets/AMCOL_Logo.png" />
+                    <div>
+                        <p class="text-xs font-black uppercase tracking-[0.22em] text-[#cc1f31]">AMCOL Operations</p>
+                        <h1 class="text-2xl font-black tracking-tight text-slate-950">Admin Dashboard</h1>
+                    </div>
+                </a>
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white">
+                        <span class="status-dot"></span>
+                        <span>Demo Session Active</span>
+                    </div>
+                    <a class="amcol-btn inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700 hover:border-[#cc1f31] hover:text-[#cc1f31]"
+                        href="admin.html" id="signOutLink">
+                        <span class="material-symbols-outlined text-[20px]">logout</span>
+                        Sign Out
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content" class="px-4 pb-10 sm:px-6 lg:px-8">
+            <div class="admin-layout mx-auto grid max-w-[96rem] grid-cols-[17rem_minmax(0,1fr)] gap-6">
+                <aside class="glass-panel rounded-[24px] p-4">
+                    <nav aria-label="Admin sections" class="grid gap-2 text-sm font-bold text-slate-700">
+                        <a class="flex items-center gap-3 rounded-2xl bg-slate-950 px-4 py-3 text-white" href="#overview">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            Overview
+                        </a>
+                        <a class="flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors hover:bg-white" href="#requests">
+                            <span class="material-symbols-outlined">assignment</span>
+                            Requests
+                        </a>
+                        <a class="flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors hover:bg-white" href="#fleet">
+                            <span class="material-symbols-outlined">local_shipping</span>
+                            Fleet Status
+                        </a>
+                        <a class="flex items-center gap-3 rounded-2xl px-4 py-3 transition-colors hover:bg-white" href="#actions">
+                            <span class="material-symbols-outlined">bolt</span>
+                            Quick Actions
+                        </a>
+                    </nav>
+                    <div class="mt-8 rounded-2xl bg-slate-950 p-5 text-white">
+                        <p class="text-xs font-black uppercase tracking-[0.2em] text-[#39d9cd]">Control Room</p>
+                        <p class="mt-3 text-sm leading-6 text-slate-300">Dashboard data is static until Supabase auth and request tables are connected.</p>
+                        <p class="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Time</p>
+                        <p class="mt-2 text-2xl font-black" id="liveTime">--:--:--</p>
+                    </div>
+                </aside>
+
+                <div class="grid gap-6">
+                    <section id="overview" class="glass-panel rounded-[24px] p-6 lg:p-8">
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                            <div>
+                                <p class="text-xs font-black uppercase tracking-[0.22em] text-[#cc1f31]">Today</p>
+                                <h2 class="mt-2 text-4xl font-black tracking-tight text-slate-950">Operations Overview</h2>
+                                <p class="mt-3 max-w-3xl text-base leading-7 text-slate-600">Review incoming work, dispatch readiness, fleet movement, and priority follow-ups from one admin screen.</p>
+                            </div>
+                            <a class="amcol-btn inline-flex items-center justify-center gap-2 rounded-sm bg-[#cc1f31] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-lg shadow-red-900/20"
+                                href="request.html">
+                                <span class="material-symbols-outlined">add_task</span>
+                                New Request
+                            </a>
+                        </div>
+                        <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                            <article class="metric-card rounded-[18px] p-5">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500">Open Requests</p>
+                                    <span class="material-symbols-outlined text-[#cc1f31]">pending_actions</span>
+                                </div>
+                                <p class="mt-5 text-4xl font-black text-slate-950">12</p>
+                                <p class="mt-2 text-sm text-slate-500">3 high-priority reviews pending</p>
+                            </article>
+                            <article class="metric-card rounded-[18px] p-5">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500">Active Units</p>
+                                    <span class="material-symbols-outlined text-[#1e40af]">local_shipping</span>
+                                </div>
+                                <p class="mt-5 text-4xl font-black text-slate-950">18</p>
+                                <p class="mt-2 text-sm text-slate-500">Fleet units marked available or en route</p>
+                            </article>
+                            <article class="metric-card rounded-[18px] p-5">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500">Dispatch SLA</p>
+                                    <span class="material-symbols-outlined text-[#39d9cd]">speed</span>
+                                </div>
+                                <p class="mt-5 text-4xl font-black text-slate-950">98%</p>
+                                <p class="mt-2 text-sm text-slate-500">On-time coordination benchmark</p>
+                            </article>
+                            <article class="metric-card rounded-[18px] p-5">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-black uppercase tracking-[0.18em] text-slate-500">Escalations</p>
+                                    <span class="material-symbols-outlined text-slate-700">priority_high</span>
+                                </div>
+                                <p class="mt-5 text-4xl font-black text-slate-950">2</p>
+                                <p class="mt-2 text-sm text-slate-500">Awaiting operations manager action</p>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(22rem,0.65fr)]">
+                        <div id="requests" class="glass-panel overflow-hidden rounded-[24px]">
+                            <div class="border-b border-slate-200/80 px-6 py-5">
+                                <p class="text-xs font-black uppercase tracking-[0.2em] text-[#cc1f31]">Request Queue</p>
+                                <h2 class="mt-2 text-2xl font-black text-slate-950">Recent Service Requests</h2>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                                    <thead class="bg-slate-50/80 text-xs font-black uppercase tracking-[0.16em] text-slate-500">
+                                        <tr>
+                                            <th class="px-6 py-4">Job</th>
+                                            <th class="px-6 py-4">Client</th>
+                                            <th class="px-6 py-4">Service</th>
+                                            <th class="px-6 py-4">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100 bg-white/60">
+                                        <tr>
+                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1048</td>
+                                            <td class="px-6 py-5 text-slate-600">Point Lisas Plant</td>
+                                            <td class="px-6 py-5 text-slate-600">Heavy Haulage</td>
+                                            <td class="px-6 py-5"><span class="rounded-full bg-[#cc1f31]/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#cc1f31]">Review</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1047</td>
+                                            <td class="px-6 py-5 text-slate-600">South Terminal</td>
+                                            <td class="px-6 py-5 text-slate-600">Stand-by Truck</td>
+                                            <td class="px-6 py-5"><span class="rounded-full bg-[#39d9cd]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700">Assigned</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1046</td>
+                                            <td class="px-6 py-5 text-slate-600">Port of Spain Yard</td>
+                                            <td class="px-6 py-5 text-slate-600">Oversized Cargo</td>
+                                            <td class="px-6 py-5"><span class="rounded-full bg-[#1e40af]/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#1e40af]">Planning</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1045</td>
+                                            <td class="px-6 py-5 text-slate-600">Energy Contractor</td>
+                                            <td class="px-6 py-5 text-slate-600">Hazardous Cargo</td>
+                                            <td class="px-6 py-5"><span class="rounded-full bg-slate-900/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700">Docs</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="fleet" class="glass-panel rounded-[24px] p-6">
+                            <p class="text-xs font-black uppercase tracking-[0.2em] text-[#cc1f31]">Fleet Status</p>
+                            <h2 class="mt-2 text-2xl font-black text-slate-950">Dispatch Board</h2>
+                            <div class="mt-6 grid gap-4">
+                                <article class="rounded-2xl border border-slate-200 bg-white/70 p-4">
+                                    <div class="flex items-center justify-between gap-4">
+                                        <div>
+                                            <p class="font-black text-slate-950">Truck-774</p>
+                                            <p class="mt-1 text-sm text-slate-500">Point Lisas, en route</p>
+                                        </div>
+                                        <span class="rounded-full bg-[#39d9cd]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700">Active</span>
+                                    </div>
+                                </article>
+                                <article class="rounded-2xl border border-slate-200 bg-white/70 p-4">
+                                    <div class="flex items-center justify-between gap-4">
+                                        <div>
+                                            <p class="font-black text-slate-950">Lift-102</p>
+                                            <p class="mt-1 text-sm text-slate-500">San Fernando, idle</p>
+                                        </div>
+                                        <span class="rounded-full bg-slate-900/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700">Ready</span>
+                                    </div>
+                                </article>
+                                <article class="rounded-2xl border border-slate-200 bg-white/70 p-4">
+                                    <div class="flex items-center justify-between gap-4">
+                                        <div>
+                                            <p class="font-black text-slate-950">Cargo-88B</p>
+                                            <p class="mt-1 text-sm text-slate-500">Port of Spain, delivered</p>
+                                        </div>
+                                        <span class="rounded-full bg-[#1e40af]/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#1e40af]">Closed</span>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="actions" class="glass-panel rounded-[24px] p-6 lg:p-8">
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                            <div>
+                                <p class="text-xs font-black uppercase tracking-[0.2em] text-[#cc1f31]">Admin Tools</p>
+                                <h2 class="mt-2 text-2xl font-black text-slate-950">Quick Actions</h2>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-500">Connect these controls to Supabase once the backend is ready.</p>
+                        </div>
+                        <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                            <button class="amcol-btn rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm hover:border-[#cc1f31]" type="button">
+                                <span class="material-symbols-outlined text-[#cc1f31]">assignment_add</span>
+                                <span class="mt-4 block font-black uppercase tracking-[0.12em] text-slate-950">Create Job</span>
+                                <span class="mt-2 block text-sm leading-6 text-slate-500">Add a dispatch record from an approved request.</span>
+                            </button>
+                            <button class="amcol-btn rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm hover:border-[#1e40af]" type="button">
+                                <span class="material-symbols-outlined text-[#1e40af]">route</span>
+                                <span class="mt-4 block font-black uppercase tracking-[0.12em] text-slate-950">Plan Route</span>
+                                <span class="mt-2 block text-sm leading-6 text-slate-500">Prepare route notes, access points, and escort needs.</span>
+                            </button>
+                            <button class="amcol-btn rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm hover:border-[#39d9cd]" type="button">
+                                <span class="material-symbols-outlined text-[#0f766e]">engineering</span>
+                                <span class="mt-4 block font-black uppercase tracking-[0.12em] text-slate-950">Assign Crew</span>
+                                <span class="mt-2 block text-sm leading-6 text-slate-500">Match operators, riggers, and standby support.</span>
+                            </button>
+                            <button class="amcol-btn rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm hover:border-slate-900" type="button">
+                                <span class="material-symbols-outlined text-slate-900">notifications_active</span>
+                                <span class="mt-4 block font-black uppercase tracking-[0.12em] text-slate-950">Notify Client</span>
+                                <span class="mt-2 block text-sm leading-6 text-slate-500">Send status updates once messaging is connected.</span>
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const sessionKey = 'amcol_admin_demo_session';
+        const liveTimeEl = document.getElementById('liveTime');
+        const signOutLink = document.getElementById('signOutLink');
+
+        if (!window.sessionStorage.getItem(sessionKey)) {
+            window.location.replace('admin.html');
+        }
+
+        signOutLink.addEventListener('click', () => {
+            window.sessionStorage.removeItem(sessionKey);
+        });
+
+        const updateClock = () => {
+            liveTimeEl.textContent = new Date().toLocaleTimeString('en-TT', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        };
+
+        updateClock();
+        window.setInterval(updateClock, 1000);
+    </script>
+</body>
+
+</html>
