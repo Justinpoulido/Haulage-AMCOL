@@ -4,16 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="View AMCOL headquarters, dispatch location details, and driving directions for the main yard in Trinidad and Tobago."
-        name="description">
+    <meta name="twitter:description" content="View AMCOL Haulage coverage, main yard details, dispatch hotline and driving directions for transport operations in Trinidad and Tobago." />
+    <meta name="twitter:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta name="twitter:title" content="Coverage Map | AMCOL Haulage Trinidad" />
+    <meta property="og:locale" content="en_TT" />
+    <meta property="og:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta property="og:site_name" content="AMCOL Haulage & Logistics" />
+    <meta property="og:url" content="https://www.caribbeantransportservices.com/coverage.html" />
+    <meta name="keywords" content="AMCOL coverage map, AMCOL main yard, haulage Trinidad directions, dispatch hotline Trinidad" />
+    <meta name="author" content="AMCOL Group of Companies" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="description" content="View AMCOL Haulage coverage, main yard details, dispatch hotline and driving directions for transport operations in Trinidad and Tobago." />
     <meta content="#0f172a" name="theme-color">
-    <meta content="AMCOL Coverage Map" property="og:title">
-    <meta content="View AMCOL headquarters, dispatch location details, and driving directions for the main yard in Trinidad and Tobago."
-        property="og:description">
-    <meta content="website" property="og:type">
-    <meta content="summary" name="twitter:card">
-    <title>AMCOL Coverage Map</title>
-    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png">
+    <meta property="og:title" content="Coverage Map | AMCOL Haulage Trinidad" />
+    <meta property="og:description" content="View AMCOL Haulage coverage, main yard details, dispatch hotline and driving directions for transport operations in Trinidad and Tobago." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Coverage Map | AMCOL Haulage Trinidad</title>
+        <link rel="canonical" href="https://www.caribbeantransportservices.com/coverage.html" />
+    <link rel="alternate" hreflang="en-TT" href="https://www.caribbeantransportservices.com/coverage.html" />
+<link href="assets/AMCOL_Logo.png" rel="icon" type="image/png">
     <link href="https://api.mapbox.com" rel="preconnect">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <style>
@@ -274,7 +284,6 @@
         </div>
     </main>
 
-    <script src="amcol-config.js"></script>
     <script src="/api/amcol-config"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <script>
@@ -302,7 +311,7 @@
             fallbackCard.innerHTML = `
                 <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#39d9cd;">Mapbox Status</div>
                 <div style="margin-top:0.75rem;font-size:0.92rem;line-height:1.5;">${message}</div>
-                <div style="margin-top:0.75rem;font-size:0.78rem;line-height:1.5;color:#94a3b8;">Set your public Mapbox token in <code>amcol-config.js</code> as <code>window.AMCOL_CONFIG.mapboxToken</code>.</div>
+                <div style="margin-top:0.75rem;font-size:0.78rem;line-height:1.5;color:#94a3b8;">Set MAPBOX_PUBLIC_TOKEN in Vercel environment variables, then redeploy to enable the live map.</div>
             `;
             mapElement.appendChild(fallbackCard);
         }
@@ -327,6 +336,22 @@
             showMapFallback(message);
         }
     </script>
+
+<script>
+(function () {
+    var measurementId = window.AMCOL_CONFIG && window.AMCOL_CONFIG.ga4MeasurementId;
+    if (!measurementId) return;
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = window.gtag || gtag;
+    gtag('js', new Date());
+    gtag('config', measurementId);
+})();
+</script>
 </body>
 
 </html>

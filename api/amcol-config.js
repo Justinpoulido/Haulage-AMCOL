@@ -4,7 +4,8 @@ function getAmcolConfig() {
     return {
         mapboxToken: env.MAPBOX_PUBLIC_TOKEN || "",
         supabaseUrl: env.SUPABASE_URL || "",
-        supabasePublishableKey: env.SUPABASE_PUBLISHABLE_KEY || ""
+        supabasePublishableKey: env.SUPABASE_PUBLISHABLE_KEY || "",
+        ga4MeasurementId: env.GA4_MEASUREMENT_ID || ""
     };
 }
 

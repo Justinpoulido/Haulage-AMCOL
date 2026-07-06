@@ -4,16 +4,26 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="Access the AMCOL client portal for haulage updates, account support, and dispatch tracking assistance."
-        name="description" />
+    <meta name="twitter:description" content="Secure client access for AMCOL Haulage service coordination, dispatch support and logistics updates." />
+    <meta name="twitter:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta name="twitter:title" content="Client Login | AMCOL Haulage" />
+    <meta property="og:locale" content="en_TT" />
+    <meta property="og:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta property="og:site_name" content="AMCOL Haulage & Logistics" />
+    <meta property="og:url" content="https://www.caribbeantransportservices.com/client.html" />
+    <meta name="keywords" content="AMCOL client login, haulage client portal, logistics client access" />
+    <meta name="author" content="AMCOL Group of Companies" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="description" content="Secure client access for AMCOL Haulage service coordination, dispatch support and logistics updates." />
     <meta content="#0b1220" name="theme-color" />
-    <meta content="AMCOL Client Portal" property="og:title" />
-    <meta content="Access the AMCOL client portal for haulage updates, account support, and dispatch tracking assistance."
-        property="og:description" />
-    <meta content="website" property="og:type" />
-    <meta content="summary" name="twitter:card" />
-    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
-    <title>AMCOL Client Portal</title>
+    <meta property="og:title" content="Client Login | AMCOL Haulage" />
+    <meta property="og:description" content="Secure client access for AMCOL Haulage service coordination, dispatch support and logistics updates." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href="https://www.caribbeantransportservices.com/client.html" />
+    <link rel="alternate" hreflang="en-TT" href="https://www.caribbeantransportservices.com/client.html" />
+<link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
+    <title>Client Login | AMCOL Haulage</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
@@ -42,7 +52,7 @@
             background:
                 linear-gradient(90deg, rgba(248, 250, 252, 0.96) 0%, rgba(248, 250, 252, 0.92) 60%, rgba(15, 23, 42, 0.62) 60%),
                 linear-gradient(130deg, rgba(204, 31, 49, 0.12) 0%, rgba(57, 217, 205, 0.08) 100%),
-                url('./assets/Nighttime truck with office building.png') center / cover no-repeat;
+                url('./assets/Nighttime truck with office building.webp') center / cover no-repeat;
         }
 
         .portal-shell::before,
@@ -144,7 +154,7 @@
                 background:
                     linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(248, 250, 252, 0.84) 44%, rgba(15, 23, 42, 0.56) 100%),
                     linear-gradient(130deg, rgba(204, 31, 49, 0.12) 0%, rgba(57, 217, 205, 0.08) 100%),
-                    url('./assets/Nighttime truck with office building.png') center / cover no-repeat;
+                    url('./assets/Nighttime truck with office building.webp') center / cover no-repeat;
             }
         }
 
@@ -451,6 +461,23 @@
             }, 1300);
         });
     </script>
+    <script src="/api/amcol-config"></script>
+
+<script>
+(function () {
+    var measurementId = window.AMCOL_CONFIG && window.AMCOL_CONFIG.ga4MeasurementId;
+    if (!measurementId) return;
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = window.gtag || gtag;
+    gtag('js', new Date());
+    gtag('config', measurementId);
+})();
+</script>
 </body>
 
 </html>

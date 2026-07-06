@@ -4,11 +4,26 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="AMCOL admin dashboard for dispatch oversight, service requests, fleet status, and operations coordination."
-        name="description" />
+    <meta name="twitter:description" content="AMCOL Haulage internal dashboard for reviewing service requests, operations status and dispatch activity." />
+    <meta name="twitter:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta name="twitter:title" content="Admin Dashboard | AMCOL Haulage" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:locale" content="en_TT" />
+    <meta property="og:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+    <meta property="og:site_name" content="AMCOL Haulage & Logistics" />
+    <meta property="og:url" content="https://www.caribbeantransportservices.com/admin/admin-dashboard.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="AMCOL Haulage internal dashboard for reviewing service requests, operations status and dispatch activity." />
+    <meta property="og:title" content="Admin Dashboard | AMCOL Haulage" />
+    <meta name="keywords" content="AMCOL dashboard, haulage operations dashboard, service request inbox" />
+    <meta name="author" content="AMCOL Group of Companies" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="AMCOL Haulage internal dashboard for reviewing service requests, operations status and dispatch activity." />
     <meta content="#0b1220" name="theme-color" />
-    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
-    <title>AMCOL Admin Dashboard</title>
+        <link rel="canonical" href="https://www.caribbeantransportservices.com/admin/admin-dashboard.html" />
+    <link rel="alternate" hreflang="en-TT" href="https://www.caribbeantransportservices.com/admin/admin-dashboard.html" />
+<link href="../assets/AMCOL_Logo.png" rel="icon" type="image/png" />
+    <title>Admin Dashboard | AMCOL Haulage</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
     <link
@@ -101,7 +116,7 @@
             <div class="glass-panel mx-auto flex max-w-[96rem] flex-col gap-4 rounded-[24px] px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
                 <a class="flex items-center gap-4" href="index.html">
                     <img alt="AMCOL Group of Companies" class="h-14 w-auto rounded-sm bg-white p-1 shadow-sm"
-                        src="./assets/AMCOL_Logo.png" />
+                        src="../assets/AMCOL_Logo.png" />
                     <div>
                         <p class="text-xs font-black uppercase tracking-[0.22em] text-[#cc1f31]">AMCOL Operations</p>
                         <h1 class="text-2xl font-black tracking-tight text-slate-950">Admin Dashboard</h1>
@@ -341,6 +356,23 @@
         updateClock();
         window.setInterval(updateClock, 1000);
     </script>
+    <script src="/api/amcol-config"></script>
+
+<script>
+(function () {
+    var measurementId = window.AMCOL_CONFIG && window.AMCOL_CONFIG.ga4MeasurementId;
+    if (!measurementId) return;
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = window.gtag || gtag;
+    gtag('js', new Date());
+    gtag('config', measurementId);
+})();
+</script>
 </body>
 
 </html>
