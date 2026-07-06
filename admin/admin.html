@@ -302,6 +302,14 @@
                             </div>
                         </div>
 
+                        <div>
+                            <label class="mb-2.5 block text-lg font-bold text-slate-800" for="accessCode">Access Code</label>
+                            <div class="input-shell">
+                                <span class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">verified_user</span>
+                                <input id="accessCode" name="accessCode" type="text" inputmode="numeric" placeholder="6-digit code" class="w-full rounded-2xl border-0 bg-transparent py-4 pl-14 pr-4 text-lg font-medium text-slate-700 placeholder:text-slate-400 focus:ring-0" required minlength="6" maxlength="8" />
+                            </div>
+                        </div>
+
                         <div class="flex flex-wrap items-center justify-between gap-3 text-lg">
                             <label class="inline-flex cursor-pointer select-none items-center gap-2.5 text-slate-700">
                                 <input id="rememberMe" type="checkbox" class="h-5 w-5 rounded border-slate-300 text-[#cc1f31] focus:ring-[#cc1f31]/30" />
@@ -340,6 +348,7 @@
     <script>
         const adminEmailInput = document.getElementById('adminEmail');
         const passwordInput = document.getElementById('password');
+        const accessCodeInput = document.getElementById('accessCode');
         const rememberMeInput = document.getElementById('rememberMe');
         const togglePasswordBtn = document.getElementById('togglePassword');
         const mobileNavToggle = document.getElementById('mobileNavToggle');
@@ -429,6 +438,7 @@
             event.preventDefault();
 
             const adminEmail = adminEmailInput.value.trim();
+            const accessCode = accessCodeInput.value.trim();
             let storageSaved = true;
             if (rememberMeInput.checked) {
                 storageSaved = writeStoredAdminEmail(adminEmail);
@@ -445,22 +455,11 @@
             setTimeout(() => {
                 button.disabled = false;
                 button.innerHTML = oldText;
-                try {
-                    window.sessionStorage.setItem('amcol_admin_demo_session', JSON.stringify({
-                        email: adminEmail,
-                        createdAt: new Date().toISOString()
-                    }));
-                } catch (_error) {
-                    // Session storage is a front-end placeholder until real auth is connected.
-                }
                 setLoginStatus(
                     storageSaved
-                        ? `Admin access for ${adminEmail || 'this account'} accepted for dashboard preview. Redirecting...`
-                        : `Admin access for ${adminEmail || 'this account'} accepted for dashboard preview. Browser storage is unavailable, so the admin email could not be remembered on this device. Redirecting...`
+                        ? `Admin access for ${adminEmail || 'this account'} is still being wired up. Access code ending in ${accessCode.slice(-2) || '--'} was received for validation. Operations support can assist immediately at +1 (868) 399-9200.`
+                        : `Admin access for ${adminEmail || 'this account'} is still being wired up. Browser storage is unavailable, so the admin email could not be remembered on this device.`
                 );
-                window.setTimeout(() => {
-                    window.location.href = 'admin-dashboard.html';
-                }, 700);
             }, 1300);
         });
     </script>
