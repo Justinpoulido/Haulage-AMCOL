@@ -864,7 +864,7 @@
                 try {
                     setBusyState(true);
                     const { error } = await supabaseClient
-                        .from("standby_unit_requests")
+                        .from("service_requests")
                         .insert(buildRequestPayload());
 
                     if (error) {
@@ -908,6 +908,8 @@
     gtag('config', measurementId);
 })();
 </script>
+    <script src="/api/amcol-config"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </body>
 
 </html>
