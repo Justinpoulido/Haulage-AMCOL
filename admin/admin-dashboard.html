@@ -231,30 +231,9 @@
                                             <th class="px-6 py-4">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="divide-y divide-slate-100 bg-white/60">
+                                  <tbody id="requestsTableBody" class="divide-y divide-slate-100 bg-white/60">
                                         <tr>
-                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1048</td>
-                                            <td class="px-6 py-5 text-slate-600">Point Lisas Plant</td>
-                                            <td class="px-6 py-5 text-slate-600">Heavy Haulage</td>
-                                            <td class="px-6 py-5"><span class="rounded-full bg-[#cc1f31]/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#cc1f31]">Review</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1047</td>
-                                            <td class="px-6 py-5 text-slate-600">South Terminal</td>
-                                            <td class="px-6 py-5 text-slate-600">Stand-by Truck</td>
-                                            <td class="px-6 py-5"><span class="rounded-full bg-[#39d9cd]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700">Assigned</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1046</td>
-                                            <td class="px-6 py-5 text-slate-600">Port of Spain Yard</td>
-                                            <td class="px-6 py-5 text-slate-600">Oversized Cargo</td>
-                                            <td class="px-6 py-5"><span class="rounded-full bg-[#1e40af]/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#1e40af]">Planning</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-5 font-black text-slate-950">REQ-1045</td>
-                                            <td class="px-6 py-5 text-slate-600">Energy Contractor</td>
-                                            <td class="px-6 py-5 text-slate-600">Hazardous Cargo</td>
-                                            <td class="px-6 py-5"><span class="rounded-full bg-slate-900/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700">Docs</span></td>
+                                            <td colspan="4" class="px-6 py-5 text-slate-500">Loading requests...</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -338,18 +317,41 @@
 <script>
     const liveTimeEl = document.getElementById('liveTime');
     const signOutLink = document.getElementById('signOutLink');
+    const requestsTableBody = document.getElementById('requestsTableBody');
 
     const supabaseClient = window.supabase.createClient(
         window.AMCOL_CONFIG.supabaseUrl,
         window.AMCOL_CONFIG.supabasePublishableKey
     );
 
+    function escapeHtml(value) {
+        return String(value ?? '')
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+    }
+
+    function formatRequestDate(value) {
+        if (!value) return '';
+        try {
+            return new Date(value).toLocaleDateString('en-TT', {
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit'
+            });
+        } catch (_error) {
+            return '';
+        }
+    }
+
     async function protectDashboard() {
         const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
 
         if (userError || !user) {
             window.location.replace('/admin/admin.html');
-            return;
+            return false;
         }
 
         const { data: profile, error: profileError } = await supabaseClient
@@ -361,11 +363,102 @@
         if (profileError || !profile || profile.role !== 'admin') {
             await supabaseClient.auth.signOut();
             window.location.replace('/admin/admin.html');
-            return;
+            return false;
         }
 
         document.getElementById('sessionStatusText').textContent = 'Secure Session Active';
+        return true;
     }
+
+    async function loadServiceRequests() {
+        if (!requestsTableBody) return;
+
+        requestsTableBody.innerHTML = `
+            <tr>
+                <td colspan="4" class="px-6 py-5 text-slate-500">Loading requests...</td>
+            </tr>
+        `;
+
+        const { data, error } = await supabaseClient
+            .from('service_requests')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            requestsTableBody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="px-6 py-5 text-[#cc1f31]">
+                        Could not load requests. Check Supabase RLS policies and table columns.
+                    </td>
+                </tr>
+            `;
+            console.error('Service request load error:', error);
+            return;
+        }
+
+        if (!data || data.length === 0) {
+            requestsTableBody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="px-6 py-5 text-slate-500">
+                        No service requests have been submitted yet.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        requestsTableBody.innerHTML = data.map((request) => {
+            const requestId = request.client_reference || `REQ-${String(request.id || '').slice(0, 8).toUpperCase()}`;
+            const client = request.company_name || request.contact_name || request.on_site_coordinator || request.billing_contact_email || 'Unknown Client';
+            const service = request.service || request.cargo_type || request.asset_preference || 'Service Request';
+            const status = request.status || request.request_status || 'New';
+            const date = formatRequestDate(request.created_at);
+
+            return `
+                <tr>
+                    <td class="px-6 py-5">
+                        <p class="font-black text-slate-950">${escapeHtml(requestId)}</p>
+                        <p class="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">${escapeHtml(date)}</p>
+                    </td>
+                    <td class="px-6 py-5 text-slate-600">
+                        <p class="font-bold text-slate-700">${escapeHtml(client)}</p>
+                        <p class="mt-1 text-xs text-slate-400">${escapeHtml(request.email || request.direct_phone || request.phone || '')}</p>
+                    </td>
+                    <td class="px-6 py-5 text-slate-600">
+                        <p>${escapeHtml(service)}</p>
+                        <p class="mt-1 text-xs text-slate-400">${escapeHtml(request.pickup_location || '')}</p>
+                    </td>
+                    <td class="px-6 py-5">
+                        <select
+                            class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700"
+                            onchange="updateRequestStatus('${escapeHtml(request.id)}', this.value)"
+                        >
+                            ${['New', 'Review', 'Quoted', 'Scheduled', 'In Progress', 'Completed'].map((option) => `
+                                <option value="${option}" ${status === option ? 'selected' : ''}>${option}</option>
+                            `).join('')}
+                        </select>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    async function updateRequestStatus(id, status) {
+        const { error } = await supabaseClient
+            .from('service_requests')
+            .update({ status })
+            .eq('id', id);
+
+        if (error) {
+            alert('Could not update request status.');
+            console.error('Status update error:', error);
+            return;
+        }
+
+        loadServiceRequests();
+    }
+
+    window.updateRequestStatus = updateRequestStatus;
 
     signOutLink.addEventListener('click', async (event) => {
         event.preventDefault();
@@ -383,7 +476,12 @@
 
     updateClock();
     window.setInterval(updateClock, 1000);
-    protectDashboard();
+
+    protectDashboard().then((isAllowed) => {
+        if (isAllowed) {
+            loadServiceRequests();
+        }
+    });
 </script>
     
 
