@@ -20,18 +20,20 @@
     <meta property="og:description" content="Send a service request to AMCOL Haulage for heavy transport, lifting support, cargo movement and industrial logistics in Trinidad and Tobago." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://www.caribbeantransportservices.com/request.html" />
+    <link rel="canonical" href="https://www.caribbeantransportservices.com/request.html" />
     <link rel="alternate" hreflang="en-TT" href="https://www.caribbeantransportservices.com/request.html" />
-<link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
+    <link href="assets/AMCOL_Logo.png" rel="icon" type="image/png" />
     <title>Request Haulage Service | AMCOL Trinidad</title>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
+
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -64,25 +66,35 @@
             }
         };
     </script>
+
     <style>
+        :root {
+            --ds-teal: #39d9cd;
+            --ds-red: #cc1f31;
+            --ds-blue: #1e40af;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        .request-shell {
+            background:
+                radial-gradient(circle at top right, rgba(0, 238, 252, 0.10), transparent 28%),
+                radial-gradient(circle at left top, rgba(204, 31, 49, 0.10), transparent 24%),
+                linear-gradient(135deg, #070b12 0%, #0c0e12 46%, #111827 100%);
+        }
+
         .glass-panel {
-            background: rgba(35, 38, 44, 0.52);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-top: 1px solid rgba(143, 245, 255, 0.15);
-        }
-
-        .ghost-border {
-            border: 1px solid rgba(116, 117, 122, 0.15);
-            transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .ghost-border:hover {
-            border-color: rgba(116, 117, 122, 0.35);
-        }
-
-        .kinetic-gradient {
-            background: linear-gradient(135deg, #8ff5ff 0%, #00eefc 100%);
+            background: rgba(35, 38, 44, 0.58);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(143, 245, 255, 0.12);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
         }
 
         .hero-topbar {
@@ -91,7 +103,7 @@
         }
 
         .hero-mainnav {
-            background: rgba(9, 19, 31, 0.82);
+            background: rgba(9, 19, 31, 0.86);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -101,14 +113,6 @@
             position: relative;
             background: rgba(255, 255, 255, 0.96);
             clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
-        }
-
-        .hero-brand-panel::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(30, 64, 175, 0.08));
-            pointer-events: none;
         }
 
         .hero-nav-link {
@@ -122,7 +126,7 @@
             bottom: -1.1rem;
             width: 100%;
             height: 3px;
-            background: #39d9cd;
+            background: var(--ds-teal);
             transform: scaleX(0);
             transform-origin: center;
             transition: transform 0.25s ease;
@@ -134,101 +138,160 @@
             transform: scaleX(1);
         }
 
-        .request-shell {
-            background:
-                radial-gradient(circle at top right, rgba(0, 238, 252, 0.08), transparent 28%),
-                radial-gradient(circle at left top, rgba(244, 162, 55, 0.06), transparent 22%),
-                #0c0e12;
-        }
-
-        .section-shell {
-            position: relative;
-        }
-
-        .section-shell::before {
-            content: "";
-            position: absolute;
-            left: 0.95rem;
-            top: 3rem;
-            bottom: -2rem;
-            width: 1px;
-            background: linear-gradient(180deg, rgba(143, 245, 255, 0.22), transparent);
-        }
-
-        .section-shell:last-child::before {
+        .wizard-step {
             display: none;
         }
 
+        .wizard-step.is-active {
+            display: block;
+            animation: fadeStep 0.25s ease;
+        }
+
+        @keyframes fadeStep {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-pill {
+            border: 1px solid rgba(116, 117, 122, 0.22);
+            background: rgba(23, 26, 31, 0.84);
+            color: #aaabb0;
+            transition: all .25s ease;
+        }
+
+        .step-pill.is-active {
+            border-color: rgba(57, 217, 205, 0.55);
+            background: rgba(57, 217, 205, 0.12);
+            color: #f6f6fc;
+            box-shadow: 0 0 0 4px rgba(57, 217, 205, 0.08);
+        }
+
+        .step-pill.is-complete {
+            border-color: rgba(57, 217, 205, 0.35);
+            color: #8ff5ff;
+        }
+
+        input,
+        select,
+        textarea {
+            background: rgba(23, 26, 31, 0.95) !important;
+            color: #f6f6fc !important;
+            border: 1px solid rgba(116, 117, 122, .28) !important;
+            transition:
+                background-color .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease,
+                transform .2s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #74757a !important;
+        }
+
+        input:hover,
+        textarea:hover,
+        select:hover {
+            border-color: var(--ds-teal) !important;
+        }
+
         input:focus,
-        select:focus,
-        textarea:focus {
+        textarea:focus,
+        select:focus {
             outline: none;
-            border-color: #39d9cd !important;
-            box-shadow: 0 0 0 3px rgba(57, 217, 205, 0.12);
-            background-color: rgba(57, 217, 205, 0.04);
+            background: #1d2025 !important;
+            border-color: var(--ds-teal) !important;
+            box-shadow:
+                0 0 0 3px rgba(57, 217, 205, .15),
+                0 8px 24px rgba(0, 0, 0, .18);
+            color: #ffffff !important;
+            transform: translateY(-1px);
         }
 
-        #standby-request-form label {
+        label {
+            color: #d4d8df;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: .08em;
         }
 
-        #standby-request-form label:has(+ .relative input[required])::after {
-            content: " *";
-            color: var(--ds-red, #cc1f31);
-            font-weight: 700;
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 3.2rem;
+            cursor: pointer;
+            background-image:
+                linear-gradient(45deg, transparent 50%, #39d9cd 50%),
+                linear-gradient(135deg, #39d9cd 50%, transparent 50%) !important;
+            background-position:
+                calc(100% - 22px) calc(50% - 3px),
+                calc(100% - 16px) calc(50% - 3px) !important;
+            background-size: 6px 6px !important;
+            background-repeat: no-repeat !important;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            html:focus-within {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
+        select option {
+            background: #171a1f;
+            color: #ffffff;
         }
 
-        @media (max-width: 767px) {
-            .hero-brand-panel {
-                clip-path: none;
-            }
-
-            .hero-nav-link::after {
-                bottom: -0.7rem;
-            }
-
-            .section-shell::before {
-                display: none;
-            }
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: .8;
+            cursor: pointer;
         }
-    </style>
-    <style type="text/tailwindcss">
-        /* ===== AMCOL-PREMIUM-DS : shared design system (do not fork values) ===== */
-        :root {
-            --ds-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
-            --ds-shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.08);
-            --ds-shadow-md: 0 6px 16px rgba(15, 23, 42, 0.10);
-            --ds-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.14);
-            --ds-shadow-xl: 0 20px 44px rgba(15, 23, 42, 0.18);
-            --ds-shadow-2xl: 0 32px 70px rgba(15, 23, 42, 0.22);
-            --ds-shadow-brand: 0 10px 26px rgba(204, 31, 49, 0.28);
-            --ds-shadow-teal: 0 10px 26px rgba(57, 217, 205, 0.24);
-            --ds-radius-sm: 10px;
-            --ds-radius-md: 16px;
-            --ds-radius-lg: 24px;
-            --ds-radius-xl: 32px;
-            --ds-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-            --ds-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --ds-teal: #39d9cd;
-            --ds-red: #cc1f31;
+
+        input:required,
+        select:required,
+        textarea:required {
+            border-left: 4px solid var(--ds-teal) !important;
         }
-        /* Accessible focus ring for all interactive elements */
+
+        textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .amcol-btn {
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                background-color .2s ease,
+                color .2s ease;
+        }
+
+        .amcol-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .amcol-btn:active {
+            transform: translateY(0);
+        }
+
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #8ff5ff 0%, #00eefc 100%);
+        }
+
+        .asset-option.is-active {
+            border-color: #8ff5ff;
+            background: rgba(143, 245, 255, 0.12);
+            color: #8ff5ff;
+        }
+
+        .review-card {
+            border: 1px solid rgba(116, 117, 122, .16);
+            background: rgba(17, 19, 24, .72);
+            border-radius: 18px;
+            padding: 1rem;
+        }
+
         a:focus-visible,
         button:focus-visible,
         [tabindex]:focus-visible,
@@ -239,61 +302,23 @@
             outline-offset: 2px;
             border-radius: 4px;
         }
-        /* Button polish — additive; compose with existing Tailwind utility classes */
-        .amcol-btn {
-            transition: transform 0.2s var(--ds-ease-smooth),
-                        box-shadow 0.2s var(--ds-ease-smooth),
-                        background-color 0.2s var(--ds-ease-smooth),
-                        color 0.2s var(--ds-ease-smooth);
-            will-change: transform;
-        }
-        .amcol-btn:hover { transform: translateY(-2px); }
-        .amcol-btn:active {
-            transform: translateY(0);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.14);
-        }
-        .amcol-btn-primary { box-shadow: var(--ds-shadow-brand); }
-        .amcol-btn-primary:hover { box-shadow: 0 16px 34px rgba(204, 31, 49, 0.38); }
-        .amcol-btn-teal { box-shadow: var(--ds-shadow-teal); }
-        .amcol-btn-teal:hover { box-shadow: 0 16px 34px rgba(57, 217, 205, 0.34); }
-        .amcol-btn-ghost:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22); }
-        /* Progressive-enhancement scroll reveal — content is fully visible without JS */
-        html.amcol-reveal-ready .amcol-reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s var(--ds-ease-smooth), transform 0.6s var(--ds-ease-smooth);
-        }
-        html.amcol-reveal-ready .amcol-reveal.is-visible {
-            opacity: 1;
-            transform: none;
-        }
-        @media (prefers-reduced-motion: reduce) {
-            html.amcol-reveal-ready .amcol-reveal {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
+
+        @media (max-width: 767px) {
+            .hero-brand-panel {
+                clip-path: none;
+            }
+
+            .hero-nav-link::after {
+                bottom: -0.7rem;
             }
         }
-        /* Footer polish — shared across pages */
-        footer h3 {
-            position: relative;
-        }
-        footer h3::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -1px;
-            width: 3rem;
-            height: 2px;
-            background: linear-gradient(90deg, var(--ds-red), var(--ds-teal));
-        }
-        /* ===== end AMCOL-PREMIUM-DS ===== */
     </style>
 </head>
 
 <body class="request-shell font-body text-on-surface selection:bg-primary selection:text-slate-950">
     <a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-slate-950 focus:shadow-lg"
         href="#main-content">Skip to main content</a>
+
     <header class="sticky top-0 z-50">
         <div class="hero-topbar">
             <div
@@ -312,28 +337,20 @@
             <div class="mx-auto flex max-w-7xl flex-col overflow-hidden md:flex-row">
                 <div
                     class="hero-brand-panel flex items-center justify-center px-5 py-4 md:w-[32%] md:min-w-[290px] md:justify-start md:px-8">
-                    <a class="relative z-10" href="index.html" aria-label="AMCOL Transport home">
+                    <a class="relative z-10" href="/" aria-label="AMCOL Transport home">
                         <img class="h-16 w-auto md:h-20" src="./assets/AMCOL_Logo.png" alt="AMCOL Transport" />
                     </a>
                 </div>
                 <div class="flex flex-1 items-center justify-between gap-6 px-6 py-4 md:px-10">
                     <div
                         class="flex flex-wrap items-center gap-x-6 gap-y-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85 md:gap-x-8">
-                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="index.html">Home</a>
-                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="cards.html">Standby
-                            Service</a>
-                        <a class="hero-nav-link is-active transition-colors hover:text-[#39d9cd]"
-                            href="request.html">Request Unit</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="/">Home</a>
+                        <a class="hero-nav-link transition-colors hover:text-[#39d9cd]" href="cards.html">Standby Service</a>
+                        <a class="hero-nav-link is-active transition-colors hover:text-[#39d9cd]" href="request.html">Request Unit</a>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <button class="rounded-full p-2 transition-colors hover:bg-white/10" type="button"
-                            aria-label="Notifications">
-                            <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
-                        </button>
-                        <button class="rounded-full p-2 transition-colors hover:bg-white/10" type="button"
-                            aria-label="Settings">
-                            <span class="material-symbols-outlined text-on-surface-variant">settings</span>
-                        </button>
+                    <div class="hidden items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary md:flex">
+                        <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                        Secure Intake
                     </div>
                 </div>
             </div>
@@ -341,280 +358,297 @@
     </header>
 
     <main class="mx-auto max-w-[1400px] px-6 py-12 md:px-8" id="main-content">
-        <header class="mb-16 rounded-[2rem] border border-outline-variant/10 bg-surface-container-low/70 p-8 md:p-10">
+        <header class="mb-10 rounded-[2rem] border border-outline-variant/10 bg-surface-container-low/70 p-8 md:p-10">
             <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                    <span
-                        class="mb-4 block text-xs font-headline font-bold uppercase tracking-[0.3em] text-primary">Operation
-                        Protocol</span>
-                    <h1 class="text-5xl font-headline font-bold leading-tight text-on-surface md:text-6xl">Request
-                        Standby Unit</h1>
+                    <span class="mb-4 block text-xs font-headline font-bold uppercase tracking-[0.3em] text-primary">Operation Protocol</span>
+                    <h1 class="text-5xl font-headline font-bold leading-tight text-on-surface md:text-6xl">Request Standby Unit</h1>
                     <p class="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant">
-                        Build a fast, accurate dispatch brief for AMCOL operations. The more precise the route, cargo,
-                        and contact details, the faster we can position the correct standby asset.
+                        Complete this guided request so AMCOL operations can review the company, route, cargo, and contact details.
                     </p>
                 </div>
                 <div class="rounded-2xl border border-outline-variant/10 bg-surface-container-high/60 p-5 lg:max-w-sm">
                     <p class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Rapid Response Note</p>
                     <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
-                        Priority requests are screened continuously by operations, with live coordination once route
-                        details and cargo constraints are confirmed.
+                        Priority requests are screened continuously once route details and cargo constraints are confirmed.
                     </p>
                 </div>
             </div>
         </header>
 
-        <form id="standby-request-form" class="grid grid-cols-1 gap-8 lg:grid-cols-12">
-            <div class="space-y-12 lg:col-span-8">
-                <section class="section-shell space-y-8">
-                    <div class="flex items-center gap-4">
-                        <span
-                            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-headline font-bold text-primary">01</span>
-                        <h2 class="text-2xl font-headline font-semibold">Route Information</h2>
-                    </div>
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        <div class="space-y-2">
-                            <label for="pickup_location"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Pickup
-                                Location</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">location_on</span>
-                                <input id="pickup_location" name="pickup_location" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                    placeholder="Enter origin terminal or facility" type="text" />
+        <form id="standby-request-form" autocomplete="on" class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <section class="lg:col-span-8">
+                <div class="glass-panel rounded-[28px] p-6 md:p-8">
+                    <div class="mb-8">
+                        <div class="mb-5 flex items-center justify-between gap-4">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-[0.28em] text-primary">Guided Intake</p>
+                                <h2 id="wizard-title" class="mt-2 font-headline text-3xl font-bold">Company Information</h2>
                             </div>
+                            <span id="wizard-count" class="rounded-full bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary">Step 1 of 5</span>
                         </div>
-                        <div class="space-y-2">
-                            <label for="delivery_point"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Delivery
-                                Point</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">local_shipping</span>
-                                <input id="delivery_point" name="delivery_point" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                    placeholder="Final destination address" type="text" />
-                            </div>
+                        <div class="h-2 overflow-hidden rounded-full bg-surface-container-highest">
+                            <div id="progress-bar" class="h-full w-[20%] rounded-full kinetic-gradient transition-all duration-300"></div>
                         </div>
-                        <div class="space-y-2">
-                            <label for="requested_dispatch_time"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Requested
-                                Dispatch Time</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">schedule</span>
-                                <input id="requested_dispatch_time" name="requested_dispatch_time" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface transition-all"
-                                    type="datetime-local" />
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label for="site_restrictions"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Site
-                                Restrictions</label>
-                            <select id="site_restrictions" name="site_restrictions"
-                                class="ghost-border w-full cursor-pointer appearance-none rounded-lg bg-surface-container-low px-4 py-4 text-on-surface transition-all">
-                                <option value="None">None</option>
-                                <option value="High Security Clearance Required">High Security Clearance Required
-                                </option>
-                                <option value="Loading Dock Height Only">Loading Dock Height Only</option>
-                                <option value="24/7 Access Only">24/7 Access Only</option>
-                            </select>
+                        <div class="mt-5 grid gap-3 md:grid-cols-5">
+                            <button type="button" class="step-pill is-active rounded-2xl px-3 py-3 text-left text-xs font-bold uppercase tracking-[0.14em]" data-step-jump="0">1. Company</button>
+                            <button type="button" class="step-pill rounded-2xl px-3 py-3 text-left text-xs font-bold uppercase tracking-[0.14em]" data-step-jump="1">2. Route</button>
+                            <button type="button" class="step-pill rounded-2xl px-3 py-3 text-left text-xs font-bold uppercase tracking-[0.14em]" data-step-jump="2">3. Cargo</button>
+                            <button type="button" class="step-pill rounded-2xl px-3 py-3 text-left text-xs font-bold uppercase tracking-[0.14em]" data-step-jump="3">4. Contact</button>
+                            <button type="button" class="step-pill rounded-2xl px-3 py-3 text-left text-xs font-bold uppercase tracking-[0.14em]" data-step-jump="4">5. Review</button>
                         </div>
                     </div>
-                </section>
 
-                <section class="section-shell space-y-8">
-                    <div class="flex items-center gap-4">
-                        <span
-                            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-headline font-bold text-primary">02</span>
-                        <h2 class="text-2xl font-headline font-semibold">Load Information</h2>
-                    </div>
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
-                        <div class="space-y-2 md:col-span-8">
-                            <label for="cargo_type"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Cargo
-                                Type</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">inventory_2</span>
-                                <input id="cargo_type" name="cargo_type" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                    placeholder="Description of goods (e.g., Electronics, Hazardous Materials)"
-                                    type="text" />
+                    <div class="wizard-step is-active" data-step="0" data-title="Company Information">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div class="space-y-2">
+                                <label for="company_name" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Company Name</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">business</span>
+                                    <input id="company_name" name="company_name" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="Enter company or organization name" type="text" />
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label for="contact_name" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Contact Person</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">person</span>
+                                    <input id="contact_name" name="contact_name" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="Main contact person" type="text" />
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label for="billing_contact_email" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Email Address</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">alternate_email</span>
+                                    <input id="billing_contact_email" name="billing_contact_email" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="finance@organization.com" type="email" />
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label for="direct_phone" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Direct Phone</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">call</span>
+                                    <input id="direct_phone" name="direct_phone" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="+1 (868) 000-0000" type="tel" />
+                                </div>
                             </div>
                         </div>
-                        <div class="space-y-2 md:col-span-4">
-                            <label for="estimated_weight_kg"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Estimated
-                                Weight (kg)</label>
-                            <input id="estimated_weight_kg" name="estimated_weight_kg" min="0" step="0.01"
-                                class="ghost-border w-full rounded-lg bg-surface-container-low px-4 py-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                placeholder="0.00" type="number" />
-                        </div>
-                        <div class="space-y-2 md:col-span-7">
-                            <label
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Asset
-                                Preference</label>
-                            <input id="asset_preference" name="asset_preference" type="hidden" value="Dry Van" />
-                            <div class="grid grid-cols-2 gap-3 sm:grid-cols-4" role="group"
-                                aria-label="Choose an asset preference">
-                                <button
-                                    class="asset-option rounded-lg border border-primary bg-primary/10 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary"
-                                    type="button" data-asset-option="Dry Van" aria-pressed="true">Dry Van</button>
-                                <button
-                                    class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
-                                    type="button" data-asset-option="Reefer" aria-pressed="false">Reefer</button>
-                                <button
-                                    class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
-                                    type="button" data-asset-option="Flatbed" aria-pressed="false">Flatbed</button>
-                                <button
-                                    class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high"
-                                    type="button" data-asset-option="Forklift" aria-pressed="false">Forklift</button>
-                            </div>
-                        </div>
-                        <div class="space-y-2 md:col-span-5">
-                            <label for="cargo_priority"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Cargo
-                                Priority</label>
-                            <select id="cargo_priority" name="cargo_priority"
-                                class="ghost-border w-full cursor-pointer appearance-none rounded-lg bg-surface-container-low px-4 py-4 text-on-surface transition-all">
-                                <option value="Standard">Standard</option>
-                                <option value="Urgent">Urgent</option>
-                                <option value="Critical">Critical</option>
-                            </select>
-                        </div>
-                        <div class="space-y-2 md:col-span-12">
-                            <label for="special_handling_notes"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Special
-                                Handling Notes</label>
-                            <textarea id="special_handling_notes" name="special_handling_notes"
-                                class="ghost-border w-full rounded-lg bg-surface-container-low px-4 py-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                placeholder="Specify any fragile items, hazardous classes, temperature requirements, escort needs, or priority handling protocols..."
-                                rows="4"></textarea>
-                        </div>
                     </div>
-                </section>
 
-                <section class="section-shell space-y-8">
-                    <div class="flex items-center gap-4">
-                        <span
-                            class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-headline font-bold text-primary">03</span>
-                        <h2 class="text-2xl font-headline font-semibold">Coordination Contact</h2>
-                    </div>
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        <div class="space-y-2">
-                            <label for="billing_contact_email"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Billing
-                                Contact Email</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">payments</span>
-                                <input id="billing_contact_email" name="billing_contact_email" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                    placeholder="finance@organization.com" type="email" />
+                    <div class="wizard-step" data-step="1" data-title="Route Information">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div class="space-y-2">
+                                <label for="pickup_location" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Pickup Location</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">location_on</span>
+                                    <input id="pickup_location" name="pickup_location" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="Enter origin terminal or facility" type="text" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label for="dispatch_eta_recipient"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Dispatch/ETA
-                                Recipient</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">notifications_active</span>
-                                <input id="dispatch_eta_recipient" name="dispatch_eta_recipient" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                    placeholder="Contact Name or Group ID" type="text" />
+                            <div class="space-y-2">
+                                <label for="delivery_point" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Delivery Point</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">local_shipping</span>
+                                    <input id="delivery_point" name="delivery_point" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="Final destination address" type="text" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label for="on_site_coordinator"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">On-Site
-                                Coordinator</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">badge</span>
-                                <input id="on_site_coordinator" name="on_site_coordinator" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                    placeholder="Supervisor or warehouse lead" type="text" />
+                            <div class="space-y-2">
+                                <label for="requested_dispatch_time" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Requested Dispatch Time</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">schedule</span>
+                                    <input id="requested_dispatch_time" name="requested_dispatch_time" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4"
+                                        type="datetime-local" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label for="direct_phone"
-                                class="px-1 text-xs font-medium uppercase tracking-wider text-on-surface-variant">Direct
-                                Phone</label>
-                            <div class="relative">
-                                <span
-                                    class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">call</span>
-                                <input id="direct_phone" name="direct_phone" required
-                                    class="ghost-border w-full rounded-lg bg-surface-container-low py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 transition-all"
-                                    placeholder="+1 (868) 000-0000" type="tel" />
+                            <div class="space-y-2">
+                                <label for="site_restrictions" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Site Restrictions</label>
+                                <select id="site_restrictions" name="site_restrictions"
+                                    class="w-full rounded-lg px-4 py-4">
+                                    <option value="None">None</option>
+                                    <option value="High Security Clearance Required">High Security Clearance Required</option>
+                                    <option value="Loading Dock Height Only">Loading Dock Height Only</option>
+                                    <option value="24/7 Access Only">24/7 Access Only</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
+
+                    <div class="wizard-step" data-step="2" data-title="Cargo Information">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+                            <div class="space-y-2 md:col-span-8">
+                                <label for="cargo_type" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Cargo Type</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">inventory_2</span>
+                                    <input id="cargo_type" name="cargo_type" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="Description of goods or equipment" type="text" />
+                                </div>
+                            </div>
+                            <div class="space-y-2 md:col-span-4">
+                                <label for="estimated_weight_kg" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Estimated Weight (kg)</label>
+                                <input id="estimated_weight_kg" name="estimated_weight_kg" min="0" step="0.01"
+                                    class="w-full rounded-lg px-4 py-4 placeholder:text-outline/50"
+                                    placeholder="0.00" type="number" />
+                            </div>
+                            <div class="space-y-2 md:col-span-7">
+                                <label class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Asset Preference</label>
+                                <input id="asset_preference" name="asset_preference" type="hidden" value="Dry Van" />
+                                <div class="grid grid-cols-2 gap-3 sm:grid-cols-4" role="group" aria-label="Choose an asset preference">
+                                    <button class="asset-option is-active rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant" type="button" data-asset-option="Dry Van" aria-pressed="true">Dry Van</button>
+                                    <button class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant" type="button" data-asset-option="Reefer" aria-pressed="false">Reefer</button>
+                                    <button class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant" type="button" data-asset-option="Flatbed" aria-pressed="false">Flatbed</button>
+                                    <button class="asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant" type="button" data-asset-option="Forklift" aria-pressed="false">Forklift</button>
+                                </div>
+                            </div>
+                            <div class="space-y-2 md:col-span-5">
+                                <label for="cargo_priority" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Cargo Priority</label>
+                                <select id="cargo_priority" name="cargo_priority" class="w-full rounded-lg px-4 py-4">
+                                    <option value="Standard">Standard</option>
+                                    <option value="Urgent">Urgent</option>
+                                    <option value="Critical">Critical</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2 md:col-span-12">
+                                <label for="special_handling_notes" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Special Handling Notes</label>
+                                <textarea id="special_handling_notes" name="special_handling_notes"
+                                    class="w-full rounded-lg px-4 py-4 placeholder:text-outline/50"
+                                    placeholder="Specify fragile items, hazardous classes, temperature requirements, escort needs, or route concerns..."
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" data-step="3" data-title="Coordination Contact">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div class="space-y-2">
+                                <label for="dispatch_eta_recipient" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">Dispatch / ETA Recipient</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">notifications_active</span>
+                                    <input id="dispatch_eta_recipient" name="dispatch_eta_recipient" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="Who should receive dispatch updates?" type="text" />
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label for="on_site_coordinator" class="px-1 text-xs uppercase tracking-wider text-on-surface-variant">On-Site Coordinator</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-sm text-primary">badge</span>
+                                    <input id="on_site_coordinator" name="on_site_coordinator" required
+                                        class="w-full rounded-lg py-4 pl-12 pr-4 placeholder:text-outline/50"
+                                        placeholder="Supervisor or warehouse lead" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 rounded-2xl border border-outline-variant/10 bg-surface-container-high/50 p-5">
+                            <p class="text-xs font-bold uppercase tracking-[0.24em] text-primary">Tip</p>
+                            <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
+                                Use a direct person or group that can answer route, access, loading, and receiving questions quickly.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" data-step="4" data-title="Review & Submit">
+                        <div id="review-summary" class="grid gap-4 md:grid-cols-2"></div>
+                        <div class="mt-6 rounded-2xl border border-outline-variant/10 bg-surface-container-high/60 p-5">
+                            <p class="text-xs font-bold uppercase tracking-[0.24em] text-primary">Final Check</p>
+                            <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
+                                Confirm the information above before submitting. AMCOL operations will use these details to review the request and coordinate next steps.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="request-status-message"
+                        class="mt-8 hidden rounded-2xl border border-outline-variant/10 bg-surface-container-high/60 px-4 py-3 text-sm leading-relaxed"></div>
+
+                    <div class="mt-8 flex flex-col gap-3 border-t border-outline-variant/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                        <button id="back-button" type="button"
+                            class="amcol-btn rounded-lg border border-outline-variant/25 bg-surface-container-high px-6 py-3 text-sm font-bold text-on-surface-variant hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-40">
+                            Back
+                        </button>
+                        <div class="flex flex-col gap-3 sm:flex-row">
+                            <button id="save-draft-button" type="button"
+                                class="amcol-btn rounded-lg bg-surface-container-highest/60 px-6 py-3 text-sm font-bold text-on-surface-variant hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-60">
+                                Save Draft
+                            </button>
+                            <button id="next-button" type="button"
+                                class="amcol-btn kinetic-gradient rounded-lg px-7 py-3 font-headline font-bold text-slate-950 shadow-[0_0_20px_rgba(143,245,255,0.24)] hover:brightness-110">
+                                Continue
+                            </button>
+                            <button id="submit-request-button" type="submit"
+                                class="amcol-btn kinetic-gradient hidden rounded-lg px-7 py-3 font-headline font-bold text-slate-950 shadow-[0_0_20px_rgba(143,245,255,0.3)] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60">
+                                Submit Request
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <aside class="space-y-8 lg:col-span-4">
                 <div class="glass-panel sticky top-32 space-y-8 rounded-[24px] p-8 shadow-2xl">
                     <div>
                         <div class="mb-3 flex items-center justify-between">
                             <h3 class="font-headline text-xl font-bold">Request Summary</h3>
-                            <span
-                                class="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">Live
-                                Intake</span>
+                            <span class="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">Live Intake</span>
                         </div>
-                        <p class="text-sm text-on-surface-variant">Review the logistics parameters before initializing
-                            the standby unit sequence.</p>
+                        <p class="text-sm text-on-surface-variant">Review the logistics parameters before submitting to operations.</p>
                     </div>
+
                     <div class="space-y-4">
                         <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
-                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Cargo
-                                Priority</span>
-                            <span id="summary-priority"
-                                class="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase text-primary">Standard</span>
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Company</span>
+                            <span id="summary-company" class="max-w-[12rem] truncate text-right text-xs font-bold text-on-surface">Not entered</span>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Cargo Priority</span>
+                            <span id="summary-priority" class="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase text-primary">Standard</span>
                         </div>
                         <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
                             <span class="text-xs uppercase tracking-widest text-on-surface-variant">Asset Type</span>
                             <span id="summary-asset" class="text-xs font-bold text-on-surface">Dry Van</span>
                         </div>
                         <div class="flex items-center justify-between border-b border-outline-variant/10 py-3">
-                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Coverage Zone</span>
-                            <span class="text-xs font-bold text-on-surface">Nationwide Transport</span>
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant">Route</span>
+                            <span id="summary-route" class="max-w-[12rem] truncate text-right text-xs font-bold text-on-surface">Pending</span>
                         </div>
                     </div>
-                    <div id="request-status-message"
-                        class="hidden rounded-2xl border border-outline-variant/10 bg-surface-container-high/60 px-4 py-3 text-sm leading-relaxed">
-                    </div>
+
                     <div class="overflow-hidden rounded-[10px] border border-outline-variant/20">
                         <div class="relative h-56">
                             <img alt="AMCOL fleet ready board"
                                 class="h-full w-full object-cover brightness-[0.45] saturate-0" decoding="async"
                                 loading="lazy"
                                 src="./assets/flatbed with bg.webp" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent">
-                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
                             <div class="absolute left-4 right-4 top-4 flex items-start justify-between">
                                 <div>
-                                    <p class="text-[10px] font-bold uppercase tracking-[0.28em] text-primary">Fleet Node
-                                    </p>
-                                    <p class="mt-2 text-lg font-headline font-semibold text-on-surface">Region 4
-                                        Readiness</p>
+                                    <p class="text-[10px] font-bold uppercase tracking-[0.28em] text-primary">Fleet Node</p>
+                                    <p class="mt-2 text-lg font-headline font-semibold text-on-surface">Region 4 Readiness</p>
                                 </div>
-                                <span
-                                    class="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">Online</span>
+                                <span class="rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">Online</span>
                             </div>
                             <div class="absolute bottom-4 left-4 right-4 flex items-center gap-2">
                                 <div class="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface">Standby
-                                    assets ready for dispatch sequencing</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface">Standby assets ready for dispatch sequencing</span>
                             </div>
                         </div>
                     </div>
+
                     <div class="rounded-2xl border border-outline-variant/10 bg-surface-container-high/60 p-5">
                         <p class="text-xs font-bold uppercase tracking-[0.24em] text-primary">Protocol Checklist</p>
                         <ul class="mt-4 space-y-3 text-sm text-on-surface-variant">
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined mt-0.5 text-sm text-primary">check_circle</span>
+                                Confirm company and direct contact details.
+                            </li>
                             <li class="flex items-start gap-3">
                                 <span class="material-symbols-outlined mt-0.5 text-sm text-primary">check_circle</span>
                                 Confirm pickup and drop-off details.
@@ -623,29 +657,8 @@
                                 <span class="material-symbols-outlined mt-0.5 text-sm text-primary">check_circle</span>
                                 Verify load type, weight, and handling notes.
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="material-symbols-outlined mt-0.5 text-sm text-primary">check_circle</span>
-                                Share a direct on-site coordination contact.
-                            </li>
                         </ul>
                     </div>
-                    <div class="space-y-4 pt-2">
-                        <button id="submit-request-button"
-                            class="amcol-btn amcol-btn-primary kinetic-gradient flex w-full items-center justify-center gap-2 rounded-lg py-4 font-headline font-bold text-slate-950 shadow-[0_0_20px_rgba(143,245,255,0.3)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
-                            type="submit">
-                            <span>Submit Request</span>
-                            <span class="material-symbols-outlined text-lg">rocket_launch</span>
-                        </button>
-                        <button id="save-draft-button"
-                            class="amcol-btn amcol-btn-ghost w-full rounded-lg bg-surface-container-highest/50 py-4 text-sm font-medium text-on-surface-variant transition-all hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-60"
-                            type="button">
-                            Save Draft Protocol
-                        </button>
-                    </div>
-                    <p class="px-4 text-center text-[10px] italic leading-relaxed text-outline/60">
-                        By submitting, you acknowledge that dispatch costs may vary based on real-time fleet
-                        availability, route conditions, and after-hours coordination requirements.
-                    </p>
                 </div>
             </aside>
         </form>
@@ -656,8 +669,7 @@
             <div class="space-y-4">
                 <img class="h-14 w-auto" src="./assets/AMCOL_Logo.png" alt="AMCOL Transport" />
                 <p class="max-w-sm text-sm text-on-surface-variant">
-                    Precision in motion. Standby units, direct dispatch support, and dependable response when routing
-                    continuity matters most.
+                    Precision in motion. Standby units, direct dispatch support, and dependable response when routing continuity matters most.
                 </p>
                 <p class="text-xs text-outline">&copy; <span data-current-year></span> AMCOL Transport Standby Unit. All rights reserved.</p>
             </div>
@@ -672,31 +684,42 @@
                 <div class="space-y-4">
                     <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface">Infrastructure</h4>
                     <ul class="space-y-2 text-sm text-on-surface-variant">
-                        <li><a class="transition-colors hover:text-primary" href="tel:+18683999200">Operational
-                                Support</a></li>
+                        <li><a class="transition-colors hover:text-primary" href="tel:+18683999200">Operational Support</a></li>
                         <li><a class="transition-colors hover:text-primary" href="client.html">Client Portal</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </footer>
-    <script src="amcol-config.js"></script>
-    <script src="/api/amcol-config.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+    <script src="/api/amcol-config"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
         (() => {
             document.querySelectorAll('[data-current-year]').forEach((element) => {
                 element.textContent = new Date().getFullYear();
             });
+
             const form = document.getElementById("standby-request-form");
-            const draftButton = document.getElementById("save-draft-button");
+            const steps = Array.from(document.querySelectorAll(".wizard-step"));
+            const stepPills = Array.from(document.querySelectorAll("[data-step-jump]"));
+            const backButton = document.getElementById("back-button");
+            const nextButton = document.getElementById("next-button");
             const submitButton = document.getElementById("submit-request-button");
+            const draftButton = document.getElementById("save-draft-button");
             const statusMessage = document.getElementById("request-status-message");
+            const progressBar = document.getElementById("progress-bar");
+            const wizardTitle = document.getElementById("wizard-title");
+            const wizardCount = document.getElementById("wizard-count");
             const prioritySelect = document.getElementById("cargo_priority");
             const summaryPriority = document.getElementById("summary-priority");
             const assetInput = document.getElementById("asset_preference");
             const summaryAsset = document.getElementById("summary-asset");
+            const summaryCompany = document.getElementById("summary-company");
+            const summaryRoute = document.getElementById("summary-route");
             const assetButtons = Array.from(document.querySelectorAll("[data-asset-option]"));
+            const reviewSummary = document.getElementById("review-summary");
             const draftStorageKey = "amcol-standby-request-draft";
             const clientReferenceKey = "amcol-standby-request-client-reference";
             const supabaseUrl = window.AMCOL_CONFIG?.supabaseUrl || "";
@@ -704,6 +727,8 @@
             const supabaseClient = supabaseUrl && supabaseKey && window.supabase?.createClient
                 ? window.supabase.createClient(supabaseUrl, supabaseKey)
                 : null;
+
+            let currentStep = 0;
 
             function setStatus(message, tone) {
                 const toneClasses = {
@@ -717,10 +742,28 @@
                 statusMessage.classList.remove("hidden");
             }
 
+            function clearStatus() {
+                statusMessage.classList.add("hidden");
+                statusMessage.textContent = "";
+            }
+
             function setBusyState(isBusy) {
                 submitButton.disabled = isBusy;
                 draftButton.disabled = isBusy;
-                submitButton.querySelector("span").textContent = isBusy ? "Saving Request..." : "Submit Request";
+                nextButton.disabled = isBusy;
+                backButton.disabled = isBusy;
+                submitButton.textContent = isBusy ? "Saving Request..." : "Submit Request";
+            }
+
+            function updateSummary() {
+                const company = form.elements.namedItem("company_name")?.value?.trim();
+                const pickup = form.elements.namedItem("pickup_location")?.value?.trim();
+                const delivery = form.elements.namedItem("delivery_point")?.value?.trim();
+
+                summaryCompany.textContent = company || "Not entered";
+                summaryPriority.textContent = prioritySelect.value || "Standard";
+                summaryAsset.textContent = assetInput.value || "Dry Van";
+                summaryRoute.textContent = pickup && delivery ? `${pickup} → ${delivery}` : "Pending";
             }
 
             function updateAssetSelection(value) {
@@ -730,78 +773,90 @@
                 assetButtons.forEach((button) => {
                     const isActive = button.dataset.assetOption === value;
                     button.setAttribute("aria-pressed", String(isActive));
-                    button.className = isActive
-                        ? "asset-option rounded-lg border border-primary bg-primary/10 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary"
-                        : "asset-option rounded-lg border border-outline-variant/20 bg-surface-container-low px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant transition-colors hover:bg-surface-container-high";
+                    button.classList.toggle("is-active", isActive);
                 });
             }
 
-            function updatePrioritySummary() {
-                summaryPriority.textContent = prioritySelect.value || "Standard";
+            function validateCurrentStep() {
+                const requiredFields = Array.from(steps[currentStep].querySelectorAll("[required]"));
+                for (const field of requiredFields) {
+                    if (!field.checkValidity()) {
+                        field.reportValidity();
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function renderReviewSummary() {
+                const payload = buildRequestPayload();
+                const rows = [
+                    ["Company", payload.company_name],
+                    ["Contact", payload.contact_name],
+                    ["Email", payload.email],
+                    ["Phone", payload.phone],
+                    ["Pickup", payload.pickup_location],
+                    ["Delivery", payload.delivery_point],
+                    ["Dispatch Time", payload.requested_dispatch_time ? new Date(payload.requested_dispatch_time).toLocaleString("en-TT") : ""],
+                    ["Cargo", payload.cargo_type],
+                    ["Weight", payload.estimated_weight_kg ? `${payload.estimated_weight_kg} kg` : "Not specified"],
+                    ["Asset", payload.asset_preference],
+                    ["Priority", payload.cargo_priority],
+                    ["Site Restrictions", payload.site_restrictions],
+                    ["Dispatch Recipient", payload.dispatch_eta_recipient],
+                    ["On-Site Coordinator", payload.on_site_coordinator],
+                    ["Notes", payload.special_handling_notes || "None"]
+                ];
+
+                reviewSummary.innerHTML = rows.map(([label, value]) => `
+                    <div class="review-card">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-on-surface-variant">${label}</p>
+                        <p class="mt-2 text-sm font-semibold text-on-surface">${value || "Not provided"}</p>
+                    </div>
+                `).join("");
+            }
+
+            function showStep(index) {
+                currentStep = Math.max(0, Math.min(index, steps.length - 1));
+
+                steps.forEach((step, stepIndex) => {
+                    step.classList.toggle("is-active", stepIndex === currentStep);
+                });
+
+                stepPills.forEach((pill, pillIndex) => {
+                    pill.classList.toggle("is-active", pillIndex === currentStep);
+                    pill.classList.toggle("is-complete", pillIndex < currentStep);
+                });
+
+                const activeStep = steps[currentStep];
+                wizardTitle.textContent = activeStep.dataset.title || "Request Details";
+                wizardCount.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+                progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+
+                backButton.disabled = currentStep === 0;
+                nextButton.classList.toggle("hidden", currentStep === steps.length - 1);
+                submitButton.classList.toggle("hidden", currentStep !== steps.length - 1);
+
+                updateSummary();
+
+                if (currentStep === steps.length - 1) {
+                    renderReviewSummary();
+                }
             }
 
             function getClientReference() {
                 try {
                     const existingReference = window.localStorage.getItem(clientReferenceKey);
-                    if (existingReference) {
-                        return existingReference;
-                    }
+                    if (existingReference) return existingReference;
 
                     const nextReference = window.crypto?.randomUUID
                         ? window.crypto.randomUUID()
                         : "request-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+
                     window.localStorage.setItem(clientReferenceKey, nextReference);
                     return nextReference;
                 } catch (error) {
                     return "request-" + Date.now();
-                }
-            }
-
-            function readDraft() {
-                try {
-                    const draft = window.localStorage.getItem(draftStorageKey);
-                    return draft ? JSON.parse(draft) : null;
-                } catch (error) {
-                    return null;
-                }
-            }
-
-            function saveDraftLocally() {
-                const draftPayload = Object.fromEntries(new FormData(form).entries());
-
-                try {
-                    window.localStorage.setItem(draftStorageKey, JSON.stringify(draftPayload));
-                    setStatus("Draft saved on this device. Submit the request when you're ready to send it to operations.", "success");
-                } catch (error) {
-                    setStatus("Draft storage is unavailable in this browser, so the request could not be saved locally.", "error");
-                }
-            }
-
-            function loadDraft() {
-                const draft = readDraft();
-                if (!draft) {
-                    return;
-                }
-
-                Object.entries(draft).forEach(([name, value]) => {
-                    const field = form.elements.namedItem(name);
-                    if (!field || typeof value !== "string") {
-                        return;
-                    }
-
-                    field.value = value;
-                });
-
-                updateAssetSelection(draft.asset_preference || "Dry Van");
-                updatePrioritySummary();
-                setStatus("Saved draft loaded. Review the details and submit when ready.", "warning");
-            }
-
-            function clearDraft() {
-                try {
-                    window.localStorage.removeItem(draftStorageKey);
-                } catch (error) {
-                    // Ignore local storage cleanup issues.
                 }
             }
 
@@ -812,6 +867,12 @@
                 const requestedDispatchTime = String(formData.get("requested_dispatch_time") || "");
 
                 return {
+                    company_name: String(formData.get("company_name") || "").trim(),
+                    contact_name: String(formData.get("contact_name") || "").trim(),
+                    email: String(formData.get("billing_contact_email") || "").trim(),
+                    phone: String(formData.get("direct_phone") || "").trim(),
+                    service: String(formData.get("asset_preference") || "Standby Unit"),
+                    status: "New",
                     pickup_location: String(formData.get("pickup_location") || "").trim(),
                     delivery_point: String(formData.get("delivery_point") || "").trim(),
                     requested_dispatch_time: requestedDispatchTime ? new Date(requestedDispatchTime).toISOString() : null,
@@ -825,6 +886,7 @@
                     dispatch_eta_recipient: String(formData.get("dispatch_eta_recipient") || "").trim(),
                     on_site_coordinator: String(formData.get("on_site_coordinator") || "").trim(),
                     direct_phone: String(formData.get("direct_phone") || "").trim(),
+                    message: String(formData.get("special_handling_notes") || "").trim() || null,
                     request_status: "submitted",
                     submission_page: "request.html",
                     client_reference: getClientReference(),
@@ -836,17 +898,82 @@
                 };
             }
 
+            function saveDraftLocally() {
+                const draftPayload = Object.fromEntries(new FormData(form).entries());
+                draftPayload.currentStep = String(currentStep);
+
+                try {
+                    window.localStorage.setItem(draftStorageKey, JSON.stringify(draftPayload));
+                    setStatus("Draft saved on this device. Submit the request when you're ready to send it to operations.", "success");
+                } catch (error) {
+                    setStatus("Draft storage is unavailable in this browser, so the request could not be saved locally.", "error");
+                }
+            }
+
+            function loadDraft() {
+                try {
+                    const rawDraft = window.localStorage.getItem(draftStorageKey);
+                    if (!rawDraft) return;
+
+                    const draft = JSON.parse(rawDraft);
+                    Object.entries(draft).forEach(([name, value]) => {
+                        if (name === "currentStep") return;
+                        const field = form.elements.namedItem(name);
+                        if (!field || typeof value !== "string") return;
+                        field.value = value;
+                    });
+
+                    updateAssetSelection(draft.asset_preference || "Dry Van");
+                    updateSummary();
+                    setStatus("Saved draft loaded. Review the details and submit when ready.", "warning");
+                } catch (error) {
+                    // Ignore invalid draft state.
+                }
+            }
+
+            function clearDraft() {
+                try {
+                    window.localStorage.removeItem(draftStorageKey);
+                    window.localStorage.removeItem(clientReferenceKey);
+                } catch (error) {
+                    // Ignore local storage cleanup issues.
+                }
+            }
+
+            stepPills.forEach((pill) => {
+                pill.addEventListener("click", () => {
+                    const targetStep = Number(pill.dataset.stepJump);
+                    if (targetStep <= currentStep || validateCurrentStep()) {
+                        clearStatus();
+                        showStep(targetStep);
+                    }
+                });
+            });
+
+            nextButton.addEventListener("click", () => {
+                if (!validateCurrentStep()) {
+                    setStatus("Please complete the required fields before continuing.", "warning");
+                    return;
+                }
+                clearStatus();
+                showStep(currentStep + 1);
+            });
+
+            backButton.addEventListener("click", () => {
+                clearStatus();
+                showStep(currentStep - 1);
+            });
+
             assetButtons.forEach((button) => {
                 button.addEventListener("click", () => {
                     updateAssetSelection(button.dataset.assetOption || "Dry Van");
                 });
             });
 
-            prioritySelect.addEventListener("change", updatePrioritySummary);
+            form.addEventListener("input", updateSummary);
+            form.addEventListener("change", updateSummary);
 
-            draftButton.addEventListener("click", () => {
-                saveDraftLocally();
-            });
+            draftButton.addEventListener("click", saveDraftLocally);
 
             form.addEventListener("submit", async (event) => {
                 event.preventDefault();
@@ -863,18 +990,17 @@
 
                 try {
                     setBusyState(true);
+
                     const { error } = await supabaseClient
                         .from("service_requests")
                         .insert(buildRequestPayload());
 
-                    if (error) {
-                        throw error;
-                    }
+                    if (error) throw error;
 
                     form.reset();
                     clearDraft();
                     updateAssetSelection("Dry Van");
-                    updatePrioritySummary();
+                    showStep(0);
                     setStatus("Request submitted successfully. The request entry is now logged in Supabase for operations tracking.", "success");
                 } catch (error) {
                     setStatus(error.message || "Something went wrong while saving the request to Supabase.", "error");
@@ -883,9 +1009,10 @@
                 }
             });
 
-            updateAssetSelection(assetInput.value || "Dry Van");
-            updatePrioritySummary();
             loadDraft();
+            updateAssetSelection(assetInput.value || "Dry Van");
+            updateSummary();
+            showStep(0);
 
             if (!supabaseClient) {
                 setStatus("Supabase credentials are missing from window.AMCOL_CONFIG, so submissions cannot be sent yet.", "warning");
@@ -893,23 +1020,23 @@
         })();
     </script>
 
-<script>
-(function () {
-    var measurementId = window.AMCOL_CONFIG && window.AMCOL_CONFIG.ga4MeasurementId;
-    if (!measurementId) return;
-    var gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
-    document.head.appendChild(gtagScript);
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = window.gtag || gtag;
-    gtag('js', new Date());
-    gtag('config', measurementId);
-})();
-</script>
-    <script src="/api/amcol-config"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        (function () {
+            var measurementId = window.AMCOL_CONFIG && window.AMCOL_CONFIG.ga4MeasurementId;
+            if (!measurementId) return;
+
+            var gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+            document.head.appendChild(gtagScript);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = window.gtag || gtag;
+            gtag('js', new Date());
+            gtag('config', measurementId);
+        })();
+    </script>
 </body>
 
 </html>
