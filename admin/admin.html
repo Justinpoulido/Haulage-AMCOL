@@ -246,7 +246,7 @@
     <main class="portal-shell" id="main-content">
         <header class="relative z-20 px-4 sm:px-8 lg:px-14 pt-6 sm:pt-8">
             <div class="mx-auto max-w-7xl flex items-center justify-between gap-4">
-                <a href="index.html" class="flex items-center gap-3 sm:gap-4">
+                <a href="/" class="flex items-center gap-3 sm:gap-4">
                     <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-[#cc1f31] text-white flex items-center justify-center shadow-lg shadow-red-900/25">
                         <span class="material-symbols-outlined text-[26px]">local_shipping</span>
                     </div>
@@ -257,10 +257,10 @@
                 <nav aria-label="Primary"
                     class="nav-glass hidden md:flex items-center rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm">
                     <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="/">Home</a>
-                    <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#services">Services</a>
-                    <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="index.html#contact">Support</a>
+                    <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="/#services">Services</a>
+                    <a class="px-4 py-2 transition-colors hover:text-[#cc1f31]" href="/#contact">Support</a>
                     <a class="amcol-btn amcol-btn-primary ml-2 inline-flex items-center rounded-full bg-[#cc1f31] px-6 py-2.5 font-bold text-white transition-transform hover:-translate-y-0.5"
-                        href="index.html#contact">Operations Support</a>
+                        href="/#contact">Operations Support</a>
                 </nav>
                 <button id="mobileNavToggle"
                     class="nav-glass inline-flex items-center justify-center rounded-full p-3 text-slate-700 shadow-sm transition-colors hover:text-[#cc1f31] md:hidden"
@@ -272,11 +272,11 @@
                 class="nav-glass mt-4 hidden rounded-[1.5rem] p-3 text-sm font-semibold text-slate-700 shadow-sm md:hidden"
                 hidden>
                 <div class="flex flex-col gap-1">
-                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#top">Home</a>
-                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#services">Services</a>
-                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="index.html#contact">Support</a>
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="/">Home</a>
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="/#services">Services</a>
+                    <a class="rounded-2xl px-4 py-3 transition-colors hover:bg-white/50 hover:text-[#cc1f31]" href="/#contact">Support</a>
                     <a class="amcol-btn amcol-btn-primary mt-2 inline-flex items-center justify-center rounded-2xl bg-[#cc1f31] px-4 py-3 font-bold text-white transition-transform hover:-translate-y-0.5"
-                        href="index.html#contact">Operations Support</a>
+                        href="/#contact">Operations Support</a>
                 </div>
             </div>
         </header>
@@ -317,7 +317,7 @@
                                 <input id="rememberMe" type="checkbox" class="h-5 w-5 rounded border-slate-300 text-[#cc1f31] focus:ring-[#cc1f31]/30" />
                                 Remember admin email
                             </label>
-                            <a href="index.html#contact"
+                            <a href="/#contact"
                                 class="font-semibold text-[#cc1f31] transition-colors hover:text-red-700">Need access?</a>
                         </div>
 
@@ -347,6 +347,9 @@
         </footer>
     </main>
 
+    <script src="/api/amcol-config"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
         const adminEmailInput = document.getElementById('adminEmail');
         const passwordInput = document.getElementById('password');
@@ -358,6 +361,13 @@
         const liveTimeEl = document.getElementById('liveTime');
         const loginForm = document.getElementById('loginForm');
         const loginStatus = document.getElementById('loginStatus');
+
+        const supabaseUrl = window.AMCOL_CONFIG?.supabaseUrl || '';
+        const supabasePublishableKey = window.AMCOL_CONFIG?.supabasePublishableKey || '';
+
+        const supabaseClient = supabaseUrl && supabasePublishableKey && window.supabase
+            ? window.supabase.createClient(supabaseUrl, supabasePublishableKey)
+            : null;
 
         yearEl.textContent = new Date().getFullYear();
 
@@ -412,9 +422,14 @@
             }
         });
 
-        const setLoginStatus = (message) => {
+        const setLoginStatus = (message, type = 'info') => {
             loginStatus.textContent = message;
-            loginStatus.classList.remove('hidden');
+            loginStatus.classList.remove('hidden', 'border-red-300', 'bg-red-50', 'text-red-700', 'border-emerald-300', 'bg-emerald-50', 'text-emerald-700');
+            if (type === 'error') {
+                loginStatus.classList.add('border-red-300', 'bg-red-50', 'text-red-700');
+            } else if (type === 'success') {
+                loginStatus.classList.add('border-emerald-300', 'bg-emerald-50', 'text-emerald-700');
+            }
         };
 
         const updateClock = () => {
@@ -435,15 +450,22 @@
             togglePasswordBtn.querySelector('.material-symbols-outlined').textContent = isHidden ? 'visibility_off' : 'visibility';
         });
 
-        loginForm.addEventListener('submit', (event) => {
+        loginForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const adminEmail = adminEmailInput.value.trim();
+            const password = passwordInput.value;
             let storageSaved = true;
+
             if (rememberMeInput.checked) {
                 storageSaved = writeStoredAdminEmail(adminEmail);
             } else {
                 storageSaved = writeStoredAdminEmail('');
+            }
+
+            if (!supabaseClient) {
+                setLoginStatus('Supabase is not configured. Check SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY in Vercel, then redeploy.', 'error');
+                return;
             }
 
             const button = loginForm.querySelector('button[type="submit"]');
@@ -452,29 +474,48 @@
             button.innerHTML = '<span>Authenticating...</span><span class="material-symbols-outlined animate-spin">progress_activity</span>';
             loginStatus.classList.add('hidden');
 
-            setTimeout(() => {
-                button.disabled = false;
-                button.innerHTML = oldText;
-                try {
-                    window.sessionStorage.setItem('amcol_admin_demo_session', JSON.stringify({
-                        email: adminEmail,
-                        createdAt: new Date().toISOString()
-                    }));
-                } catch (_error) {
-                    // Session storage is a front-end placeholder until real auth is connected.
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email: adminEmail,
+                    password
+                });
+
+                if (error || !data.user) {
+                    setLoginStatus('Invalid admin email or password.', 'error');
+                    return;
                 }
+
+                const { data: profile, error: profileError } = await supabaseClient
+                    .from('profiles')
+                    .select('id, email, role')
+                    .eq('id', data.user.id)
+                    .eq('role', 'admin')
+                    .single();
+
+                if (profileError || !profile) {
+                    await supabaseClient.auth.signOut();
+                    setLoginStatus('This account is not approved for admin access.', 'error');
+                    return;
+                }
+
                 setLoginStatus(
                     storageSaved
-                        ? `Admin access for ${adminEmail || 'this account'} accepted for dashboard preview. Redirecting...`
-                        : `Admin access for ${adminEmail || 'this account'} accepted for dashboard preview. Browser storage is unavailable, so the admin email could not be remembered on this device. Redirecting...`
+                        ? `Admin access verified for ${profile.email || adminEmail}. Redirecting...`
+                        : `Admin access verified for ${profile.email || adminEmail}. Browser storage is unavailable, so the admin email could not be remembered. Redirecting...`,
+                    'success'
                 );
+
                 window.setTimeout(() => {
                     window.location.href = 'admin-dashboard.html';
                 }, 700);
-            }, 1300);
+            } catch (_error) {
+                setLoginStatus('Login failed. Please check your connection and try again.', 'error');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = oldText;
+            }
         });
     </script>
-    <script src="/api/amcol-config"></script>
 
 <script>
 (function () {
