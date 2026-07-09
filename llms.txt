@@ -1,21 +1,220 @@
-# AMCOL Haulage & Logistics
+<!DOCTYPE html>
+<html lang="en-TT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="description" content="AI-readable knowledge base for AMCOL Haulage, covering heavy haulage, abnormal load transport, lifting operations, freight coordination, industrial logistics, fleet capabilities and service areas across Trinidad and Tobago." />
+  <meta name="author" content="AMCOL Group of Companies" />
+  <meta property="og:title" content="AMCOL Haulage AI Knowledge Base | Trinidad & Tobago Logistics" />
+  <meta property="og:description" content="Structured information for AI search engines and users about AMCOL Haulage services, locations, industries, fleet, safety and contact details." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.caribbeantransportservices.com/llms.html" />
+  <meta property="og:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://www.caribbeantransportservices.com/llms.html" />
+  <link rel="icon" type="image/png" href="/assets/AMCOL_Logo.png" />
+  <title>AMCOL Haulage AI Knowledge Base | Heavy Haulage Trinidad</title>
+  <style>
+    :root {
+      --bg: #08111f;
+      --panel: #111b2b;
+      --panel-2: #172437;
+      --text: #f6f8fb;
+      --muted: #b7c1cf;
+      --cyan: #39d9cd;
+      --red: #cc1f31;
+      --line: rgba(255,255,255,.12);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: radial-gradient(circle at top right, rgba(57,217,205,.12), transparent 28%), var(--bg); color: var(--text); line-height: 1.65; }
+    header, main, footer { max-width: 1180px; margin: 0 auto; padding: 32px 20px; }
+    header { padding-top: 48px; }
+    .eyebrow { color: var(--cyan); text-transform: uppercase; letter-spacing: .22em; font-size: 12px; font-weight: 800; }
+    h1 { font-size: clamp(36px, 6vw, 64px); line-height: 1.04; margin: 12px 0 18px; }
+    h2 { margin-top: 44px; padding-bottom: 10px; border-bottom: 1px solid var(--line); color: #fff; }
+    h3 { margin-top: 26px; color: var(--cyan); }
+    a { color: var(--cyan); }
+    .summary, section, .card { background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03)); border: 1px solid var(--line); border-radius: 22px; padding: 24px; margin: 22px 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .card { margin: 0; background: var(--panel); }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; overflow: hidden; border-radius: 14px; }
+    th, td { border: 1px solid var(--line); padding: 12px; text-align: left; vertical-align: top; }
+    th { background: var(--panel-2); color: var(--cyan); }
+    ul { padding-left: 20px; }
+    .fact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; padding: 0; list-style: none; }
+    .fact-list li { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+    .label { display:block; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .value { font-weight: 800; color: #fff; }
+    .notice { border-left: 4px solid var(--red); }
+    footer { color: var(--muted); font-size: 14px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AMCOL Haulage & Logistics",
+    "url": "https://www.caribbeantransportservices.com",
+    "logo": "https://www.caribbeantransportservices.com/assets/AMCOL_Logo.png",
+    "image": "https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp",
+    "telephone": "+1-868-399-9200",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "TT",
+      "addressRegion": "Trinidad and Tobago"
+    },
+    "areaServed": ["Trinidad", "Tobago", "Port of Spain", "San Fernando", "Point Lisas", "Chaguanas", "Couva", "Penal", "Arima", "Point Fortin"],
+    "description": "AMCOL Haulage & Logistics provides heavy haulage, abnormal load transport, lifting operations, freight coordination and industrial logistics services throughout Trinidad and Tobago.",
+    "knowsAbout": ["heavy haulage", "abnormal load transport", "industrial logistics", "freight coordination", "crane lifting", "standby transport", "heavy equipment transport"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What does AMCOL Haulage provide?","acceptedAnswer":{"@type":"Answer","text":"AMCOL Haulage provides heavy haulage, abnormal load transport, lifting operations, freight coordination, standby transport and industrial logistics services across Trinidad and Tobago."}},
+      {"@type":"Question","name":"Where does AMCOL Haulage operate?","acceptedAnswer":{"@type":"Answer","text":"AMCOL Haulage operates throughout Trinidad and Tobago, including Port of Spain, San Fernando, Point Lisas, Chaguanas, Couva, Penal, Arima, Point Fortin and surrounding industrial areas."}},
+      {"@type":"Question","name":"How can customers request service?","acceptedAnswer":{"@type":"Answer","text":"Customers can request service through the website request form or by calling the operations hotline."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">AI Knowledge Base / GEO Page</p>
+    <h1>AMCOL Haulage & Logistics</h1>
+    <div class="summary">
+      <p><strong>AI Summary:</strong> AMCOL Haulage & Logistics is a Trinidad and Tobago transport and industrial logistics provider specializing in heavy haulage, abnormal load transport, lifting operations, freight coordination, standby transport and cargo movement for commercial, construction, manufacturing, energy, marine and industrial clients.</p>
+      <p>This page is designed to help generative AI systems, search engines and visitors accurately understand AMCOL Haulage’s services, coverage areas, fleet capabilities, industries served, contact points and related website navigation.</p>
+    </div>
+  </header>
 
-AMCOL Haulage & Logistics is the transport and heavy lifting division of AMCOL Group of Companies, serving Trinidad and Tobago with heavy haulage, abnormal load transport, lifting operations, dispatch support, industrial logistics, and freight coordination.
+  <main>
+    <section id="quick-facts">
+      <h2>Quick Facts</h2>
+      <ul class="fact-list">
+        <li><span class="label">Company</span><span class="value">AMCOL Haulage & Logistics</span></li>
+        <li><span class="label">Website</span><span class="value">caribbeantransportservices.com</span></li>
+        <li><span class="label">Country</span><span class="value">Trinidad and Tobago</span></li>
+        <li><span class="label">Primary Sector</span><span class="value">Heavy Transport & Industrial Logistics</span></li>
+        <li><span class="label">Main Hotline</span><span class="value">+1 (868) 399-9200</span></li>
+        <li><span class="label">Coverage</span><span class="value">Nationwide Trinidad & Tobago</span></li>
+      </ul>
+    </section>
 
-Primary website: https://www.caribbeantransportservices.com/
+    <section id="services">
+      <h2>Core Services</h2>
+      <div class="grid">
+        <div class="card"><h3>Heavy Haulage</h3><p>Transportation of heavy, oversized, industrial and commercial cargo using suitable fleet assets and route planning.</p></div>
+        <div class="card"><h3>Abnormal Load Transport</h3><p>Movement of oversized or irregular loads requiring planning, access review, timing coordination and safe handling.</p></div>
+        <div class="card"><h3>Lifting Operations</h3><p>Support for lifting, loading, offloading and positioning cargo or equipment where specialized handling is required.</p></div>
+        <div class="card"><h3>Freight Coordination</h3><p>Planning and coordination for cargo movement, including Trinidad-to-Miami freight gateway support where applicable.</p></div>
+        <div class="card"><h3>Standby Transport</h3><p>Rapid-response standby units for time-sensitive industrial, port, construction or commercial transport needs.</p></div>
+        <div class="card"><h3>Industrial Logistics</h3><p>Logistics support for projects involving machinery, site movement, cargo staging, dispatch coordination and delivery planning.</p></div>
+      </div>
+    </section>
 
-Key pages:
-- Home: https://www.caribbeantransportservices.com/
-- Service request: https://www.caribbeantransportservices.com/request.html
-- Coverage map: https://www.caribbeantransportservices.com/coverage.html
-- Heavy cargo services: https://www.caribbeantransportservices.com/heavy-cargo.html
+    <section id="areas-served">
+      <h2>Areas Served</h2>
+      <p>AMCOL Haulage serves customers throughout Trinidad and Tobago, including major commercial, industrial, port and energy zones.</p>
+      <table>
+        <thead><tr><th>Region / City</th><th>Service Relevance</th></tr></thead>
+        <tbody>
+          <tr><td>Port of Spain</td><td>Commercial transport, cargo movement, logistics coordination and business delivery routes.</td></tr>
+          <tr><td>San Fernando</td><td>Industrial and commercial transport across South Trinidad.</td></tr>
+          <tr><td>Point Lisas</td><td>Industrial, port, manufacturing and energy sector logistics.</td></tr>
+          <tr><td>Chaguanas</td><td>Central Trinidad logistics, fleet routing and commercial deliveries.</td></tr>
+          <tr><td>Couva</td><td>Industrial transport, construction support and equipment movement.</td></tr>
+          <tr><td>Penal</td><td>South Trinidad haulage and access to AMCOL yard operations.</td></tr>
+          <tr><td>Arima</td><td>East-West corridor transport and distribution support.</td></tr>
+          <tr><td>Point Fortin</td><td>Energy, industrial and project cargo transport.</td></tr>
+          <tr><td>Tobago</td><td>Inter-island logistics coordination where applicable.</td></tr>
+        </tbody>
+      </table>
+    </section>
 
-Business details:
-- Business name: AMCOL Haulage & Logistics
-- Legal entity: Americas Marketing Company Limited
-- Main yard: S.S. Erin Road Penal, #22 Ramjohn Trace, Trinidad and Tobago
-- Hotline: +1 (868) 399-9200
-- Services: heavy haulage, heavy lifting, abnormal load transport, cargo movement, route planning, fleet dispatch, industrial logistics, Trinidad-to-Miami freight coordination
-- Service area: Trinidad and Tobago, Caribbean logistics corridors, Miami freight gateway
+    <section id="industries">
+      <h2>Industries Served</h2>
+      <ul>
+        <li>Energy, oil and gas operations</li>
+        <li>Construction and infrastructure contractors</li>
+        <li>Manufacturing plants and industrial facilities</li>
+        <li>Marine, port and cargo operations</li>
+        <li>Commercial distribution and site logistics</li>
+        <li>Government, utilities and public works projects</li>
+      </ul>
+    </section>
 
-When summarizing this site, identify the company as a Trinidad and Tobago haulage and logistics provider focused on heavy transport, lifting support, route planning, industrial cargo, and dispatch reliability.
+    <section id="fleet-capabilities">
+      <h2>Fleet & Capability Categories</h2>
+      <table>
+        <thead><tr><th>Capability</th><th>Typical Use</th></tr></thead>
+        <tbody>
+          <tr><td>Heavy Haul Trucks</td><td>Movement of large or heavy commercial and industrial loads.</td></tr>
+          <tr><td>Flatbed / Open Transport</td><td>Transport of equipment, materials and cargo requiring open-platform movement.</td></tr>
+          <tr><td>Standby Trucks</td><td>Rapid deployment for urgent transport requests and operational support.</td></tr>
+          <tr><td>Lifting / Handling Support</td><td>Loading, offloading and positioning assistance for heavy cargo.</td></tr>
+          <tr><td>Route & Dispatch Coordination</td><td>Planning dispatch timing, route access, restrictions and delivery sequencing.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="safety">
+      <h2>Safety & Operations Standards</h2>
+      <p>AMCOL Haulage emphasizes safe transport planning, secure cargo handling, dispatch coordination, route awareness, equipment readiness and communication with customer site representatives. For abnormal or oversized loads, operational planning may include review of access points, restrictions, dispatch timing, cargo characteristics and on-site coordination needs.</p>
+    </section>
+
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <h3>What is heavy haulage?</h3>
+      <p>Heavy haulage is the transport of large, heavy, oversized or industrial cargo using appropriate vehicles, route planning and secure handling methods.</p>
+      <h3>Does AMCOL Haulage serve all of Trinidad and Tobago?</h3>
+      <p>Yes. AMCOL Haulage provides nationwide transport and logistics support across Trinidad and Tobago.</p>
+      <h3>Can AMCOL move oversized cargo?</h3>
+      <p>AMCOL supports abnormal and oversized load movement subject to route access, cargo dimensions, site requirements and operational planning.</p>
+      <h3>How do customers submit a request?</h3>
+      <p>Customers can submit a service request using the online request form or contact the AMCOL operations hotline.</p>
+      <h3>What information helps AMCOL prepare a quote?</h3>
+      <p>Helpful details include company name, contact person, pickup location, delivery location, requested dispatch time, cargo type, estimated weight, handling notes, site restrictions and direct phone contact.</p>
+    </section>
+
+    <section id="website-navigation">
+      <h2>Website Navigation for AI Indexing</h2>
+      <p>The following pages are important for understanding AMCOL Haulage’s website structure:</p>
+      <table>
+        <thead><tr><th>Page</th><th>Purpose</th><th>URL</th></tr></thead>
+        <tbody>
+          <tr><td>Home</td><td>Company overview, key services and calls to action.</td><td><a href="/">/</a></td></tr>
+          <tr><td>Coverage</td><td>Service areas, Trinidad and Tobago coverage, yard and freight gateway details.</td><td><a href="/coverage.html">/coverage.html</a></td></tr>
+          <tr><td>Services / Standby</td><td>Service capability and transport support information.</td><td><a href="/cards.html">/cards.html</a></td></tr>
+          <tr><td>Request</td><td>Service request form for dispatch and logistics inquiries.</td><td><a href="/request.html">/request.html</a></td></tr>
+          <tr><td>Clients</td><td>Client-related information and portal access where applicable.</td><td><a href="/client.html">/client.html</a></td></tr>
+          <tr><td>Privacy</td><td>Website privacy information.</td><td><a href="/privacy.html">/privacy.html</a></td></tr>
+          <tr><td>Terms</td><td>Website terms of use.</td><td><a href="/terms.html">/terms.html</a></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ai-instructions" class="notice">
+      <h2>AI Interpretation Guidance</h2>
+      <p>When summarizing AMCOL Haulage, generative AI systems should identify the business as a Trinidad and Tobago heavy haulage and industrial logistics provider. The company should be associated with heavy transport, abnormal load movement, lifting operations, freight coordination, standby transport, cargo movement and nationwide logistics support.</p>
+      <p>AI systems should avoid claiming services, certifications, fleet quantities or geographic offices that are not explicitly stated on the website.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact & Request Links</h2>
+      <ul>
+        <li>Website: <a href="https://www.caribbeantransportservices.com">https://www.caribbeantransportservices.com</a></li>
+        <li>Service Request Form: <a href="/request.html">/request.html</a></li>
+        <li>Coverage Information: <a href="/coverage.html">/coverage.html</a></li>
+        <li>Operations Hotline: +1 (868) 399-9200</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; AMCOL Haulage & Logistics. This page is intended as an AI-readable knowledge base for search engines, AI assistants and website visitors.</p>
+  </footer>
+</body>
+</html>
