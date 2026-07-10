@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/heavy-haulage-trinidad.html", "destination": "/heavy-haulage-cargo.html", "permanent": true },
+    { "source": "/heavy-haulage-trinidad", "destination": "/heavy-haulage-cargo.html", "permanent": true },
+    { "source": "/abnormal-load-transport.html", "destination": "/oversized-cargo-moves.html", "permanent": true },
+    { "source": "/abnormal-load-transport", "destination": "/oversized-cargo-moves.html", "permanent": true },
+    { "source": "/industrial-logistics.html", "destination": "/", "permanent": true },
+    { "source": "/industrial-logistics", "destination": "/", "permanent": true },
+    { "source": "/freight-coordination.html", "destination": "/", "permanent": true },
+    { "source": "/freight-coordination", "destination": "/", "permanent": true },
+    { "source": "/route-planning.html", "destination": "/", "permanent": true },
+    { "source": "/route-planning", "destination": "/", "permanent": true }
+  ]
+}
