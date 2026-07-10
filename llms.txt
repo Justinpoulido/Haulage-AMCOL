@@ -9,10 +9,12 @@
   <meta property="og:title" content="AMCOL Haulage AI Knowledge Base | Trinidad & Tobago Logistics" />
   <meta property="og:description" content="Structured information for AI search engines and users about AMCOL Haulage services, locations, industries, fleet, safety and contact details." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.caribbeantransportservices.com/llms.html" />
+  <meta property="og:locale" content="en_TT" />
+  <meta property="og:url" content="https://www.caribbeantransportservices.com/llms.txt" />
   <meta property="og:image" content="https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="https://www.caribbeantransportservices.com/llms.html" />
+  <link rel="canonical" href="https://www.caribbeantransportservices.com/llms.txt" />
+  <link rel="alternate" hreflang="en-TT" href="https://www.caribbeantransportservices.com/llms.txt" />
   <link rel="icon" type="image/png" href="/assets/AMCOL_Logo.png" />
   <title>AMCOL Haulage AI Knowledge Base | Heavy Haulage Trinidad</title>
   <style>
@@ -58,10 +60,26 @@
     "logo": "https://www.caribbeantransportservices.com/assets/AMCOL_Logo.png",
     "image": "https://www.caribbeantransportservices.com/assets/AMCOL_FLEET2.webp",
     "telephone": "+1-868-399-9200",
+    "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "TT",
-      "addressRegion": "Trinidad and Tobago"
+      "streetAddress": "#22 Ramjohn Trace, S.S. Erin Road",
+      "addressLocality": "Penal",
+      "addressRegion": "Penal-Debe",
+      "addressCountry": "TT"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "10.1667",
+      "longitude": "-61.4667"
+    },
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=S.S.+Erin+Road+Penal,+%2322+Ramjohn+Trace,+Trinidad+and+Tobago",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-868-399-9200",
+      "contactType": "operations hotline",
+      "areaServed": "TT",
+      "availableLanguage": "English"
     },
     "areaServed": ["Trinidad", "Tobago", "Port of Spain", "San Fernando", "Point Lisas", "Chaguanas", "Couva", "Penal", "Arima", "Point Fortin"],
     "description": "AMCOL Haulage & Logistics provides heavy haulage, abnormal load transport, lifting operations, freight coordination and industrial logistics services throughout Trinidad and Tobago.",
@@ -86,7 +104,7 @@
     <h1>AMCOL Haulage & Logistics</h1>
     <div class="summary">
       <p><strong>AI Summary:</strong> AMCOL Haulage & Logistics is a Trinidad and Tobago transport and industrial logistics provider specializing in heavy haulage, abnormal load transport, lifting operations, freight coordination, standby transport and cargo movement for commercial, construction, manufacturing, energy, marine and industrial clients.</p>
-      <p>This page is designed to help generative AI systems, search engines and visitors accurately understand AMCOL Haulage’s services, coverage areas, fleet capabilities, industries served, contact points and related website navigation.</p>
+      <p>This page is designed to help generative AI systems, search engines and visitors accurately understand AMCOL Haulage's services, coverage areas, fleet capabilities, industries served, contact points and related website navigation.</p>
     </div>
   </header>
 
@@ -97,6 +115,7 @@
         <li><span class="label">Company</span><span class="value">AMCOL Haulage & Logistics</span></li>
         <li><span class="label">Website</span><span class="value">caribbeantransportservices.com</span></li>
         <li><span class="label">Country</span><span class="value">Trinidad and Tobago</span></li>
+        <li><span class="label">Business Address</span><span class="value">#22 Ramjohn Trace, S.S. Erin Road, Penal</span></li>
         <li><span class="label">Primary Sector</span><span class="value">Heavy Transport & Industrial Logistics</span></li>
         <li><span class="label">Main Hotline</span><span class="value">+1 (868) 399-9200</span></li>
         <li><span class="label">Coverage</span><span class="value">Nationwide Trinidad & Tobago</span></li>
@@ -181,7 +200,7 @@
 
     <section id="website-navigation">
       <h2>Website Navigation for AI Indexing</h2>
-      <p>The following pages are important for understanding AMCOL Haulage’s website structure:</p>
+      <p>The following pages are important for understanding AMCOL Haulage's website structure:</p>
       <table>
         <thead><tr><th>Page</th><th>Purpose</th><th>URL</th></tr></thead>
         <tbody>
@@ -208,6 +227,7 @@
         <li>Website: <a href="https://www.caribbeantransportservices.com">https://www.caribbeantransportservices.com</a></li>
         <li>Service Request Form: <a href="/request.html">/request.html</a></li>
         <li>Coverage Information: <a href="/coverage.html">/coverage.html</a></li>
+        <li>Business Address: #22 Ramjohn Trace, S.S. Erin Road, Penal, Trinidad and Tobago</li>
         <li>Operations Hotline: +1 (868) 399-9200</li>
       </ul>
     </section>
