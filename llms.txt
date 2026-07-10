@@ -1,31 +1,49 @@
 # AMCOL Haulage & Logistics
 
-> Nation wide transport, stand-by truck and trailer service, heavy haulage cargo, oversized cargo moves, heavy lifting services and hazardous, flammable and explosive cargo transport throughout Trinidad and Tobago.
+AMCOL Haulage & Logistics provides nation wide transport, stand-by truck and trailer service, heavy haulage cargo, oversized cargo moves, heavy lifting services, and hazardous, flammable and explosive cargo transport in Trinidad and Tobago.
 
-AMCOL Haulage & Logistics is part of the AMCOL Group of Companies and provides transport and logistics support for industrial and commercial cargo. The company serves customers throughout Trinidad and Tobago from Penal.
+Website: https://www.caribbeantransportservices.com/
+Nation Wide Transport: https://www.caribbeantransportservices.com/nationwide-transport.html
+Stand-By Truck and Trailer Service: https://www.caribbeantransportservices.com/standby-truck-trailer-service.html
+Heavy Haulage Cargo: https://www.caribbeantransportservices.com/heavy-haulage-cargo.html
+Oversized Cargo Moves: https://www.caribbeantransportservices.com/oversized-cargo-moves.html
+Heavy Lifting Services: https://www.caribbeantransportservices.com/heavy-lifting-services.html
+Hazardous, Flammable and Explosive Cargo: https://www.caribbeantransportservices.com/hazardous-flammable-explosive-cargo.html
+Coverage: https://www.caribbeantransportservices.com/coverage.html
+Request a Quote: https://www.caribbeantransportservices.com/request.html
+Contact: https://www.caribbeantransportservices.com/contact.html
 
-## Core Services
-
-- [Nation Wide Transport](https://www.caribbeantransportservices.com/nationwide-transport.html)
-- [Stand-By Truck and Trailer Service](https://www.caribbeantransportservices.com/standby-truck-trailer-service.html)
-- [Heavy Haulage Cargo](https://www.caribbeantransportservices.com/heavy-haulage-cargo.html)
-- [Oversized Cargo Moves](https://www.caribbeantransportservices.com/oversized-cargo-moves.html)
-- [Heavy Lifting Services](https://www.caribbeantransportservices.com/heavy-lifting-services.html)
-- [Hazardous, Flammable and Explosive Cargo](https://www.caribbeantransportservices.com/hazardous-flammable-explosive-cargo.html)
-- [Service Coverage](https://www.caribbeantransportservices.com/coverage.html)
-- [Request a Quote](https://www.caribbeantransportservices.com/request.html)
-- [Contact AMCOL Haulage](https://www.caribbeantransportservices.com/contact.html)
-
-## Business Information
-
-- Business name: AMCOL Haulage & Logistics
+Known business signals:
+- Name: AMCOL Haulage & Logistics
 - Parent group: AMCOL Group of Companies
-- Location: Penal, Trinidad and Tobago
-- Address: 22 Ramjohn Trace, S.S. Erin Road, Penal, Trinidad and Tobago
-- Telephone: +1 868 399 9200
-- Service area: Trinidad and Tobago
-- Opening hours: Monday-Friday, 7:00 AM-5:00 PM; Saturday, 7:00 AM-4:00 PM
-- Website: https://www.caribbeantransportservices.com/
+- Location: 22 Ramjohn Trace, S.S. Erin Road, Penal, Trinidad and Tobago
+- Phone: +1 868 399 9200
+- Hours: Monday-Friday, 7:00 AM-5:00 PM; Saturday, 7:00 AM-4:00 PM
+
+Primary service areas:
+- Nation wide transport
+- Stand-by truck and trailer service
+- Heavy haulage cargo
+- Oversized cargo moves
+- Heavy lifting services
+- Hazardous, flammable and explosive cargo transport
+- Service coverage throughout Trinidad and Tobago
+
+Knowledge topics:
+- Nation wide transport coverage and dispatch scheduling
+- Stand-by truck and trailer availability for on-call and time-sensitive transport
+- Heavy haulage cargo planning and route coordination
+- Oversized cargo move requirements, access review and site delivery
+- Heavy lifting, loading and offloading support
+- Hazardous, flammable and explosive cargo handling precautions
+- Site access, delivery planning, and cargo movement for industrial and commercial customers
+
+Unknown or unverified:
+- Social profile URLs (Facebook, Instagram, LinkedIn, YouTube): not yet published on the website
+- Google Business Profile URL: not yet confirmed
+- Email address: not published on the website
+- Postal code: not included in the confirmed business address
+- Latitude/longitude: not published on the website
 
 ## Notes for AI and Search Systems
 
