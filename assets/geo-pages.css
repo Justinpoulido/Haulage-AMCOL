@@ -1,0 +1,161 @@
+:root {
+  --amcol-red: #cc1f31;
+  --amcol-blue: #1e40af;
+  --amcol-teal: #39d9cd;
+  --amcol-navy: #09131f;
+  --amcol-text: #0f172a;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--amcol-text);
+  background: #f8fafc;
+  line-height: 1.65;
+}
+a { color: inherit; }
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 20;
+  transform: translateY(-140%);
+  background: #fff;
+  color: var(--amcol-navy);
+  padding: .75rem 1rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.skip-link:focus { transform: translateY(0); }
+.topbar {
+  background: linear-gradient(90deg, rgba(204,31,49,.98), rgba(142,24,39,.98));
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.topbar-inner, .nav-inner, .container {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+.topbar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 1rem 1.5rem;
+  padding: .75rem 0;
+}
+.topbar a { color: #fff; text-decoration: none; }
+.site-header { background: rgba(9,19,31,.96); color: #fff; }
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  padding: .75rem 2rem .75rem 1rem;
+  clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+}
+.brand img { height: 72px; width: auto; }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem 1.4rem;
+  justify-content: flex-end;
+}
+nav a {
+  color: rgba(255,255,255,.84);
+  text-decoration: none;
+  font-size: .75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+}
+nav a:hover, nav a:focus { color: var(--amcol-teal); }
+.hero {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(9,19,31,.9), rgba(19,39,63,.84)), url('../assets/AMCOL_FLEET2.webp') center/cover;
+}
+.hero .container { padding: 5rem 0 6rem; }
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: 2rem;
+  color: rgba(255,255,255,.75);
+  font-size: .875rem;
+}
+.breadcrumb a { color: #fff; }
+.kicker {
+  color: var(--amcol-teal);
+  font-size: .78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .24em;
+}
+h1 {
+  max-width: 920px;
+  margin: .75rem 0 1rem;
+  font-size: clamp(2.4rem, 6vw, 4.9rem);
+  line-height: .98;
+  letter-spacing: 0;
+}
+.lead {
+  max-width: 780px;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: rgba(255,255,255,.88);
+}
+.actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: .85rem 1.2rem;
+  border-radius: 3px;
+  text-decoration: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .82rem;
+}
+.button.primary { background: var(--amcol-teal); color: var(--amcol-navy); }
+.button.secondary { border: 1px solid rgba(255,255,255,.28); color: #fff; }
+main section { padding: 4.5rem 0; }
+section.alt { background: #fff; }
+h2 { margin: 0 0 1rem; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.05; }
+h3 { margin: 1.5rem 0 .5rem; font-size: 1.15rem; }
+.grid { display: grid; gap: 1.25rem; }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card {
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 16px 40px rgba(15,23,42,.06);
+}
+.dark-band { background: var(--amcol-navy); color: #fff; }
+.dark-band p, .dark-band li { color: rgba(255,255,255,.78); }
+ul.clean { padding-left: 1.2rem; }
+.faq details { border-top: 1px solid #e2e8f0; padding: 1rem 0; }
+.faq summary { cursor: pointer; font-weight: 900; color: #0f172a; }
+.related a { color: var(--amcol-blue); font-weight: 800; }
+address { font-style: normal; }
+footer { background: #4b4b4b; color: #e2e8f0; padding: 3rem 0; }
+.footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 2rem; }
+footer h2, footer h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .12em; }
+footer a { color: #fff; }
+.footer-links { display: grid; gap: .4rem; }
+@media (max-width: 800px) {
+  .nav-inner, .footer-grid { grid-template-columns: 1fr; flex-direction: column; align-items: flex-start; }
+  nav { justify-content: flex-start; }
+  .grid.three { grid-template-columns: 1fr; }
+  .hero .container { padding: 3.5rem 0 4rem; }
+}

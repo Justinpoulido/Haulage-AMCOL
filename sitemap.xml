@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.caribbeantransportservices.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/nationwide-transport.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/standby-truck-trailer-service.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/heavy-haulage-cargo.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/oversized-cargo-moves.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/heavy-lifting-services.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/hazardous-flammable-explosive-cargo.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.caribbeantransportservices.com/coverage.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.caribbeantransportservices.com/request.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.caribbeantransportservices.com/heavy-cargo.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.caribbeantransportservices.com/client.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.caribbeantransportservices.com/cards.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.caribbeantransportservices.com/privacy.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.caribbeantransportservices.com/terms.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/contact.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/heavy-cargo.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/client.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/privacy.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://www.caribbeantransportservices.com/terms.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>
