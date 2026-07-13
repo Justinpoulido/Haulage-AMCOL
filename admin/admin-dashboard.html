@@ -128,7 +128,7 @@
                        <span id="sessionStatusText">Checking Session...</span>
                     </div>
                     <a class="amcol-btn inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700 hover:border-[#cc1f31] hover:text-[#cc1f31]"
-                        href="admin.html" id="signOutLink">
+                        href="/admin/" id="signOutLink">
                         <span class="material-symbols-outlined text-[20px]">logout</span>
                         Sign Out
                     </a>
@@ -350,7 +350,7 @@
         const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
 
         if (userError || !user) {
-            window.location.replace('/admin/admin.html');
+            window.location.replace('/admin/');
             return false;
         }
 
@@ -362,7 +362,7 @@
 
         if (profileError || !profile || profile.role !== 'admin') {
             await supabaseClient.auth.signOut();
-            window.location.replace('/admin/admin.html');
+            window.location.replace('/admin/');
             return false;
         }
 
@@ -463,7 +463,7 @@
     signOutLink.addEventListener('click', async (event) => {
         event.preventDefault();
         await supabaseClient.auth.signOut();
-        window.location.href = '/admin/admin.html';
+        window.location.href = '/admin/';
     });
 
     const updateClock = () => {

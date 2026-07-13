@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/admin/", "destination": "/admin/admin.html" }
+  ],
   "redirects": [
     { "source": "/heavy-haulage-trinidad.html", "destination": "/heavy-haulage-cargo.html", "permanent": true },
     { "source": "/heavy-haulage-trinidad", "destination": "/heavy-haulage-cargo.html", "permanent": true },

@@ -13,7 +13,7 @@
     <meta property="og:url" content="https://www.caribbeantransportservices.com/admin/admin.html" />
     <meta name="keywords" content="AMCOL admin portal, haulage admin, service request dashboard" />
     <meta name="author" content="AMCOL Group of Companies" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
     <meta name="description" content="Secure AMCOL Haulage admin portal for internal service request review, dispatch oversight and operations management." />
     <meta content="#0b1220" name="theme-color" />
     <meta property="og:title" content="Admin Portal | AMCOL Haulage" />
@@ -369,6 +369,25 @@
             ? window.supabase.createClient(supabaseUrl, supabasePublishableKey)
             : null;
 
+        async function redirectAuthenticatedAdmin() {
+            if (!supabaseClient) return;
+
+            const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+            if (userError || !user) return;
+
+            const { data: profile, error: profileError } = await supabaseClient
+                .from('profiles')
+                .select('role')
+                .eq('id', user.id)
+                .single();
+
+            if (!profileError && profile?.role === 'admin') {
+                window.location.replace('/admin/admin-dashboard.html');
+            }
+        }
+
+        redirectAuthenticatedAdmin();
+
         yearEl.textContent = new Date().getFullYear();
 
         const readStoredAdminEmail = () => {
@@ -506,7 +525,7 @@
                 );
 
                 window.setTimeout(() => {
-                    window.location.href = 'admin-dashboard.html';
+                    window.location.href = '/admin/admin-dashboard.html';
                 }, 700);
             } catch (_error) {
                 setLoginStatus('Login failed. Please check your connection and try again.', 'error');
