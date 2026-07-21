@@ -986,25 +986,36 @@
                     return;
                 }
 
-                if (!supabaseClient) {
-                    setStatus("Supabase is not configured yet. Add the project URL and publishable key to window.AMCOL_CONFIG before submitting requests.", "error");
-                    return;
-                }
-
                 try {
                     setBusyState(true);
 
-                    const { error } = await supabaseClient
-                        .from("service_requests")
-                        .insert(buildRequestPayload());
+                    const response = await fetch("/api/submit-request", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(buildRequestPayload())
+                    });
 
-                    if (error) throw error;
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(
+                            result.error ||
+                            "The haulage request could not be submitted."
+                        );
+                    }
 
                     form.reset();
                     clearDraft();
                     updateAssetSelection("Dry Van");
                     showStep(0);
-                    setStatus("Request submitted successfully. The request entry is now logged in Supabase for operations tracking.", "success");
+                    setStatus(
+                        result.emailSent
+                            ? "Request submitted successfully. The operations team has also been notified by email."
+                            : "Request submitted successfully and saved to the operations dashboard. The email notification could not be sent, but your request was still recorded.",
+                        result.emailSent ? "success" : "warning"
+                    );
                 } catch (error) {
                     setStatus(error.message || "Something went wrong while saving the request to Supabase.", "error");
                 } finally {
@@ -1017,9 +1028,6 @@
             updateSummary();
             showStep(0);
 
-            if (!supabaseClient) {
-                setStatus("Supabase credentials are missing from window.AMCOL_CONFIG, so submissions cannot be sent yet.", "warning");
-            }
         })();
     </script>
 

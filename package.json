@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.8",
+    "resend": "^6.18.0"
+  }
+}
