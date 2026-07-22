@@ -356,16 +356,42 @@
                     <td class="min-w-[11rem] px-6 py-5">
                         <select
                             class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-slate-700"
-                            onchange="updateRequestStatus(${requestIdForAction}, this.value)"
+                            data-current-status="${escapeHtml(status)}"
+                            onchange="handleRequestAction(this, ${requestIdForAction})"
                         >
                             ${['New', 'Review', 'Quoted', 'Scheduled', 'In Progress', 'Completed'].map((option) => `
                                 <option value="${option}" ${status === option ? 'selected' : ''}>${option}</option>
                             `).join('')}
+                            <option disabled>──────────</option>
+                            <option value="__delete__">Delete Request</option>
                         </select>
                     </td>
                 </tr>
             `;
         }).join('');
+    }
+
+    async function handleRequestAction(selectElement, id) {
+        const selectedValue = selectElement.value;
+        const previousStatus = selectElement.dataset.currentStatus || 'New';
+
+        if (selectedValue === '__delete__') {
+            selectElement.value = previousStatus;
+            await deleteServiceRequest(id);
+            return;
+        }
+
+        selectElement.disabled = true;
+        const updated = await updateRequestStatus(id, selectedValue);
+
+        if (!updated) {
+            selectElement.value = previousStatus;
+            selectElement.disabled = false;
+            return;
+        }
+
+        selectElement.dataset.currentStatus = selectedValue;
+        selectElement.disabled = false;
     }
 
     async function updateRequestStatus(id, status) {
@@ -377,13 +403,34 @@
         if (error) {
             alert('Could not update request status.');
             console.error('Status update error:', error);
+            return false;
+        }
+
+        return true;
+    }
+
+    async function deleteServiceRequest(id) {
+        const confirmed = window.confirm(
+            'Delete this service request permanently? This action cannot be undone.'
+        );
+
+        if (!confirmed) return;
+
+        const { error } = await supabaseClient
+            .from('service_requests')
+            .delete()
+            .eq('id', id);
+
+        if (error) {
+            alert('Could not delete the request. Check the Supabase DELETE policy.');
+            console.error('Request delete error:', error);
             return;
         }
 
-        loadServiceRequests();
+        await loadServiceRequests();
     }
 
-    window.updateRequestStatus = updateRequestStatus;
+    window.handleRequestAction = handleRequestAction;
 
     signOutLink.addEventListener('click', async (event) => {
         event.preventDefault();
