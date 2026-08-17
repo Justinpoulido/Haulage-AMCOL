@@ -153,6 +153,11 @@ footer { background: #4b4b4b; color: #e2e8f0; padding: 3rem 0; }
 footer h2, footer h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .12em; }
 footer a { color: #fff; }
 .footer-links { display: grid; gap: .4rem; }
+.social-links { display: flex; flex-wrap: nowrap; gap: .75rem; margin-top: 1rem; }
+.social-icon { align-items: center; border: 1px solid #94a3b8; border-radius: 2px; display: inline-flex; height: 2.75rem; justify-content: center; text-decoration: none; transition: border-color .2s ease, color .2s ease; width: 2.75rem; }
+.social-icon:hover { border-color: #fff; color: #fff; }
+.social-icon svg { height: 1.25rem; width: 1.25rem; }
+.social-icon span { font-size: 1.2rem; font-weight: 900; line-height: 1; }
 @media (max-width: 800px) {
   .nav-inner, .footer-grid { grid-template-columns: 1fr; flex-direction: column; align-items: flex-start; }
   nav { justify-content: flex-start; }
